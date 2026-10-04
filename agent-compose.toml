@@ -1,0 +1,10 @@
+version = 1
+
+[roots]
+local = ".agent-fragments"
+
+[compose]
+common = ["local:project.md"]
+
+[outputs."AGENTS.md"]
+fragments = []
