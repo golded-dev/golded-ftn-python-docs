@@ -35,8 +35,9 @@ when checking changes in sibling development checkouts.
 Writer contracts and verification limits live in [docs/writers.md](docs/writers.md).
 Run `uv run python scripts/build_writer_guide.py` after editing them; this renders
 `site/writers.html` with the existing design. Tests check the generated page and
-execute its four-format CRUD example. GoldED build and interoperability checks
-are deferred; concurrent mode remains disabled on all platforms.
+execute its four-format CRUD example. Bounded macOS offline interoperability probes are recorded in
+[docs/golded-macos-compatibility.md](docs/golded-macos-compatibility.md). All four formats
+passed the described scenarios against the corrected GoldED build. Concurrent mode remains disabled on all platforms.
 
 Preview with `python -m http.server 8874 --directory site`, then open
 http://localhost:8874. Check a narrow mobile viewport, keyboard navigation,
@@ -78,7 +79,7 @@ archive recovery and known limits. Editable sources are `docs/msg.md`, `docs/jam
 `docs/squish.md` and `docs/hudson.md`. Regenerate all four with
 `uv run python scripts/build_format_guides.py`. They use the shared design,
 syntax highlighting and navigation; their synthetic Python examples run in pytest
-and strict mypy. GoldED interoperability remains unverified.
+and strict mypy. The bounded macOS results and remaining gaps are recorded in the compatibility report.
 
 `docs/glossary.md` explains FTN terminology and is rendered as `site/glossary.html`
 by the format-guide renderer. Inline code uses the shared syntax palette, too.
