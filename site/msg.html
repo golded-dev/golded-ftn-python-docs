@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GoldED for Python · MSG and Opus reference</title><style>
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/ibm-plex-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/ibm-plex-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/ibm-plex-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-5.ttf) format('truetype');
+}
+
+
+:root{color-scheme:dark;--canvas:#05070b;--surface:#0b0f18;--raised:#101624;--ink:#f5f7ff;--muted:#bcc5d9;--blue:#4f6dff;--yellow:#ffe45a;--info:#8fb2ff;--line:#273149}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:17px/1.65 'IBM Plex Sans',sans-serif}a{color:var(--info);text-underline-offset:4px}a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}.page{max-width:1260px;margin:40px auto;padding:0 24px}.masthead{border-top:1px solid #ff6868;border-bottom:1px solid #ff6868;padding:7px 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:24px}.logo-mark{position:relative;display:block;width:210px;margin-left:-7.3px}.logo{display:block;width:100%;height:auto}.logo-subtitle{position:absolute;right:3%;top:70%;color:var(--yellow);font:400 13px/1 'IBM Plex Sans',sans-serif;letter-spacing:0;white-space:nowrap}.masthead a{font:12px 'IBM Plex Mono',monospace;text-decoration:none}.masthead div>span{color:var(--muted);margin-right:24px}.shell{border:1px solid var(--blue);background:var(--surface)}.bar{display:flex;justify-content:space-between;gap:16px;padding:12px 20px;background:#2d47c7;color:var(--yellow);font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em}.bar span:last-child{color:#e0e6ff}.layout{display:grid;grid-template-columns:230px minmax(0,1fr)}aside{min-width:0;border-right:1px solid var(--line);padding:32px 20px}.label{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.nav{display:grid;gap:4px;margin:20px -20px 36px}.nav a{padding:9px 20px;color:var(--muted);text-decoration:none;font-size:14px}.nav a.active{background:var(--raised);border-left:2px solid var(--yellow);padding-left:18px;color:var(--ink)}.num{font:11px 'IBM Plex Mono',monospace;color:#7f8798;margin-right:14px}.aside-note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}.aside-note code{color:var(--yellow)}main{padding:42px 48px 36px;min-width:0}.eyebrow{color:var(--yellow);font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em}h1{font-size:44px;line-height:1.1;letter-spacing:-.035em;font-weight:600;margin:16px 0 20px;max-width:650px}.intro{color:var(--muted);max-width:620px;margin:0 0 26px}.formats{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 34px}.formats span{padding:10px 19px 10px 0;margin-right:19px;font:12px 'IBM Plex Mono',monospace;color:var(--info)}.formats span+span{border-left:1px solid var(--line);padding-left:19px}.section-title{display:flex;gap:12px;align-items:baseline}h2{font-size:24px;line-height:1.2;margin:0 0 10px;font-weight:500}.section-title span{font:500 20px/1.2 'IBM Plex Mono',monospace;color:var(--yellow);flex-shrink:0}.lead{margin:0 0 20px;color:var(--muted);font-size:15px}.code-pane{border:1px solid #34446e;background:#080c14}.code-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--raised);border-bottom:1px solid #34446e;font:11px 'IBM Plex Mono',monospace;color:var(--muted)}button{white-space:nowrap;flex-shrink:0;cursor:pointer;background:transparent;color:var(--info);border:1px solid #435170;padding:4px 10px;font:11px 'IBM Plex Mono',monospace}pre{margin:0;padding:20px;overflow:auto;font:13px/1.85 'IBM Plex Mono',monospace;tab-size:4}.kw{color:#8fb2ff}.str{color:#ffe45a}.comment{color:#8d9bb5}.output{border-top:1px solid var(--line);padding:12px 20px;font:12px 'IBM Plex Mono',monospace;color:#bcc5d9}.output b{color:#8d9bb5;font-weight:400;margin-right:20px}.note{border-left:2px solid var(--blue);padding:0 0 0 16px;margin-top:24px;font-size:14px;color:var(--muted)}.note strong{color:var(--ink);font-weight:500}.next{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:24px;margin-top:32px;font-size:14px}.next span{color:var(--muted)}footer{display:flex;justify-content:space-between;font:11px 'IBM Plex Mono',monospace;color:#8d9bb5;padding:18px 0}.preview{color:var(--yellow)}@media(max-width:800px){.page{margin:20px auto;padding:0 20px}.logo-mark{width:160px;margin-left:-5.56px}.logo-subtitle{font-size:10px}.masthead div>span{display:none}.layout{grid-template-columns:1fr}aside{padding:16px;border-right:0;border-bottom:1px solid var(--line)}aside>.label,.aside-note{display:none}.nav{display:flex;overflow:auto;margin:0;gap:8px}.nav a{white-space:nowrap;padding:8px 10px}.nav a.active{padding-left:8px}.nav a{flex-shrink:0}main{padding:28px 20px}h1{font-size:34px}.bar{font-size:10px;padding:10px 14px}.bar span:last-child{display:none}pre{font-size:12px;padding:16px}.formats span{padding-right:10px;margin-right:10px}.formats span+span{padding-left:10px}footer{gap:16px;font-size:10px}}@media print{body,.shell,.code-pane{background:white;color:black}.page{margin:0;max-width:none}.masthead,aside,footer,button,.next{display:none}.layout{display:block}main{padding:0}.bar{background:white;color:black}.kw,.str,.comment,.intro,.lead,.note{color:black}pre{white-space:pre-wrap}.shell{border:0}}
+.guide-section{margin-top:44px;scroll-margin-top:24px}.guide-section>p,.guide-section>ul,.guide-section>dl{font-size:15px;color:var(--muted)}.guide-section h3{font-size:19px;font-weight:500;margin:30px 0 12px}.code-pane{margin:20px 0}.output pre{padding:8px 0 0;white-space:pre-wrap;font-size:12px}.table-wrap{overflow:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:13px;text-align:left}th,td{border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}th{color:var(--ink);font-weight:500}td{color:var(--muted)}code{font-family:'IBM Plex Mono',monospace;font-size:.86em}pre code{font-size:inherit}dt{color:var(--ink);margin-top:18px}dd{margin:6px 0 0}.references{padding-left:20px}.references li{margin:10px 0}.credit{font-size:12px!important}.skip{position:absolute;top:-100px}.skip:focus{top:4px;left:20px;background:var(--surface);padding:8px;z-index:5}.logo-mark{flex-shrink:0}button[hidden]{display:none}@media(max-width:800px){.masthead div{font-size:11px}.next{gap:20px}.guide-section{margin-top:36px}footer{flex-wrap:wrap}}@media print{.table-wrap,pre{overflow:visible}th,td,dt,.guide-section>p,.guide-section>ul,.guide-section>dl,.output{color:black}a{color:#163a8c}.code-head{background:#eee;color:black}.skip{display:none}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.kw,.k,.kn,.nb{color:#8fb2ff}.o,.ow{color:#ff6868}.kc,.mi,.mf{color:#55ff55}.str,.s,.s1,.s2,.se,.nf,.nc{color:#ffe45a}.comment,.c,.c1{color:#8d9bb5}@media print{.k,.kn,.kc,.nb,.mi,.mf,.o,.ow,.s,.s1,.s2,.se,.nf,.nc,.c,.c1{color:black}}.sidebar{position:sticky;top:24px}@media(max-width:800px){.sidebar{position:static}}@media print{.eyebrow,.section-title span,.bar span:last-child,.formats span,.output b{color:#222}.formats{border-color:#aaa}.code-pane{break-inside:avoid}}
+body{-webkit-font-smoothing:antialiased}h1,h2{text-wrap:balance}p{text-wrap:pretty}
+.page-nav{display:grid;gap:4px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.page-nav a{display:flex;align-items:center;min-height:40px;padding:8px 12px;font-size:14px;text-decoration:none;color:var(--muted)}
+.page-nav a[aria-current="page"]{color:var(--yellow);background:var(--raised);box-shadow:inset 2px 0 var(--yellow)}
+.contents summary{font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:space-between}
+.contents summary::after{content:'−';font-size:18px}.contents:not([open]) summary::after{content:'+'}.contents summary::-webkit-details-marker{display:none}
+.contents summary:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+.nav{margin:8px 0 24px}.nav a{min-height:40px;display:flex;align-items:baseline;padding:8px 12px}.nav a.active{padding-left:10px}.num{font-variant-numeric:tabular-nums;flex-shrink:0}
+.sidebar{max-height:calc(100vh - 48px);overflow:auto;scrollbar-gutter:stable;overscroll-behavior-y:contain}
+main>nav[aria-label="Documentation"]{display:none}
+@media(hover:hover) and (pointer:fine){.page-nav a:hover,.nav a:hover{background:var(--raised);color:var(--ink)}}
+@media(max-width:800px){.page-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:8px;padding-bottom:12px}.page-nav a{font-size:13px;padding:8px}.sidebar{max-height:none;overflow:visible}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 0;gap:4px;overflow:visible}.nav a{white-space:normal;padding:8px;font-size:13px}.nav a.active{padding-left:6px}.num{margin-right:8px}.contents summary{min-height:40px}.guide-section{scroll-margin-top:24px}}
+@media print{:root{color-scheme:light}main>nav[aria-label="Documentation"]{display:none}pre{break-inside:avoid}}
+.inline-code{color:var(--yellow)}p .inline-code,li .inline-code,dd .inline-code{background:var(--raised);padding:2px 4px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}@media print{.inline-code{color:black}p .inline-code,li .inline-code,dd .inline-code{background:transparent}}
+</style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>MSG AND OPUS / FORMAT REFERENCE</span><span>1.2.0 WORKING SOURCES · OFFLINE WRITERS</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="guide.html">Library guide</a><a href="core-api.html">Core API reference</a><a href="writers.html">Editing message bases</a><a href="glossary.html">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html" aria-current="page">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html">Hudson</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#public-api"><span class="num">01</span>Public API</a><a href="#area-paths-and-initialization"><span class="num">02</span>Area paths and initialization</a><a href="#reading-and-metadata"><span class="num">03</span>Reading and metadata</a><a href="#writing-and-limits"><span class="num">04</span>Writing and limits</a><a href="#create-read-update-and-delete"><span class="num">05</span>Create, read, update and delete</a><a href="#archive-reading"><span class="num">06</span>Archive reading</a><a href="#locks-rollback-and-compatibility"><span class="num">07</span>Locks, rollback and compatibility</a><a href="#implementation-references"><span class="num">08</span>Implementation references</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a></nav><div class="eyebrow">Individual files. Complete messages.</div><h1 id="msg-format-reference">MSG format reference</h1>
+<p>Read classic FTSC and Opus message directories. Edit FTSC messages through
+<code class="inline-code"><span class="n">golded_ftn_msg</span></code>. Each message has its own numbered file and a 190-byte header.
+Python 3.12+ is required. Version 1.2.0 is available on <a href="https://pypi.org/project/golded-ftn-msg/1.2.0/">PyPI</a>.</p>
+<p>Use the <a href="core-api.html">core API reference</a> for shared models and errors, and
+<a href="writers.html">Editing message bases</a> for revision and patch contracts.</p>
+<section id="public-api" class="guide-section"><div class="section-title"><span>01</span><h2>Public API</h2></div>
+<p>The package exports exactly <code class="inline-code"><span class="n">MsgReader</span></code>, <code class="inline-code"><span class="n">MsgWriter</span></code> and <code class="inline-code"><span class="n">MsgSession</span></code>.
+Construct a writer without arguments. Obtain sessions through <code class="inline-code"><span class="nb">open</span></code> and use them
+as context managers; closing or a failed rollback makes them unusable.</p>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="msg_block_1" hidden>Copy code</button></div><pre><code class="language-text" id="msg_block_1"><span class="n">MsgReader</span><span class="p">(</span><span class="n">header_format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"ftsc"</span><span class="p">,</span> <span class="s2">"opus"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"ftsc"</span><span class="p">)</span>
+<span class="n">MsgReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">options</span><span class="p">:</span> <span class="n">ReaderOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">ParsedMessage</span><span class="p">]</span>
+<span class="n">MsgWriter</span><span class="p">()</span>
+<span class="n">MsgWriter</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<span class="n">MsgWriter</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">options</span><span class="p">:</span> <span class="n">WriterOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span> <span class="n">header_format</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"ftsc"</span><span class="p">,</span> <span class="s2">"opus"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"ftsc"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MsgSession</span>
+<span class="n">MsgWriter</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">messages</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">OutgoingMessage</span><span class="p">],</span>
+    <span class="n">options</span><span class="p">:</span> <span class="n">WriterOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+<span class="n">MsgSession</span><span class="p">(</span><span class="n">base</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">WriterOptions</span><span class="p">)</span>
+<span class="n">MsgSession</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">msgno</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionMessage</span>
+<span class="n">MsgSession</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">OutgoingMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteResult</span>
+<span class="n">MsgSession</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span> <span class="n">patch</span><span class="p">:</span> <span class="n">MessagePatch</span><span class="p">,</span>
+    <span class="n">expected_revision</span><span class="p">:</span> <span class="n">RevisionToken</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteResult</span>
+<span class="n">MsgSession</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span>
+    <span class="n">expected_revision</span><span class="p">:</span> <span class="n">RevisionToken</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MessageIdentity</span>
+</code></pre></div>
+<p><code class="inline-code"><span class="n">write</span></code> is a batch convenience method: it creates the directory if needed and
+returns the number of completed appends. Each append commits separately; an
+exception on a later message leaves earlier appends in place.</p>
+</section><section id="area-paths-and-initialization" class="guide-section"><div class="section-title"><span>02</span><h2>Area paths and initialization</h2></div>
+<p>Pass the directory, without a message filename. The reader accepts positive
+numeric stems with case-insensitive <code class="inline-code"><span class="o">.</span><span class="n">msg</span></code> extensions, skips symlinks and reads
+regular files in numeric order. Duplicate numeric identities are rejected, even
+when filenames differ in padding or extension case.</p>
+<p><code class="inline-code"><span class="n">create</span></code> accepts a missing or empty directory and creates parent directories.
+It refuses a nonempty directory. Opening a session initializes the private
+<code class="inline-code"><span class="o">.</span><span class="n">golded</span><span class="o">-</span><span class="n">ftn</span><span class="o">-</span><span class="n">msg</span><span class="o">.</span><span class="n">lock</span></code> sidecar. This stores the highest allocated number, so
+removing the highest message does not make its number available again.
+Existing lastread files are preserved; no GoldED lastread file is required or
+created for a new empty area.</p>
+<p>Message identity uses format <code class="inline-code"><span class="n">msg</span></code>, the resolved area path and the filename
+number. It is separate from an external MSGID. Reader provenance records the
+actual filename and message number; byte offsets are unknown.</p>
+</section><section id="reading-and-metadata" class="guide-section"><div class="section-title"><span>03</span><h2>Reading and metadata</h2></div>
+<p>FTSC is the default. Choose <code class="inline-code"><span class="n">MsgReader</span><span class="p">(</span><span class="s2">"opus"</span><span class="p">)</span></code> explicitly for Opus: header
+format detection is not automatic. FTSC words 176–183 represent zone and point;
+Opus uses those bytes for DOS written/arrived timestamps. Opus addresses combine
+header net/node with INTL/FMPT/TOPT, without interpreting timestamps as addresses.
+Opus provenance uses source type <code class="inline-code"><span class="n">opus</span></code>.</p>
+<p>Text decoding is strict, using core charset detection and CP850 fallback.
+Kludges remain in the normalized body. Header addresses must agree with
+INTL/FMPT/TOPT. Invalid FTSC textual dates become <code class="inline-code"><span class="kc">None</span></code>; English month names and
+the 1970–2069 two-digit year window are used. Opus written dates are naive,
+have two-second precision and cover 1980–2107. Zero or invalid Opus timestamps
+fall back to the textual date.</p>
+<p>Raw 16-bit attributes are exposed as <code class="inline-code"><span class="n">attributes_raw</span></code>. The two header reply
+words map to <code class="inline-code"><span class="n">reply_to_msgno</span></code> and <code class="inline-code"><span class="n">reply1st_msgno</span></code>; zero means no link.
+General controls, external MSGID, addresses and routing remain distinct values.
+No MSGID, routing or duplicate detection is generated automatically.</p>
+</section><section id="writing-and-limits" class="guide-section"><div class="section-title"><span>04</span><h2>Writing and limits</h2></div>
+<p>Writers produce FTSC only. <code class="inline-code"><span class="nb">open</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">header_format</span><span class="o">=</span><span class="s2">"opus"</span><span class="p">)</span></code> is rejected.
+Names permit 35 encoded bytes and subjects 71. Header text rejects nulls, line
+breaks and control separators. Encoding defaults to CP850 and is strict:
+conflicting charset declarations, replacement characters and silent truncation
+are refused. Dates must be naive, have no microseconds and lie in 1970–2069.
+Address components, raw attributes and reply links use unsigned 16-bit values.
+Domain addresses cannot be represented.</p>
+<p>MSG represents only the reply-to and first-reply links. Additional reply links
+and arbitrary reply lists are unsupported. Provenance is never serialized and
+cannot be patched. Body lines serialize with CR and one terminating null byte;
+embedded nulls are rejected.</p>
+<p>Updates begin with the existing raw header. Unknown header bytes and omitted
+fields survive. Attribute-only changes preserve original text bytes. Body-only
+changes preserve controls and routing. <code class="inline-code"><span class="n">control_lines</span></code> replaces general controls;
+omitted external MSGID, addresses and routing keep their structured values.
+Explicit conflicting metadata is rejected. <code class="inline-code"><span class="kc">None</span></code> clears only representable
+optional values. Delete removes one file and leaves other messages' reply links
+unchanged.</p>
+</section><section id="create-read-update-and-delete" class="guide-section"><div class="section-title"><span>05</span><h2>Create, read, update and delete</h2></div>
+<p>This example uses an isolated temporary area. The session read issues the
+revision used by the update; the updated revision is used for deletion.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="msg_example_1" hidden>Copy code</button></div><pre><code id="msg_example_1" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagePatch</span><span class="p">,</span> <span class="n">OutgoingMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn_msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">MsgReader</span><span class="p">,</span> <span class="n">MsgWriter</span>
+
+<span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">directory</span><span class="p">:</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"messages"</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">MsgWriter</span><span class="p">()</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">writer</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">area</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">added</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">OutgoingMessage</span><span class="p">(</span>
+                <span class="n">from_name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">,</span>
+                <span class="n">to_name</span><span class="o">=</span><span class="s2">"Bob"</span><span class="p">,</span>
+                <span class="n">subject</span><span class="o">=</span><span class="s2">"Hello"</span><span class="p">,</span>
+                <span class="n">body_text</span><span class="o">=</span><span class="s2">"First line"</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">added</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">msgno</span><span class="p">)</span>
+        <span class="n">changed</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+            <span class="n">MessagePatch</span><span class="p">(</span><span class="n">body_text</span><span class="o">=</span><span class="s2">"A longer second line"</span><span class="p">),</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">revision</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">session</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">changed</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">msgno</span><span class="p">)</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">body_text</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span>
+            <span class="s2">"A longer second line"</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">changed</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span> <span class="n">changed</span><span class="o">.</span><span class="n">revision</span><span class="p">)</span> <span class="o">==</span> <span class="n">changed</span><span class="o">.</span><span class="n">identity</span>
+    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">MsgReader</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">area</span><span class="p">))</span> <span class="o">==</span> <span class="p">[]</span>
+</code></pre></div>
+</section><section id="archive-reading" class="guide-section"><div class="section-title"><span>06</span><h2>Archive reading</h2></div>
+<p>Strict reading stops with <code class="inline-code"><span class="n">ParserException</span></code> for malformed message files; filesystem
+errors remain filesystem errors. <code class="inline-code"><span class="n">ReaderOptions</span><span class="p">(</span><span class="n">archive_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_issue</span><span class="o">=...</span><span class="p">)</span></code>
+requires a callback and skips malformed records with <code class="inline-code"><span class="n">record_parse_error</span></code>.
+Declared ASCII may fall back strictly to the configured charset, reporting
+<code class="inline-code"><span class="n">ascii_decode_fallback</span></code>. Invalid UTF-8 and conflicting addresses are skipped.
+Duplicate message numbers report <code class="inline-code"><span class="n">duplicate_message_number</span></code> with action <code class="inline-code"><span class="n">stopped</span></code>
+before any messages are returned. Callback exceptions propagate. Issues identify
+the source without including message contents. Archive mode never enables editing
+or repairs original bytes.</p>
+</section><section id="locks-rollback-and-compatibility" class="guide-section"><div class="section-title"><span>07</span><h2>Locks, rollback and compatibility</h2></div>
+<p>Keep GoldED closed. <code class="inline-code"><span class="n">concurrent</span><span class="o">=</span><span class="kc">True</span></code> is rejected on every platform: original
+GoldED MSG locks are empty functions, and the Python sidecar cannot coordinate
+GoldED readers or writers. Standalone reading also requires stable files.</p>
+<p>Each session operation takes the sidecar lock, rereads the area and checks the
+raw-byte revision under the lock. The default monotonic timeout is five seconds.
+Python sessions share a lock manager within one process. Callers must avoid direct
+base-file access during operations.</p>
+<p>Append serializes a complete temporary file, then publishes without replacing an
+existing destination: a hard link on POSIX, a non-replacing rename on Windows.
+Update replaces the complete file; delete unlinks it. Ordinary I/O failure restores
+the affected file and numbering sidecar where possible. Failed rollback raises
+<code class="inline-code"><span class="n">RollbackError</span></code> and poisons the session. Completed earlier operations survive.
+Process death and power loss have no transactional guarantee.</p>
+<p>Runtime checks in this checkout cover macOS. Linux and Windows execution and
+GoldED build interoperability, caching and refresh remain unverified. Source
+layout checks are not live compatibility tests.</p>
+</section><section id="implementation-references" class="guide-section"><div class="section-title"><span>08</span><h2>Implementation references</h2></div>
+<ul>
+<li><a href="https://github.com/golded-dev/golded-ftn-msg-python/blob/main/README.md">Package README</a></li>
+<li><a href="https://github.com/golded-dev/golded-ftn-msg-python/blob/main/src/golded_ftn_msg/reader.py">Reader</a>
+  and <a href="https://github.com/golded-dev/golded-ftn-msg-python/blob/main/src/golded_ftn_msg/writer.py">writer</a></li>
+<li><a href="https://github.com/golded-dev/golded-ftn-msg-python/blob/main/docs/writer-sources.md">Writer source notes</a>:
+  original GoldED commit <code class="inline-code"><span class="mi">600266252</span><span class="n">b73174ff5116cee697ef9a97aeb1859</span></code>,
+  <code class="inline-code"><span class="n">gmofido</span><span class="o">.</span><span class="n">h</span></code> layout and <code class="inline-code"><span class="n">gmofido2</span><span class="o">.</span><span class="n">cpp</span></code> / <code class="inline-code"><span class="n">gmofido4</span><span class="o">.</span><span class="n">cpp</span></code> scan and write paths.</li>
+</ul></section></main></div></div><footer><span>GoldED for Python / GoldED.dev</span><span>v1.2.0 · MIT LICENSE</span></footer></div><script>
+for (const button of document.querySelectorAll('[data-copy]')) {
+  button.hidden = false;
+  button.addEventListener('click', async () => {
+    const source = document.getElementById(button.dataset.copy);
+    try {
+      await navigator.clipboard.writeText(source.textContent);
+      button.textContent = 'Copied';
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(source);
+      selection.removeAllRanges(); selection.addRange(range);
+      button.textContent = 'Code selected';
+    }
+    document.getElementById('copy-status').textContent = button.textContent;
+    setTimeout(() => { button.textContent = 'Copy code'; }, 1800);
+  });
+}
+const links = [...document.querySelectorAll('.nav a')];
+const sections = links.map(link => document.querySelector(link.hash)).filter(Boolean);
+function updateLocation() {
+  let current = sections[0];
+  for (const section of sections) if (section.getBoundingClientRect().top <= 100) current = section;
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = sections.at(-1);
+  for (const link of links) {
+    const active = current && link.hash === '#' + current.id;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+}
+let pending = false;
+window.addEventListener('scroll', () => {
+  if (!pending) requestAnimationFrame(() => { updateLocation(); pending = false; });
+  pending = true;
+}, {passive: true});
+window.addEventListener('hashchange', updateLocation);
+updateLocation();
+const narrow = window.matchMedia('(max-width:800px)');
+function setContents() { for (const menu of document.querySelectorAll('.contents')) menu.open = !narrow.matches; }
+narrow.addEventListener('change', setContents);
+setContents();
+</script><span id="copy-status" role="status" class="sr-only"></span></body></html>

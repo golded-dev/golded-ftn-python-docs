@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GoldED for Python · Hudson reference</title><style>
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/ibm-plex-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/ibm-plex-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/ibm-plex-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-5.ttf) format('truetype');
+}
+
+
+:root{color-scheme:dark;--canvas:#05070b;--surface:#0b0f18;--raised:#101624;--ink:#f5f7ff;--muted:#bcc5d9;--blue:#4f6dff;--yellow:#ffe45a;--info:#8fb2ff;--line:#273149}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:17px/1.65 'IBM Plex Sans',sans-serif}a{color:var(--info);text-underline-offset:4px}a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}.page{max-width:1260px;margin:40px auto;padding:0 24px}.masthead{border-top:1px solid #ff6868;border-bottom:1px solid #ff6868;padding:7px 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:24px}.logo-mark{position:relative;display:block;width:210px;margin-left:-7.3px}.logo{display:block;width:100%;height:auto}.logo-subtitle{position:absolute;right:3%;top:70%;color:var(--yellow);font:400 13px/1 'IBM Plex Sans',sans-serif;letter-spacing:0;white-space:nowrap}.masthead a{font:12px 'IBM Plex Mono',monospace;text-decoration:none}.masthead div>span{color:var(--muted);margin-right:24px}.shell{border:1px solid var(--blue);background:var(--surface)}.bar{display:flex;justify-content:space-between;gap:16px;padding:12px 20px;background:#2d47c7;color:var(--yellow);font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em}.bar span:last-child{color:#e0e6ff}.layout{display:grid;grid-template-columns:230px minmax(0,1fr)}aside{min-width:0;border-right:1px solid var(--line);padding:32px 20px}.label{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.nav{display:grid;gap:4px;margin:20px -20px 36px}.nav a{padding:9px 20px;color:var(--muted);text-decoration:none;font-size:14px}.nav a.active{background:var(--raised);border-left:2px solid var(--yellow);padding-left:18px;color:var(--ink)}.num{font:11px 'IBM Plex Mono',monospace;color:#7f8798;margin-right:14px}.aside-note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}.aside-note code{color:var(--yellow)}main{padding:42px 48px 36px;min-width:0}.eyebrow{color:var(--yellow);font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em}h1{font-size:44px;line-height:1.1;letter-spacing:-.035em;font-weight:600;margin:16px 0 20px;max-width:650px}.intro{color:var(--muted);max-width:620px;margin:0 0 26px}.formats{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 34px}.formats span{padding:10px 19px 10px 0;margin-right:19px;font:12px 'IBM Plex Mono',monospace;color:var(--info)}.formats span+span{border-left:1px solid var(--line);padding-left:19px}.section-title{display:flex;gap:12px;align-items:baseline}h2{font-size:24px;line-height:1.2;margin:0 0 10px;font-weight:500}.section-title span{font:500 20px/1.2 'IBM Plex Mono',monospace;color:var(--yellow);flex-shrink:0}.lead{margin:0 0 20px;color:var(--muted);font-size:15px}.code-pane{border:1px solid #34446e;background:#080c14}.code-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--raised);border-bottom:1px solid #34446e;font:11px 'IBM Plex Mono',monospace;color:var(--muted)}button{white-space:nowrap;flex-shrink:0;cursor:pointer;background:transparent;color:var(--info);border:1px solid #435170;padding:4px 10px;font:11px 'IBM Plex Mono',monospace}pre{margin:0;padding:20px;overflow:auto;font:13px/1.85 'IBM Plex Mono',monospace;tab-size:4}.kw{color:#8fb2ff}.str{color:#ffe45a}.comment{color:#8d9bb5}.output{border-top:1px solid var(--line);padding:12px 20px;font:12px 'IBM Plex Mono',monospace;color:#bcc5d9}.output b{color:#8d9bb5;font-weight:400;margin-right:20px}.note{border-left:2px solid var(--blue);padding:0 0 0 16px;margin-top:24px;font-size:14px;color:var(--muted)}.note strong{color:var(--ink);font-weight:500}.next{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:24px;margin-top:32px;font-size:14px}.next span{color:var(--muted)}footer{display:flex;justify-content:space-between;font:11px 'IBM Plex Mono',monospace;color:#8d9bb5;padding:18px 0}.preview{color:var(--yellow)}@media(max-width:800px){.page{margin:20px auto;padding:0 20px}.logo-mark{width:160px;margin-left:-5.56px}.logo-subtitle{font-size:10px}.masthead div>span{display:none}.layout{grid-template-columns:1fr}aside{padding:16px;border-right:0;border-bottom:1px solid var(--line)}aside>.label,.aside-note{display:none}.nav{display:flex;overflow:auto;margin:0;gap:8px}.nav a{white-space:nowrap;padding:8px 10px}.nav a.active{padding-left:8px}.nav a{flex-shrink:0}main{padding:28px 20px}h1{font-size:34px}.bar{font-size:10px;padding:10px 14px}.bar span:last-child{display:none}pre{font-size:12px;padding:16px}.formats span{padding-right:10px;margin-right:10px}.formats span+span{padding-left:10px}footer{gap:16px;font-size:10px}}@media print{body,.shell,.code-pane{background:white;color:black}.page{margin:0;max-width:none}.masthead,aside,footer,button,.next{display:none}.layout{display:block}main{padding:0}.bar{background:white;color:black}.kw,.str,.comment,.intro,.lead,.note{color:black}pre{white-space:pre-wrap}.shell{border:0}}
+.guide-section{margin-top:44px;scroll-margin-top:24px}.guide-section>p,.guide-section>ul,.guide-section>dl{font-size:15px;color:var(--muted)}.guide-section h3{font-size:19px;font-weight:500;margin:30px 0 12px}.code-pane{margin:20px 0}.output pre{padding:8px 0 0;white-space:pre-wrap;font-size:12px}.table-wrap{overflow:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:13px;text-align:left}th,td{border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}th{color:var(--ink);font-weight:500}td{color:var(--muted)}code{font-family:'IBM Plex Mono',monospace;font-size:.86em}pre code{font-size:inherit}dt{color:var(--ink);margin-top:18px}dd{margin:6px 0 0}.references{padding-left:20px}.references li{margin:10px 0}.credit{font-size:12px!important}.skip{position:absolute;top:-100px}.skip:focus{top:4px;left:20px;background:var(--surface);padding:8px;z-index:5}.logo-mark{flex-shrink:0}button[hidden]{display:none}@media(max-width:800px){.masthead div{font-size:11px}.next{gap:20px}.guide-section{margin-top:36px}footer{flex-wrap:wrap}}@media print{.table-wrap,pre{overflow:visible}th,td,dt,.guide-section>p,.guide-section>ul,.guide-section>dl,.output{color:black}a{color:#163a8c}.code-head{background:#eee;color:black}.skip{display:none}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.kw,.k,.kn,.nb{color:#8fb2ff}.o,.ow{color:#ff6868}.kc,.mi,.mf{color:#55ff55}.str,.s,.s1,.s2,.se,.nf,.nc{color:#ffe45a}.comment,.c,.c1{color:#8d9bb5}@media print{.k,.kn,.kc,.nb,.mi,.mf,.o,.ow,.s,.s1,.s2,.se,.nf,.nc,.c,.c1{color:black}}.sidebar{position:sticky;top:24px}@media(max-width:800px){.sidebar{position:static}}@media print{.eyebrow,.section-title span,.bar span:last-child,.formats span,.output b{color:#222}.formats{border-color:#aaa}.code-pane{break-inside:avoid}}
+body{-webkit-font-smoothing:antialiased}h1,h2{text-wrap:balance}p{text-wrap:pretty}
+.page-nav{display:grid;gap:4px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.page-nav a{display:flex;align-items:center;min-height:40px;padding:8px 12px;font-size:14px;text-decoration:none;color:var(--muted)}
+.page-nav a[aria-current="page"]{color:var(--yellow);background:var(--raised);box-shadow:inset 2px 0 var(--yellow)}
+.contents summary{font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:space-between}
+.contents summary::after{content:'−';font-size:18px}.contents:not([open]) summary::after{content:'+'}.contents summary::-webkit-details-marker{display:none}
+.contents summary:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+.nav{margin:8px 0 24px}.nav a{min-height:40px;display:flex;align-items:baseline;padding:8px 12px}.nav a.active{padding-left:10px}.num{font-variant-numeric:tabular-nums;flex-shrink:0}
+.sidebar{max-height:calc(100vh - 48px);overflow:auto;scrollbar-gutter:stable;overscroll-behavior-y:contain}
+main>nav[aria-label="Documentation"]{display:none}
+@media(hover:hover) and (pointer:fine){.page-nav a:hover,.nav a:hover{background:var(--raised);color:var(--ink)}}
+@media(max-width:800px){.page-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:8px;padding-bottom:12px}.page-nav a{font-size:13px;padding:8px}.sidebar{max-height:none;overflow:visible}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 0;gap:4px;overflow:visible}.nav a{white-space:normal;padding:8px;font-size:13px}.nav a.active{padding-left:6px}.num{margin-right:8px}.contents summary{min-height:40px}.guide-section{scroll-margin-top:24px}}
+@media print{:root{color-scheme:light}main>nav[aria-label="Documentation"]{display:none}pre{break-inside:avoid}}
+.inline-code{color:var(--yellow)}p .inline-code,li .inline-code,dd .inline-code{background:var(--raised);padding:2px 4px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}@media print{.inline-code{color:black}p .inline-code,li .inline-code,dd .inline-code{background:transparent}}
+</style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>HUDSON / FORMAT REFERENCE</span><span>1.2.0 WORKING SOURCES · OFFLINE WRITERS</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="guide.html">Library guide</a><a href="core-api.html">Core API reference</a><a href="writers.html">Editing message bases</a><a href="glossary.html">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html" aria-current="page">Hudson</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#public-api"><span class="num">01</span>Public API</a><a href="#files-and-whole-base-creation"><span class="num">02</span>Files and whole-base creation</a><a href="#reading-and-metadata"><span class="num">03</span>Reading and metadata</a><a href="#editing-scan-indices-and-limits"><span class="num">04</span>Editing, scan indices and limits</a><a href="#synthetic-crud-example"><span class="num">05</span>Synthetic CRUD example</a><a href="#archive-mode-and-safety"><span class="num">06</span>Archive mode and safety</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a></nav><div class="eyebrow">Shared files. Explicit boards.</div><h1 id="hudson-message-bases">Hudson message bases</h1>
+<p>Read and edit classic <code class="inline-code"><span class="o">.</span><span class="n">BBS</span></code> Hudson bases with <code class="inline-code"><span class="n">golded</span><span class="o">-</span><span class="n">ftn</span><span class="o">-</span><span class="n">hudson</span></code>. Imports use
+<code class="inline-code"><span class="n">golded_ftn_hudson</span></code>. Python 3.12 or newer is required. Version 1.2.0 is available on
+<a href="https://pypi.org/project/golded-ftn-hudson/1.2.0/">PyPI</a>. GoldBase <code class="inline-code"><span class="o">.</span><span class="n">DAT</span></code> is a different format and
+is not supported.</p>
+<p>The <a href="core-api.html">core API reference</a> defines shared models and errors.
+<a href="writers.html">Editing message bases</a> defines the common session, patch and
+revision contract. This page covers Hudson's boards, files and public API.</p>
+<section id="public-api" class="guide-section"><div class="section-title"><span>01</span><h2>Public API</h2></div>
+<p>The package exports exactly <code class="inline-code"><span class="n">HudsonReader</span></code> and <code class="inline-code"><span class="n">HudsonWriter</span></code>. Both have
+no-argument constructors. The standalone reader reads all boards; it has no
+board filter. A writer session always selects one explicit board in <strong>1–200</strong>.
+The board may be passed positionally or as <code class="inline-code"><span class="n">board</span><span class="o">=</span><span class="mi">7</span></code>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">HudsonReader</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code></td>
+<td><code class="inline-code"><span class="n">Iterator</span><span class="p">[</span><span class="n">ParsedMessage</span><span class="p">]</span></code>, all boards in ascending message-number order</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">HudsonWriter</span><span class="p">()</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code>; initializes the whole base</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">writer</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">board</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">scan_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code></td>
+<td>Context-managed Hudson session</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">session</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">msgno</span><span class="p">)</span></code></td>
+<td><code class="inline-code"><span class="n">SessionMessage</span></code> from the selected board</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">session</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></code></td>
+<td><code class="inline-code"><span class="n">WriteResult</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">session</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">patch</span><span class="p">,</span> <span class="n">expected_revision</span><span class="p">)</span></code></td>
+<td><code class="inline-code"><span class="n">WriteResult</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">identity</span><span class="p">,</span> <span class="n">expected_revision</span><span class="p">)</span></code></td>
+<td>Deleted <code class="inline-code"><span class="n">MessageIdentity</span></code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Paths and <code class="inline-code"><span class="n">scan_path</span></code> accept <code class="inline-code"><span class="nb">str</span></code> or <code class="inline-code"><span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>. Options use
+<code class="inline-code"><span class="n">ReaderOptions</span></code> or <code class="inline-code"><span class="n">WriterOptions</span></code>; messages, identities, patches and revisions
+use <code class="inline-code"><span class="n">OutgoingMessage</span></code>, <code class="inline-code"><span class="n">MessageIdentity</span></code>, <code class="inline-code"><span class="n">MessagePatch</span></code> and <code class="inline-code"><span class="n">RevisionToken</span></code>.
+<code class="inline-code"><span class="n">HudsonSession</span></code> is the return type of <code class="inline-code"><span class="nb">open</span><span class="p">()</span></code>, not a package-root export.
+Use the context manager, which returns the session and closes it on exit.</p>
+</section><section id="files-and-whole-base-creation" class="guide-section"><div class="section-title"><span>02</span><h2>Files and whole-base creation</h2></div>
+<p>Pass the directory containing the base, not a filename or board subdirectory.
+The standalone reader needs regular <code class="inline-code"><span class="n">MSGIDX</span><span class="o">.</span><span class="n">BBS</span></code>, <code class="inline-code"><span class="n">MSGHDR</span><span class="o">.</span><span class="n">BBS</span></code> and <code class="inline-code"><span class="n">MSGTXT</span><span class="o">.</span><span class="n">BBS</span></code>
+files. Names are case-insensitive; symlinks and ambiguous variants are rejected.
+It ignores <code class="inline-code"><span class="n">MSGINFO</span><span class="o">.</span><span class="n">BBS</span></code>, <code class="inline-code"><span class="n">MSGTOIDX</span><span class="o">.</span><span class="n">BBS</span></code> and <code class="inline-code"><span class="n">LASTREAD</span><span class="o">.</span><span class="n">BBS</span></code>. Writer sessions also
+validate and maintain the information and recipient-index files.</p>
+<p><code class="inline-code"><span class="n">create</span><span class="p">()</span></code> creates the directory if necessary, then initializes <strong>the whole base,
+not one board</strong>. Any existing base filename, including a case variant, is rejected.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Initial file</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">MSGINFO</span><span class="o">.</span><span class="n">BBS</span></code></td>
+<td>406 zero bytes</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">LASTREAD</span><span class="o">.</span><span class="n">BBS</span></code></td>
+<td>400 zero bytes</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">MSGHDR</span><span class="o">.</span><span class="n">BBS</span></code>, <code class="inline-code"><span class="n">MSGIDX</span><span class="o">.</span><span class="n">BBS</span></code>, <code class="inline-code"><span class="n">MSGTOIDX</span><span class="o">.</span><span class="n">BBS</span></code>, <code class="inline-code"><span class="n">MSGTXT</span><span class="o">.</span><span class="n">BBS</span></code></td>
+<td>Empty</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">NETMAIL</span><span class="o">.</span><span class="n">BBS</span></code>, <code class="inline-code"><span class="n">ECHOMAIL</span><span class="o">.</span><span class="n">BBS</span></code></td>
+<td>Empty scan indices</td>
+</tr>
+</tbody>
+</table></div>
+<p>Existing lastread data is preserved during editing. A 3-byte message-index record
+selects a corresponding 187-byte header slot. Header strings are Pascal fields.
+Text consists of 256-byte blocks: one length byte followed by up to 255 payload
+bytes. Payloads are joined before decoding, including multibyte characters or
+controls spanning blocks. Bytes outside declared lengths are padding.</p>
+<p>Active message numbers are global across boards and lie in 1–65534. <code class="inline-code"><span class="mh">0xffff</span></code>
+marks a deleted index entry; headers marked deleted are also skipped. Index and
+header numbers and boards must agree, and active numbers must be unique.
+Complete unused headers and text blocks are ignored, but file alignment is
+checked. Zero-block bodies, short or empty text blocks and bodies without a
+final NUL are accepted by the reader.</p>
+</section><section id="reading-and-metadata" class="guide-section"><div class="section-title"><span>03</span><h2>Reading and metadata</h2></div>
+<p>Read a stable directory with no concurrent writer. The standalone reader reads
+files separately without locking or an atomic snapshot. Strict mode validates
+all active records before yielding the first message; a later malformed record
+cannot leave a partial result. Filesystem errors remain filesystem errors.
+Malformed records and strict decoding failures raise <code class="inline-code"><span class="n">ParserException</span></code> with the
+actual filename, byte offset and chained cause. Session reads are locked.</p>
+<p>Decoding uses core charset handling with CP850 fallback. Repeated charset, MSGID
+and REPLY declarations must agree. <code class="inline-code"><span class="n">body_text</span></code> retains control lines; core
+normalizes line endings and removes trailing NULs. Controls and routing keep
+source order within their separate model sequences. INTL, FMPT and TOPT support
+space and colon forms and supplement incomplete binary addresses. Conflicts fail;
+nonzero header components and node zero with an established net survive.
+Incomplete addresses become <code class="inline-code"><span class="kc">None</span></code>; domains are not inferred from IDs or Origin.</p>
+<p>Dates use <code class="inline-code"><span class="n">MM</span><span class="o">-</span><span class="n">DD</span><span class="o">-</span><span class="n">YY</span> <span class="n">HH</span><span class="p">:</span><span class="n">MM</span></code>: years 00–79 mean 2000–2079 and 80–99 mean
+1980–1999. They are timezone-naive and independent of machine settings.
+Invalid or missing dates become <code class="inline-code"><span class="kc">None</span></code>; malformed Pascal lengths still fail.
+Timezone controls remain metadata rather than changing this date interpretation.</p>
+<p><code class="inline-code"><span class="n">attributes_raw</span></code> combines the message attribute byte with the network attribute
+byte shifted left eight bits. Reply-to and first-reply numbers are retained,
+with zero mapped to <code class="inline-code"><span class="kc">None</span></code>. The read-count word is not a next-reply link;
+<code class="inline-code"><span class="n">reply_next_msgno</span></code> is <code class="inline-code"><span class="kc">None</span></code>. MSGID supplies <code class="inline-code"><span class="n">external_id</span></code>; otherwise core
+creates a synthetic ID over decoded normalized fields.</p>
+<p>Each board maps to synthetic <code class="inline-code"><span class="n">area_code</span><span class="o">=</span><span class="s2">"BOARD&lt;n&gt;"</span></code> and
+<code class="inline-code"><span class="n">area_meta_key</span><span class="o">=</span><span class="s2">"hudson:&lt;n&gt;"</span></code>. Area name and display order remain <code class="inline-code"><span class="kc">None</span></code>: configured
+board names are not stored in this base. Provenance identifies <code class="inline-code"><span class="n">hudson</span></code>, the
+actual <code class="inline-code"><span class="n">MSGHDR</span><span class="o">.</span><span class="n">BBS</span></code> filename, message number and header offset.</p>
+</section><section id="editing-scan-indices-and-limits" class="guide-section"><div class="section-title"><span>04</span><h2>Editing, scan indices and limits</h2></div>
+<p>Identity includes format, resolved base path, board and global message number.
+Allocation includes deleted headers and preserves the high-number watermark;
+deleted numbers are not reused. A session cannot edit a target on another board.
+Deletion does not change other messages' replies. Next-reply and reply-list
+requests are rejected because those structures cannot be stored here.</p>
+<p>Updates start from raw header and text bytes. Omitted fields preserve controls,
+padding, read count, cost, unknown attribute bits and dates. <code class="inline-code"><span class="kc">None</span></code> clears only
+representable optional fields such as dates, addresses, MSGID and reply links.
+Names, body, subject and attributes cannot be cleared. Attribute-only changes
+preserve allocated text bytes. Content changes append fresh Pascal text blocks
+and update the existing header slot; old text blocks remain allocated.</p>
+<p>A body-only patch preserves control and routing lines. General control replacement
+preserves omitted structured MSGID, addresses and routing. Use the corresponding
+structured patch fields to replace or clear them; conflicting explicit controls
+are rejected. No MSGID generation, routing generation or duplicate checks occur.</p>
+<p>Strict serialization defaults to CP850 through <code class="inline-code"><span class="n">WriterOptions</span><span class="o">.</span><span class="n">target_charset</span></code>.
+Contradictory charset declarations, unencodable text, oversized Pascal fields
+and out-of-range integers fail. Encoded sender and recipient names are limited
+to 35 bytes each and subjects to 72 bytes. Dates must be timezone-naive and lie
+in 1980–2079; storage has minute precision. Domains cannot be stored. Point
+addresses use explicit FMPT/TOPT controls. Message numbers and reply references
+must fit their Hudson ranges; allocation rejects exhaustion beyond message number
+65534. Text start and count and scan header-slot indices must fit 16-bit words.</p>
+<p><code class="inline-code"><span class="n">MSGTOIDX</span><span class="o">.</span><span class="n">BBS</span></code> stores the recipient or GoldED's <code class="inline-code"><span class="o">*</span> <span class="n">Received</span> <span class="o">*</span></code> and
+<code class="inline-code"><span class="o">*</span> <span class="n">Deleted</span> <span class="o">*</span></code> markers. <code class="inline-code"><span class="n">NETMAIL</span><span class="o">.</span><span class="n">BBS</span></code> and <code class="inline-code"><span class="n">ECHOMAIL</span><span class="o">.</span><span class="n">BBS</span></code> store physical header
+slots, not message numbers. Net-transmit and echo-transmit bits enqueue slots;
+existing entries remain until explicit deletion, following GoldED's write path.</p>
+<p>GoldED places scan indices in its configured system directory. If that differs
+from the base, pass <code class="inline-code"><span class="n">scan_path</span><span class="o">=</span><span class="n">golded_system_path</span></code> to <code class="inline-code"><span class="nb">open</span><span class="p">()</span></code>. By default the
+scan directory is the base directory. Existing scan files are validated; missing
+ones are created only when an operation adds an entry. Empty files remain after
+removal. Do not share one scan directory among independent bases: that exceeds
+this base lock's scope.</p>
+</section><section id="synthetic-crud-example" class="guide-section"><div class="section-title"><span>05</span><h2>Synthetic CRUD example</h2></div>
+<p>This example creates the whole base, edits board 7 and uses no message archive.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="hudson_example_1" hidden>Copy code</button></div><pre><code id="hudson_example_1" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagePatch</span><span class="p">,</span> <span class="n">OutgoingMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn_hudson</span><span class="w"> </span><span class="kn">import</span> <span class="n">HudsonReader</span><span class="p">,</span> <span class="n">HudsonWriter</span>
+
+<span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">directory</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">HudsonWriter</span><span class="p">()</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">writer</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">board</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">added</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">OutgoingMessage</span><span class="p">(</span>
+                <span class="n">from_name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="n">to_name</span><span class="o">=</span><span class="s2">"Bob"</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="n">body_text</span><span class="o">=</span><span class="s2">"Body"</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">added</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">board</span> <span class="o">==</span> <span class="mi">7</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">added</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">msgno</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">current</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">subject</span> <span class="o">==</span> <span class="s2">"Hello"</span>
+        <span class="n">changed</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span> <span class="n">MessagePatch</span><span class="p">(</span><span class="n">body_text</span><span class="o">=</span><span class="s2">"A longer body"</span><span class="p">),</span> <span class="n">current</span><span class="o">.</span><span class="n">revision</span>
+        <span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">changed</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span> <span class="n">changed</span><span class="o">.</span><span class="n">revision</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">HudsonReader</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">directory</span><span class="p">))</span> <span class="o">==</span> <span class="p">[]</span>
+</code></pre></div>
+</section><section id="archive-mode-and-safety" class="guide-section"><div class="section-title"><span>06</span><h2>Archive mode and safety</h2></div>
+<p>Archive reading requires <code class="inline-code"><span class="n">ReaderOptions</span><span class="p">(</span><span class="n">archive_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_issue</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span></code>.
+Issues report <code class="inline-code"><span class="n">recovered</span></code>, <code class="inline-code"><span class="n">skipped</span></code> or <code class="inline-code"><span class="n">stopped</span></code>, with actual file, record
+identity and physical offset but no message contents. Failed active records are
+skipped through the next fixed slot. Duplicate numbers, missing indexed headers
+and alignment failures stop traversal; a returned validated prefix may be
+incomplete. Charset, ID and address conflicts are skipped. Failed declared ASCII
+may be retried strictly with the configured fallback and a report, without
+rewriting the declaration. Other decoding failures are skipped. Filesystem and
+callback exceptions propagate. Archive mode requires stable files and is not
+an editing or repair mode.</p>
+<p>Every session operation locks byte <strong>407</strong> of <code class="inline-code"><span class="n">MSGINFO</span><span class="o">.</span><span class="n">BBS</span></code>, derived from the
+packed 406-byte information structure plus one. It rereads the base, validates
+active records and information counts, and flushes before releasing the lock.
+The core manager serializes same-process sessions and retains one lock-file
+descriptor. Callers must not directly open or close base files during operations.</p>
+<p>Revision tokens cover identity, header/index/text positions and SHA-256 over raw
+header, index, recipient-index and allocated text-block bytes. Update and delete
+recheck under the lock. Missing or changed targets raise <code class="inline-code"><span class="n">ConflictError</span></code>;
+unrelated appends do not invalidate the token.</p>
+<p>Before mutation, affected files are watched for in-place rollback of bytes and
+sizes under the lock. Each completed operation is independent; a later failure
+does not undo it. Failed rollback raises <code class="inline-code"><span class="n">RollbackError</span></code> with base and operation
+details and makes the session unusable. There is no crash journal, transactional
+guarantee for process termination or power loss, or promise to detect every
+partial write.</p>
+<p>Stop GoldED before reading or editing. <code class="inline-code"><span class="n">WriterOptions</span><span class="p">(</span><span class="n">concurrent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code> raises
+<code class="inline-code"><span class="n">UnsupportedOperationError</span></code> on every platform. macOS lock and rollback runtime
+tests are recorded; Linux and Windows runtime execution remain unverified.
+Current GoldED build integration is deferred. Live support requires competing
+write tests and tests of reads, scan/cache behavior and refresh against a pinned
+build; the byte lock alone does not establish that support.</p>
+<p>See the <a href="https://github.com/golded-dev/golded-ftn-hudson-python">package source and tests</a>
+and its <a href="https://github.com/golded-dev/golded-ftn-hudson-python/blob/main/docs/writer.md">writer notes</a>.
+GoldED's <code class="inline-code"><span class="n">gmohuds</span><span class="o">.</span><span class="n">h</span></code>, <code class="inline-code"><span class="n">gmohuds3</span><span class="o">.</span><span class="n">cpp</span></code> and <code class="inline-code"><span class="n">gmohuds4</span><span class="o">.</span><span class="n">cpp</span></code> are the implementation
+references for packed records, metadata and Pascal text blocks.</p></section></main></div></div><footer><span>GoldED for Python / GoldED.dev</span><span>v1.2.0 · MIT LICENSE</span></footer></div><script>
+for (const button of document.querySelectorAll('[data-copy]')) {
+  button.hidden = false;
+  button.addEventListener('click', async () => {
+    const source = document.getElementById(button.dataset.copy);
+    try {
+      await navigator.clipboard.writeText(source.textContent);
+      button.textContent = 'Copied';
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(source);
+      selection.removeAllRanges(); selection.addRange(range);
+      button.textContent = 'Code selected';
+    }
+    document.getElementById('copy-status').textContent = button.textContent;
+    setTimeout(() => { button.textContent = 'Copy code'; }, 1800);
+  });
+}
+const links = [...document.querySelectorAll('.nav a')];
+const sections = links.map(link => document.querySelector(link.hash)).filter(Boolean);
+function updateLocation() {
+  let current = sections[0];
+  for (const section of sections) if (section.getBoundingClientRect().top <= 100) current = section;
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = sections.at(-1);
+  for (const link of links) {
+    const active = current && link.hash === '#' + current.id;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+}
+let pending = false;
+window.addEventListener('scroll', () => {
+  if (!pending) requestAnimationFrame(() => { updateLocation(); pending = false; });
+  pending = true;
+}, {passive: true});
+window.addEventListener('hashchange', updateLocation);
+updateLocation();
+const narrow = window.matchMedia('(max-width:800px)');
+function setContents() { for (const menu of document.querySelectorAll('.contents')) menu.open = !narrow.matches; }
+narrow.addEventListener('change', setContents);
+setContents();
+</script><span id="copy-status" role="status" class="sr-only"></span></body></html>

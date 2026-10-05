@@ -34,8 +34,21 @@ class Examples(HTMLParser):
 
 def main() -> None:
     parser = Examples()
-    source = (ROOT / "site/index.html").read_text(encoding="utf-8")
+    source = (ROOT / "site/guide.html").read_text(encoding="utf-8")
     parser.feed(source)
+    assert len(parser.items) == 9
+    writer_source = (ROOT / "site/writers.html").read_text(encoding="utf-8")
+    parser.feed(writer_source)
+    assert len(parser.items) == 10
+    api_source = (ROOT / "site/core-api.html").read_text(encoding="utf-8")
+    parser.feed(api_source)
+    assert any(name.startswith("core_api_") for name in parser.items)
+    format_sources = ""
+    for name in ("msg", "jam", "squish", "hudson"):
+        page = (ROOT / "site" / f"{name}.html").read_text(encoding="utf-8")
+        parser.feed(page)
+        format_sources += page
+        assert any(key.startswith(f"{name}_example_") for key in parser.items)
     with tempfile.TemporaryDirectory(prefix="ftn-doc-examples-") as temporary:
         paths = []
         for name, code in parser.items.items():
@@ -44,11 +57,12 @@ def main() -> None:
             path.write_text(code, encoding="utf-8")
             paths.append(str(path))
         subprocess.run(["mypy", "--strict", *paths], check=True)
-    assert len(parser.items) == 9
-    for filename in re.findall(r'src="([^"]+)"', source):
+    for filename in re.findall(
+        r'src="([^"]+)"', source + writer_source + api_source + format_sources
+    ):
         if not filename.startswith("https:"):
             assert (ROOT / "site" / filename).is_file(), filename
-    print("Nine HTML examples parsed and passed strict mypy; image assets exist.")
+    print(f"{len(parser.items)} HTML examples passed strict mypy; image assets exist.")
 
 
 if __name__ == "__main__":

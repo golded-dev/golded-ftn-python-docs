@@ -58,7 +58,7 @@ class Guide(HTMLParser):
 
 def guide():
     parsed = Guide()
-    parsed.feed((ROOT / "site/index.html").read_text(encoding="utf-8"))
+    parsed.feed((ROOT / "site/guide.html").read_text(encoding="utf-8"))
     return parsed
 
 
@@ -200,4 +200,4 @@ def test_strict_example_handles_filesystem_and_parser_errors(archive):
 
 def test_html5_document():
     parser = html5lib.HTMLParser(strict=True)
-    parser.parse((ROOT / "site/index.html").read_text(encoding="utf-8"))
+    parser.parse((ROOT / "site/guide.html").read_text(encoding="utf-8"))

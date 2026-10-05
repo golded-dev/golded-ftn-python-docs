@@ -1,0 +1,1543 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GoldED for Python · Core API reference</title><style>
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/ibm-plex-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/ibm-plex-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/ibm-plex-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-5.ttf) format('truetype');
+}
+
+
+:root{color-scheme:dark;--canvas:#05070b;--surface:#0b0f18;--raised:#101624;--ink:#f5f7ff;--muted:#bcc5d9;--blue:#4f6dff;--yellow:#ffe45a;--info:#8fb2ff;--line:#273149}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:17px/1.65 'IBM Plex Sans',sans-serif}a{color:var(--info);text-underline-offset:4px}a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}.page{max-width:1260px;margin:40px auto;padding:0 24px}.masthead{border-top:1px solid #ff6868;border-bottom:1px solid #ff6868;padding:7px 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:24px}.logo-mark{position:relative;display:block;width:210px;margin-left:-7.3px}.logo{display:block;width:100%;height:auto}.logo-subtitle{position:absolute;right:3%;top:70%;color:var(--yellow);font:400 13px/1 'IBM Plex Sans',sans-serif;letter-spacing:0;white-space:nowrap}.masthead a{font:12px 'IBM Plex Mono',monospace;text-decoration:none}.masthead div>span{color:var(--muted);margin-right:24px}.shell{border:1px solid var(--blue);background:var(--surface)}.bar{display:flex;justify-content:space-between;gap:16px;padding:12px 20px;background:#2d47c7;color:var(--yellow);font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em}.bar span:last-child{color:#e0e6ff}.layout{display:grid;grid-template-columns:230px minmax(0,1fr)}aside{min-width:0;border-right:1px solid var(--line);padding:32px 20px}.label{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.nav{display:grid;gap:4px;margin:20px -20px 36px}.nav a{padding:9px 20px;color:var(--muted);text-decoration:none;font-size:14px}.nav a.active{background:var(--raised);border-left:2px solid var(--yellow);padding-left:18px;color:var(--ink)}.num{font:11px 'IBM Plex Mono',monospace;color:#7f8798;margin-right:14px}.aside-note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}.aside-note code{color:var(--yellow)}main{padding:42px 48px 36px;min-width:0}.eyebrow{color:var(--yellow);font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em}h1{font-size:44px;line-height:1.1;letter-spacing:-.035em;font-weight:600;margin:16px 0 20px;max-width:650px}.intro{color:var(--muted);max-width:620px;margin:0 0 26px}.formats{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 34px}.formats span{padding:10px 19px 10px 0;margin-right:19px;font:12px 'IBM Plex Mono',monospace;color:var(--info)}.formats span+span{border-left:1px solid var(--line);padding-left:19px}.section-title{display:flex;gap:12px;align-items:baseline}h2{font-size:24px;line-height:1.2;margin:0 0 10px;font-weight:500}.section-title span{font:500 20px/1.2 'IBM Plex Mono',monospace;color:var(--yellow);flex-shrink:0}.lead{margin:0 0 20px;color:var(--muted);font-size:15px}.code-pane{border:1px solid #34446e;background:#080c14}.code-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--raised);border-bottom:1px solid #34446e;font:11px 'IBM Plex Mono',monospace;color:var(--muted)}button{white-space:nowrap;flex-shrink:0;cursor:pointer;background:transparent;color:var(--info);border:1px solid #435170;padding:4px 10px;font:11px 'IBM Plex Mono',monospace}pre{margin:0;padding:20px;overflow:auto;font:13px/1.85 'IBM Plex Mono',monospace;tab-size:4}.kw{color:#8fb2ff}.str{color:#ffe45a}.comment{color:#8d9bb5}.output{border-top:1px solid var(--line);padding:12px 20px;font:12px 'IBM Plex Mono',monospace;color:#bcc5d9}.output b{color:#8d9bb5;font-weight:400;margin-right:20px}.note{border-left:2px solid var(--blue);padding:0 0 0 16px;margin-top:24px;font-size:14px;color:var(--muted)}.note strong{color:var(--ink);font-weight:500}.next{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:24px;margin-top:32px;font-size:14px}.next span{color:var(--muted)}footer{display:flex;justify-content:space-between;font:11px 'IBM Plex Mono',monospace;color:#8d9bb5;padding:18px 0}.preview{color:var(--yellow)}@media(max-width:800px){.page{margin:20px auto;padding:0 20px}.logo-mark{width:160px;margin-left:-5.56px}.logo-subtitle{font-size:10px}.masthead div>span{display:none}.layout{grid-template-columns:1fr}aside{padding:16px;border-right:0;border-bottom:1px solid var(--line)}aside>.label,.aside-note{display:none}.nav{display:flex;overflow:auto;margin:0;gap:8px}.nav a{white-space:nowrap;padding:8px 10px}.nav a.active{padding-left:8px}.nav a{flex-shrink:0}main{padding:28px 20px}h1{font-size:34px}.bar{font-size:10px;padding:10px 14px}.bar span:last-child{display:none}pre{font-size:12px;padding:16px}.formats span{padding-right:10px;margin-right:10px}.formats span+span{padding-left:10px}footer{gap:16px;font-size:10px}}@media print{body,.shell,.code-pane{background:white;color:black}.page{margin:0;max-width:none}.masthead,aside,footer,button,.next{display:none}.layout{display:block}main{padding:0}.bar{background:white;color:black}.kw,.str,.comment,.intro,.lead,.note{color:black}pre{white-space:pre-wrap}.shell{border:0}}
+.guide-section{margin-top:44px;scroll-margin-top:24px}.guide-section>p,.guide-section>ul,.guide-section>dl{font-size:15px;color:var(--muted)}.guide-section h3{font-size:19px;font-weight:500;margin:30px 0 12px}.code-pane{margin:20px 0}.output pre{padding:8px 0 0;white-space:pre-wrap;font-size:12px}.table-wrap{overflow:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:13px;text-align:left}th,td{border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}th{color:var(--ink);font-weight:500}td{color:var(--muted)}code{font-family:'IBM Plex Mono',monospace;font-size:.86em}pre code{font-size:inherit}dt{color:var(--ink);margin-top:18px}dd{margin:6px 0 0}.references{padding-left:20px}.references li{margin:10px 0}.credit{font-size:12px!important}.skip{position:absolute;top:-100px}.skip:focus{top:4px;left:20px;background:var(--surface);padding:8px;z-index:5}.logo-mark{flex-shrink:0}button[hidden]{display:none}@media(max-width:800px){.masthead div{font-size:11px}.next{gap:20px}.guide-section{margin-top:36px}footer{flex-wrap:wrap}}@media print{.table-wrap,pre{overflow:visible}th,td,dt,.guide-section>p,.guide-section>ul,.guide-section>dl,.output{color:black}a{color:#163a8c}.code-head{background:#eee;color:black}.skip{display:none}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.kw,.k,.kn,.nb{color:#8fb2ff}.o,.ow{color:#ff6868}.kc,.mi,.mf{color:#55ff55}.str,.s,.s1,.s2,.se,.nf,.nc{color:#ffe45a}.comment,.c,.c1{color:#8d9bb5}@media print{.k,.kn,.kc,.nb,.mi,.mf,.o,.ow,.s,.s1,.s2,.se,.nf,.nc,.c,.c1{color:black}}.sidebar{position:sticky;top:24px}@media(max-width:800px){.sidebar{position:static}}@media print{.eyebrow,.section-title span,.bar span:last-child,.formats span,.output b{color:#222}.formats{border-color:#aaa}.code-pane{break-inside:avoid}}
+body{-webkit-font-smoothing:antialiased}h1,h2{text-wrap:balance}p{text-wrap:pretty}
+.page-nav{display:grid;gap:4px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.page-nav a{display:flex;align-items:center;min-height:40px;padding:8px 12px;font-size:14px;text-decoration:none;color:var(--muted)}
+.page-nav a[aria-current="page"]{color:var(--yellow);background:var(--raised);box-shadow:inset 2px 0 var(--yellow)}
+.contents summary{font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:space-between}
+.contents summary::after{content:'−';font-size:18px}.contents:not([open]) summary::after{content:'+'}.contents summary::-webkit-details-marker{display:none}
+.contents summary:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+.nav{margin:8px 0 24px}.nav a{min-height:40px;display:flex;align-items:baseline;padding:8px 12px}.nav a.active{padding-left:10px}.num{font-variant-numeric:tabular-nums;flex-shrink:0}
+.sidebar{max-height:calc(100vh - 48px);overflow:auto;scrollbar-gutter:stable;overscroll-behavior-y:contain}
+main>nav[aria-label="Documentation"]{display:none}
+@media(hover:hover) and (pointer:fine){.page-nav a:hover,.nav a:hover{background:var(--raised);color:var(--ink)}}
+@media(max-width:800px){.page-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:8px;padding-bottom:12px}.page-nav a{font-size:13px;padding:8px}.sidebar{max-height:none;overflow:visible}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 0;gap:4px;overflow:visible}.nav a{white-space:normal;padding:8px;font-size:13px}.nav a.active{padding-left:6px}.num{margin-right:8px}.contents summary{min-height:40px}.guide-section{scroll-margin-top:24px}}
+@media print{:root{color-scheme:light}main>nav[aria-label="Documentation"]{display:none}pre{break-inside:avoid}}
+.inline-code{color:var(--yellow)}p .inline-code,li .inline-code,dd .inline-code{background:var(--raised);padding:2px 4px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}@media print{.inline-code{color:black}p .inline-code,li .inline-code,dd .inline-code{background:transparent}}
+</style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>CORE API REFERENCE</span><span>1.2.0 WORKING SOURCES</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="guide.html">Library guide</a><a href="core-api.html" aria-current="page">Core API reference</a><a href="writers.html">Editing message bases</a><a href="glossary.html">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html">Hudson</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#value-conventions"><span class="num">01</span>Value conventions</a><a href="#addresses-and-controls"><span class="num">02</span>Addresses and controls</a><a href="#decoding-and-text-helpers"><span class="num">03</span>Decoding and text helpers</a><a href="#optional-text-repair"><span class="num">04</span>Optional text repair</a><a href="#read-values-and-options"><span class="num">05</span>Read values and options</a><a href="#write-values-patches-and-revisions"><span class="num">06</span>Write values, patches and revisions</a><a href="#protocols-and-session-lifecycle"><span class="num">07</span>Protocols and session lifecycle</a><a href="#exceptions"><span class="num">08</span>Exceptions</a><a href="#boundaries"><span class="num">09</span>Boundaries</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a> · <a href="guide.html">Library guide</a> · <a href="writers.html">Writer contract</a></nav><div class="eyebrow">Old formats. Shared values.</div><h1 id="api-reference-for-golded-ftn">API reference for golded-ftn</h1>
+<p>This reference covers all 40 names exported by <code class="inline-code"><span class="n">golded_ftn</span></code> in the 1.2.0
+working tree. Import public values and functions from <code class="inline-code"><span class="n">golded_ftn</span></code>. Core owns
+values, protocols and pure text helpers. Concrete format packages own files,
+serialization, record validation and writer sessions.</p>
+<p>The distribution is <code class="inline-code"><span class="n">golded</span><span class="o">-</span><span class="n">ftn</span></code>, the import is <code class="inline-code"><span class="n">golded_ftn</span></code>, and Python 3.12+
+is required. There are no runtime dependencies. See <a href="https://github.com/golded-dev/golded-ftn-python/blob/main/docs/php-api.md">PHP API mapping</a>
+for migration differences and the shared <a href="writers.html">writer guide</a>
+for concrete MSG, JAM, Squish and Hudson examples in the sibling checkout.</p>
+<section id="value-conventions" class="guide-section"><div class="section-title"><span>01</span><h2>Value conventions</h2></div>
+<p>All dataclass constructors are keyword-only. Values are frozen and slotted.
+The tables below give every constructor field, its type and its default.
+<strong>Required</strong> means the constructor has no default. Core annotations describe
+the contract; they do not validate every value at runtime. Format writers check
+encoded lengths, numeric ranges, representable fields and date restrictions.</p>
+<p>Strings are Unicode. Source bytes stay separate. Dates are <code class="inline-code"><span class="n">datetime</span></code> values;
+core does not infer timezones or convert timestamps. Unknown metadata is <code class="inline-code"><span class="kc">None</span></code>.
+An empty string, <code class="inline-code"><span class="mi">0</span></code>, <code class="inline-code"><span class="p">()</span></code>, <code class="inline-code"><span class="kc">None</span></code> and <code class="inline-code"><span class="n">UNSET</span></code> have different meanings.</p>
+<p><code class="inline-code"><span class="n">MessageControlLines</span></code> and <code class="inline-code"><span class="n">OutgoingMessage</span></code> convert their collection fields to
+tuples during construction. Other models require callers to pass their declared
+types; freezing a model does not recursively freeze incorrectly typed inputs.</p>
+</section><section id="addresses-and-controls" class="guide-section"><div class="section-title"><span>02</span><h2>Addresses and controls</h2></div>
+<h3 id="ftnaddress"><code class="inline-code"><span class="n">FtnAddress</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_1" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_1"><span class="n">FtnAddress</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">zone</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">net</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+           <span class="n">point</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">FtnAddress</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FtnAddress</span>
+<span class="n">FtnAddress</span><span class="o">.</span><span class="n">try_from_string</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FtnAddress</span> <span class="o">|</span> <span class="kc">None</span>
+<span class="nb">str</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">zone</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span></code></td>
+<td>Required</td>
+<td>Network zone.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">net</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span></code></td>
+<td>Required</td>
+<td>Network number.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">node</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span></code></td>
+<td>Required</td>
+<td>Node number.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">point</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Optional point, including explicit point <code class="inline-code"><span class="mi">0</span></code>.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">domain</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Optional domain, with original case retained.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The parsers accept <code class="inline-code"><span class="n">zone</span><span class="p">:</span><span class="n">net</span><span class="o">/</span><span class="n">node</span></code>, optional <code class="inline-code"><span class="o">.</span><span class="n">point</span></code> and optional <code class="inline-code"><span class="nd">@domain</span></code>,
+with surrounding whitespace stripped. Numeric parts contain ASCII digits only.
+Domains begin with an ASCII letter or digit and then allow letters, digits,
+periods, underscores and hyphens. Parsing accepts arbitrary non-negative integer
+sizes; it does not enforce a format's 16-bit address limits. Direct construction
+does not enforce this grammar.</p>
+<p><code class="inline-code"><span class="n">from_string</span></code> raises <code class="inline-code"><span class="ne">ValueError</span></code> for invalid syntax. <code class="inline-code"><span class="n">try_from_string</span></code> returns
+<code class="inline-code"><span class="kc">None</span></code>. <code class="inline-code"><span class="nb">str</span></code> emits the full address and includes <code class="inline-code"><span class="mf">.0</span></code> when point is explicitly
+zero. It does not normalize domain case or remove an explicit point.</p>
+<h3 id="controlline"><code class="inline-code"><span class="n">ControlLine</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_2" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_2"><span class="n">ControlLine</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">raw</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Kludge name; the parser uppercases it.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">value</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Parsed value; the parser trims surrounding whitespace.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">raw</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Original decoded line, without its line separator.</td>
+</tr>
+</tbody>
+</table></div>
+<p><code class="inline-code"><span class="n">raw</span></code> includes any trailing nulls on the loaded line. It is decoded text, not
+original source bytes. For newly supplied writer controls, use <code class="inline-code"><span class="n">raw</span><span class="o">=</span><span class="s2">""</span></code>;
+concrete serializers use structured names and values and validate them.</p>
+<h3 id="messagecontrollines"><code class="inline-code"><span class="n">MessageControlLines</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_3" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_3"><span class="n">MessageControlLines</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">kludges</span><span class="o">=</span><span class="p">(),</span> <span class="n">msgid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reply</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">seen_by</span><span class="o">=</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="p">(),</span> <span class="n">tearline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">origin_address</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">kludges</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="n">ControlLine</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code></td>
+<td><code class="inline-code"><span class="p">()</span></code></td>
+<td>Valid SOH kludges, including unknown names and repetitions, in input order.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">msgid</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>First parsed MSGID value, including an empty value.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>First parsed REPLY value; this is external metadata.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">charset</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>First CHRS or CHARSET value, including its level suffix.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">seen_by</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code></td>
+<td><code class="inline-code"><span class="p">()</span></code></td>
+<td>Unexpanded SEEN-BY values.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">path</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code></td>
+<td><code class="inline-code"><span class="p">()</span></code></td>
+<td>Unexpanded plain PATH values. See parser limitation below.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">tearline</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>First unquoted line beginning <code class="inline-code"><span class="o">---</span></code>.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">origin</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>First recognized origin text, without the <code class="inline-code"><span class="n">Origin</span><span class="p">:</span></code> prefix.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">origin_address</span></code></td>
+<td><code class="inline-code"><span class="n">FtnAddress</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>First valid parenthesized address at the end of a recognized origin line.</td>
+</tr>
+</tbody>
+</table></div>
+<p><code class="inline-code"><span class="n">kludges</span></code>, <code class="inline-code"><span class="n">seen_by</span></code> and <code class="inline-code"><span class="n">path</span></code> are converted to tuples. Direct construction
+does not reconcile convenience fields with the contents of <code class="inline-code"><span class="n">kludges</span></code>.</p>
+<h3 id="parse_message"><code class="inline-code"><span class="n">parse_message</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_4" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_4"><span class="n">parse_message</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MessageControlLines</span>
+</code></pre></div>
+<p>Splits CRLF, CR and LF without changing the supplied string. Parsing ignores
+empty lines and quoted lines beginning with optional whitespace followed by <code class="inline-code"><span class="o">&gt;</span></code>
+or one to six ASCII letters/digits followed by <code class="inline-code"><span class="o">&gt;</span></code>. It ignores trailing nulls
+when interpreting a line but retains them in <code class="inline-code"><span class="n">ControlLine</span><span class="o">.</span><span class="n">raw</span></code>.</p>
+<p>A kludge must start at column zero with SOH (<code class="inline-code">\<span class="n">x01</span></code>) and use
+<code class="inline-code"><span class="n">NAME</span><span class="p">:</span> <span class="n">value</span></code>. Names begin with an ASCII letter and then allow ASCII letters,
+digits and hyphens. Names are uppercased; first MSGID, REPLY and charset values
+win. Valid unknown kludges and repetitions remain in <code class="inline-code"><span class="n">kludges</span></code>. There is no
+conflict validation here: a writer may reject conflicting declarations.</p>
+<p>Plain <code class="inline-code"><span class="n">SEEN</span><span class="o">-</span><span class="n">BY</span><span class="p">:</span></code> and <code class="inline-code"><span class="n">PATH</span><span class="p">:</span></code> lines are case-sensitive and have their surrounding
+value whitespace stripped. The current parser keeps SOH <code class="inline-code">\<span class="n">x01PATH</span><span class="p">:</span></code> in
+<code class="inline-code"><span class="n">kludges</span></code> but does <strong>not</strong> add it to <code class="inline-code"><span class="n">path</span></code>. Space-separated SOH controls such as
+<code class="inline-code">\<span class="n">x01INTL</span> <span class="mi">2</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span> <span class="mi">2</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span></code> are not parsed by this core helper; concrete readers may
+extend its syntax. Routing strings are never expanded or deduplicated.</p>
+<p>Origin recognition requires a leading whitespace character followed by
+<code class="inline-code"><span class="o">*</span> <span class="n">Origin</span><span class="p">:</span></code>. <code class="inline-code"><span class="n">origin</span></code> keeps the first recognized origin text; a later recognized
+origin line can supply <code class="inline-code"><span class="n">origin_address</span></code> if earlier lines had no valid address.
+Ordinary body lines are not returned separately by this function.</p>
+<h3 id="extract_msgid"><code class="inline-code"><span class="n">extract_msgid</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_5" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_5"><span class="n">extract_msgid</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Returns <code class="inline-code"><span class="n">parse_message</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">msgid</span></code>. It uses exactly the same quoting and syntax
+rules, including first-value precedence and an empty string as a valid result.
+It does not generate an ID or validate uniqueness.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="core_api_1" hidden>Copy code</button></div><pre><code id="core_api_1" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">FtnAddress</span><span class="p">,</span> <span class="n">extract_msgid</span><span class="p">,</span> <span class="n">parse_message</span>
+
+<span class="n">address</span> <span class="o">=</span> <span class="n">FtnAddress</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">" 2:236/77.0@fidonet "</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">str</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"2:236/77.0@fidonet"</span>
+<span class="k">assert</span> <span class="n">FtnAddress</span><span class="o">.</span><span class="n">try_from_string</span><span class="p">(</span><span class="s2">"not an address"</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"&gt; </span><span class="se">\x01</span><span class="s2">MSGID: quoted</span><span class="se">\r\x01</span><span class="s2">msgid: actual</span><span class="se">\r\x01</span><span class="s2">X-CUSTOM: value</span><span class="se">\0</span><span class="s2">"</span>
+<span class="n">controls</span> <span class="o">=</span> <span class="n">parse_message</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">extract_msgid</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"actual"</span>
+<span class="k">assert</span> <span class="n">controls</span><span class="o">.</span><span class="n">kludges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"X-CUSTOM"</span>
+<span class="k">assert</span> <span class="n">controls</span><span class="o">.</span><span class="n">kludges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"</span><span class="se">\0</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">parse_message</span><span class="p">(</span><span class="s2">"SEEN-BY: 1/2 3</span><span class="se">\n</span><span class="s2">PATH: 1/4"</span><span class="p">)</span><span class="o">.</span><span class="n">path</span> <span class="o">==</span> <span class="p">(</span><span class="s2">"1/4"</span><span class="p">,)</span>
+</code></pre></div>
+</section><section id="decoding-and-text-helpers" class="guide-section"><div class="section-title"><span>03</span><h2>Decoding and text helpers</h2></div>
+<h3 id="decodeerrors"><code class="inline-code"><span class="n">DecodeErrors</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_7" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_7"><span class="n">DecodeErrors</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"strict"</span><span class="p">,</span> <span class="s2">"replace"</span><span class="p">,</span> <span class="s2">"ignore"</span><span class="p">]</span>
+</code></pre></div>
+<p>Type alias for <code class="inline-code"><span class="n">to_utf8</span></code>'s error policy. <code class="inline-code"><span class="n">strict</span></code> raises on malformed input;
+<code class="inline-code"><span class="n">replace</span></code> inserts replacement characters; <code class="inline-code"><span class="n">ignore</span></code> discards undecodable bytes.
+Neither lossy mode retains the original bytes for you.</p>
+<h3 id="detect_charset"><code class="inline-code"><span class="n">detect_charset</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_8" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_8"><span class="n">detect_charset</span><span class="p">(</span><span class="n">raw_body</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">fallback</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"CP850"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+<p>Finds the first case-insensitive SOH <code class="inline-code"><span class="n">CHRS</span><span class="p">:</span></code> or <code class="inline-code"><span class="n">CHARSET</span><span class="p">:</span></code> declaration anywhere
+in the byte string. The token ends at whitespace, null or another SOH. Detection
+does not apply the text parser's quoted-line rules. A recognized FTN alias is
+resolved; an absent or unknown declaration uses <code class="inline-code"><span class="n">fallback</span></code>. This is declaration
+lookup, not statistical encoding detection, and it does not reject conflicting
+later declarations.</p>
+<p>The fallback is always resolved and validated through Python's codec registry,
+even when the message has a recognized declaration. Invalid fallbacks raise
+<code class="inline-code"><span class="ne">LookupError</span></code>. Supported declaration aliases, matched case-insensitively:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Aliases</th>
+<th>Returned encoding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">CP850</span></code>, <code class="inline-code"><span class="n">IBM850</span></code>, <code class="inline-code"><span class="n">IBMPC</span></code>, <code class="inline-code"><span class="n">IBM</span></code></td>
+<td><code class="inline-code"><span class="n">CP850</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">LATIN</span><span class="o">-</span><span class="mi">1</span></code>, <code class="inline-code"><span class="n">LATIN1</span></code>, <code class="inline-code"><span class="mi">8859</span><span class="o">-</span><span class="mi">1</span></code>, <code class="inline-code"><span class="n">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">1</span></code>, <code class="inline-code"><span class="n">ISO8859</span><span class="o">-</span><span class="mi">1</span></code></td>
+<td><code class="inline-code"><span class="n">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">1</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">ASCII</span></code>, <code class="inline-code"><span class="n">USASCII</span></code></td>
+<td><code class="inline-code"><span class="n">ASCII</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">CP866</span></code>, <code class="inline-code"><span class="n">IBM866</span></code></td>
+<td><code class="inline-code"><span class="n">CP866</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">KOI8</span><span class="o">-</span><span class="n">R</span></code>, <code class="inline-code"><span class="n">KOI8R</span></code></td>
+<td><code class="inline-code"><span class="n">KOI8</span><span class="o">-</span><span class="n">R</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">CP437</span></code>, <code class="inline-code"><span class="n">IBM437</span></code></td>
+<td><code class="inline-code"><span class="n">CP437</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">CP1251</span></code></td>
+<td><code class="inline-code"><span class="n">CP1251</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">CP1252</span></code></td>
+<td><code class="inline-code"><span class="n">CP1252</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">CP1250</span></code></td>
+<td><code class="inline-code"><span class="n">CP1250</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">LATIN</span><span class="o">-</span><span class="mi">2</span></code>, <code class="inline-code"><span class="n">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">2</span></code></td>
+<td><code class="inline-code"><span class="n">ISO</span><span class="o">-</span><span class="mi">8859</span><span class="o">-</span><span class="mi">2</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span></code>, <code class="inline-code"><span class="n">UTF8</span></code></td>
+<td><code class="inline-code"><span class="n">UTF</span><span class="o">-</span><span class="mi">8</span></code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Fallbacks additionally accept names understood by Python's codec registry.
+The returned spelling is an alias target or the validated fallback spelling,
+not necessarily the codec registry's canonical name.</p>
+<h3 id="to_utf8"><code class="inline-code"><span class="n">to_utf8</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_9" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_9"><span class="n">to_utf8</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">charset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"CP850"</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span>
+        <span class="n">errors</span><span class="p">:</span> <span class="n">DecodeErrors</span> <span class="o">=</span> <span class="s2">"strict"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+<p>Removes trailing null bytes, then decodes with <code class="inline-code"><span class="n">charset</span></code> into Python Unicode.
+Despite its name, the result is a <code class="inline-code"><span class="nb">str</span></code>, not UTF-8 bytes. Interior nulls remain.
+The charset is passed directly to Python's codec registry: resolve FTN aliases
+with <code class="inline-code"><span class="n">detect_charset</span></code> first. Unknown codec names raise <code class="inline-code"><span class="ne">LookupError</span></code>; malformed
+bytes raise <code class="inline-code"><span class="ne">UnicodeDecodeError</span></code> in strict mode. An unsupported error policy
+raises <code class="inline-code"><span class="ne">ValueError</span></code>.</p>
+<h3 id="parse_body"><code class="inline-code"><span class="n">parse_body</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_10" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_10"><span class="n">parse_body</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+<p>Removes trailing null characters and normalizes CRLF and CR to LF. It preserves
+interior nulls, controls, routing and ordinary text. It does not decode, extract
+metadata or repair mojibake.</p>
+<h3 id="read_null_padded_field"><code class="inline-code"><span class="n">read_null_padded_field</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_11" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_11"><span class="n">read_null_padded_field</span><span class="p">(</span><span class="n">raw</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span>
+</code></pre></div>
+<p>Takes the requested byte slice and returns its bytes before the first null.
+Negative offset or length raises <code class="inline-code"><span class="ne">ValueError</span></code>. A slice beyond the buffer is
+short or empty; this helper does not enforce binary record bounds. Validate
+record size before interpreting fixed fields.</p>
+<h3 id="synthetic_id"><code class="inline-code"><span class="n">synthetic_id</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_12" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_12"><span class="n">synthetic_id</span><span class="p">(</span><span class="n">from_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">to_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+             <span class="n">date</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span>
+</code></pre></div>
+<p>Returns <code class="inline-code"><span class="nb">hash</span><span class="p">:</span><span class="n">sha256</span><span class="p">:</span></code> plus 64 lowercase hexadecimal digits. The digest covers
+the exact UTF-8 encoding of JSON <code class="inline-code"><span class="p">[</span><span class="n">from_name</span><span class="p">,</span> <span class="n">to_name</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">body</span><span class="p">]</span></code>,
+with <code class="inline-code"><span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span></code> and separators <code class="inline-code"><span class="p">(</span><span class="s2">","</span><span class="p">,</span> <span class="s2">":"</span><span class="p">)</span></code>. The complete body is
+included. Names, text and date are not normalized. <code class="inline-code"><span class="kc">None</span></code> and <code class="inline-code"><span class="s2">""</span></code> dates differ.
+Consumers choose their date string format.</p>
+<p>This is a content-derived ID, separate from source record identity and revision.
+It does not prove that two source records are the same. Concrete writers do not
+automatically generate MSGID, and a synthetic ID must not be supplied as an
+external MSGID.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="core_api_2" hidden>Copy code</button></div><pre><code id="core_api_2" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">detect_charset</span><span class="p">,</span>
+    <span class="n">parse_body</span><span class="p">,</span>
+    <span class="n">read_null_padded_field</span><span class="p">,</span>
+    <span class="n">synthetic_id</span><span class="p">,</span>
+    <span class="n">to_utf8</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">raw</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"</span><span class="se">\x01</span><span class="s2">CHRS: IBMPC 2</span><span class="se">\r</span><span class="s2">Bruger m</span><span class="se">\x9b</span><span class="s2">de</span><span class="se">\0\0</span><span class="s2">"</span>
+<span class="n">charset</span> <span class="o">=</span> <span class="n">detect_charset</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">charset</span> <span class="o">==</span> <span class="s2">"CP850"</span>
+<span class="k">assert</span> <span class="n">parse_body</span><span class="p">(</span><span class="n">to_utf8</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">charset</span><span class="p">))</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"Bruger møde"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">read_null_padded_field</span><span class="p">(</span><span class="sa">b</span><span class="s2">"xxAlice</span><span class="se">\0</span><span class="s2">padding"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">"Alice"</span>
+<span class="k">assert</span> <span class="n">read_null_padded_field</span><span class="p">(</span><span class="sa">b</span><span class="s2">"x"</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="sa">b</span><span class="s2">""</span>
+<span class="k">assert</span> <span class="n">parse_body</span><span class="p">(</span><span class="s2">"a</span><span class="se">\0</span><span class="s2">b</span><span class="se">\r\n\0</span><span class="s2">"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"a</span><span class="se">\0</span><span class="s2">b</span><span class="se">\n</span><span class="s2">"</span>
+<span class="k">assert</span> <span class="n">to_utf8</span><span class="p">(</span><span class="sa">b</span><span class="s2">"</span><span class="se">\xff</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"UTF-8"</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"replace"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"</span><span class="se">\ufffd</span><span class="s2">"</span>
+<span class="n">identity</span> <span class="o">=</span> <span class="n">synthetic_id</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"Ping"</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">"body"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">identity</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"hash:sha256:"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span> <span class="o">==</span> <span class="mi">76</span>
+<span class="k">assert</span> <span class="n">identity</span> <span class="o">!=</span> <span class="n">synthetic_id</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="s2">"Ping"</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="s2">"body"</span><span class="p">)</span>
+</code></pre></div>
+</section><section id="optional-text-repair" class="guide-section"><div class="section-title"><span>04</span><h2>Optional text repair</h2></div>
+<h3 id="mojibakerepairresult"><code class="inline-code"><span class="n">MojibakeRepairResult</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_14" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_14"><span class="n">MojibakeRepairResult</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">changed</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">confidence</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">text</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Repaired text, with LF line endings.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">changed</span></code></td>
+<td><code class="inline-code"><span class="nb">bool</span></code></td>
+<td>Required</td>
+<td>At least one line was repaired.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">confidence</span></code></td>
+<td><code class="inline-code"><span class="nb">float</span></code></td>
+<td>Required</td>
+<td>Heuristic score for the returned repair.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The score is not a probability. Returned scores lie between 0 and 1; direct
+construction does not validate that range.</p>
+<h3 id="repair_mojibake"><code class="inline-code"><span class="n">repair_mojibake</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_15" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_15"><span class="n">repair_mojibake</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">declared_charset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+               <span class="n">prefer_quoted_lines</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MojibakeRepairResult</span>
+</code></pre></div>
+<p>Attempts RFC 2047 decoding and strict encoding round trips per line. It scores
+damage markers, plausible European letters and a small word list. Default
+visible encodings are CP850, CP437, CP865, ISO-8859-1 and Windows-1252; intended
+encodings are UTF-8, ISO-8859-1, Windows-1252 and CP850. A valid first token of
+<code class="inline-code"><span class="n">declared_charset</span></code>, including an FTN alias, adds a candidate. Unknown declarations
+fall back to the default candidates.</p>
+<p><code class="inline-code"><span class="n">prefer_quoted_lines</span><span class="o">=</span><span class="kc">True</span></code> lowers the score threshold for matching quote lines;
+it does not mean only quoted lines are examined. Candidates that cannot encode
+and decode strictly are discarded. Malformed RFC 2047 words remain unchanged
+when decoding fails. Repair always returns a new result and never modifies
+source data.</p>
+<p>CRLF and CR are normalized to LF even when <code class="inline-code"><span class="n">changed</span></code> is false. <code class="inline-code"><span class="n">confidence</span></code> is
+the mean of line scores, including zero scores for unchanged lines, capped at
+1. This is an opt-in heuristic tuned to European-language fixtures, not a
+general detector. Readers and writers do not invoke it automatically.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="core_api_3" hidden>Copy code</button></div><pre><code id="core_api_3" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">repair_mojibake</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">repair_mojibake</span><span class="p">(</span><span class="s2">"Bruger m°de"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">result</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">"Bruger møde"</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">changed</span>
+<span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">result</span><span class="o">.</span><span class="n">confidence</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+<span class="n">plain</span> <span class="o">=</span> <span class="n">repair_mojibake</span><span class="p">(</span><span class="s2">"a</span><span class="se">\r\n</span><span class="s2">b"</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">plain</span><span class="o">.</span><span class="n">text</span> <span class="o">==</span> <span class="s2">"a</span><span class="se">\n</span><span class="s2">b"</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">plain</span><span class="o">.</span><span class="n">changed</span>
+<span class="k">assert</span> <span class="n">plain</span><span class="o">.</span><span class="n">confidence</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></div>
+</section><section id="read-values-and-options" class="guide-section"><div class="section-title"><span>05</span><h2>Read values and options</h2></div>
+<h3 id="messageprovenance"><code class="inline-code"><span class="n">MessageProvenance</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_17" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_17"><span class="n">MessageProvenance</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">source_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">source_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">source_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">source_type</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Source format or source kind.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">source_path</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Actual source path when known.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">source_id</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Format-specific record identity when known.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">source_offset</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Physical byte offset when known.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Provenance records where a value was read. It is separate from external MSGID
+and does not itself provide a writer revision or permission to mutate a base.</p>
+<h3 id="messagesource"><code class="inline-code"><span class="n">MessageSource</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_18" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_18"><span class="n">MessageSource</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">source_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+              <span class="n">sort_order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">meta_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">source_type</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Format selected by a concrete catalog.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">path</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Catalog source path.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">code</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Area code.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Area display name.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">sort_order</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span></code></td>
+<td><code class="inline-code"><span class="mi">0</span></code></td>
+<td>Catalog ordering value.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">meta_key</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Optional consumer metadata key.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Core does not discover paths or interpret <code class="inline-code"><span class="n">meta_key</span></code>.</p>
+<h3 id="parsedarea"><code class="inline-code"><span class="n">ParsedArea</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_19" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_19"><span class="n">ParsedArea</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+           <span class="n">sort_order</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">meta_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">code</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Area code.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Area display name.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">source_type</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Source format or source kind.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">sort_order</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span></code></td>
+<td><code class="inline-code"><span class="mi">0</span></code></td>
+<td>Area ordering value.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">meta_key</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Optional consumer metadata key.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Area metadata has no path field. Use <code class="inline-code"><span class="n">MessageSource</span></code> for a located source.</p>
+<h3 id="parsedmessage"><code class="inline-code"><span class="n">ParsedMessage</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_20" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_20"><span class="n">ParsedMessage</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">msgno</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">from_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">to_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+              <span class="n">body_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attributes_raw</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">posted_at</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">external_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">from_address</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">to_address</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">reply_to_msgno</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reply1st_msgno</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reply_next_msgno</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">area_code</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">area_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">area_sort_order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">area_meta_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">control_lines</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">provenance</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span></code></td>
+<td>Required</td>
+<td>Format-specific message number or Squish UID.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">from_name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Decoded sender name.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">to_name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Decoded recipient name.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">subject</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Decoded subject.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">body_text</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Decoded body; concrete formats decide whether header controls are included.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">attributes_raw</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span></code></td>
+<td>Required</td>
+<td>Raw format-specific attribute bits.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">posted_at</span></code></td>
+<td><code class="inline-code"><span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Parsed posting time when known.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">external_id</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Reader-supplied ID; a concrete reader may use a synthetic fallback.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">from_address</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Parsed sender address as text.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">to_address</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Parsed recipient address as text.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply_to_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Format-specific parent message link.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply1st_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Format-specific first reply link.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply_next_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Format-specific next reply link.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">area_code</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Area code when supplied by the reader.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">area_name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Area name when supplied by the reader.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">area_sort_order</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Area ordering value when supplied.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">area_meta_key</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Consumer metadata key when supplied.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">control_lines</span></code></td>
+<td><code class="inline-code"><span class="n">MessageControlLines</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Parsed controls and routing when supplied.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">provenance</span></code></td>
+<td><code class="inline-code"><span class="n">MessageProvenance</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Source location when supplied.</td>
+</tr>
+</tbody>
+</table></div>
+<p>This decoded view does not contain all raw headers, unknown binary metadata or
+the complete Squish reply list. Writers update from raw records under their
+lock; rebuilding an existing record from <code class="inline-code"><span class="n">ParsedMessage</span></code> can lose metadata.</p>
+<h3 id="readerissue"><code class="inline-code"><span class="n">ReaderIssue</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_21" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_21"><span class="n">ReaderIssue</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">source_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">action</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"recovered"</span><span class="p">,</span> <span class="s2">"skipped"</span><span class="p">,</span> <span class="s2">"stopped"</span><span class="p">],</span>
+            <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">detail</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">source_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">source_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">source_type</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Source format or source kind.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">source_path</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Actual source file path.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">action</span></code></td>
+<td><code class="inline-code"><span class="n">Literal</span><span class="p">[</span><span class="s2">"recovered"</span><span class="p">,</span> <span class="s2">"skipped"</span><span class="p">,</span> <span class="s2">"stopped"</span><span class="p">]</span></code></td>
+<td>Required</td>
+<td>What the concrete reader did.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">code</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Machine-readable issue code defined by the format reader.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">detail</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Explanation without message contents.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">source_id</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Record identity when known.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">source_offset</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Physical byte offset when known.</td>
+</tr>
+</tbody>
+</table></div>
+<p><code class="inline-code"><span class="n">recovered</span></code> describes an accepted deviation. <code class="inline-code"><span class="n">skipped</span></code> excludes a record.
+<code class="inline-code"><span class="n">stopped</span></code> means traversal is incomplete. Several issues may describe one record;
+an earlier recovery does not prevent a later skip. Core does not enforce issue
+codes or sanitize a directly supplied <code class="inline-code"><span class="n">detail</span></code> string.</p>
+<h3 id="readeroptions"><code class="inline-code"><span class="n">ReaderOptions</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_22" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_22"><span class="n">ReaderOptions</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">fallback_charset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"CP850"</span><span class="p">,</span> <span class="n">archive_mode</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+              <span class="n">on_issue</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">ReaderIssue</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">fallback_charset</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td><code class="inline-code"><span class="s2">"CP850"</span></code></td>
+<td>Charset used when no recognized declaration is available.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">archive_mode</span></code></td>
+<td><code class="inline-code"><span class="nb">bool</span></code></td>
+<td><code class="inline-code"><span class="kc">False</span></code></td>
+<td>Explicitly permit a concrete reader's documented recoveries.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">on_issue</span></code></td>
+<td><code class="inline-code"><span class="n">Callable</span><span class="p">[[</span><span class="n">ReaderIssue</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Callback receiving archive deviations.</td>
+</tr>
+</tbody>
+</table></div>
+<p><code class="inline-code"><span class="n">archive_mode</span><span class="o">=</span><span class="kc">True</span></code> without <code class="inline-code"><span class="n">on_issue</span></code> raises <code class="inline-code"><span class="ne">ValueError</span></code> at construction.
+The constructor does not validate the charset. Readers validate it when used.
+Strict mode is the default. Supplying a callback alone does not enable recovery.
+Filesystem and callback exceptions propagate; archive mode does not suppress
+them. Each format defines its permitted recovery steps. Archive reads do not
+authorize editing a damaged base.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="core_api_4" hidden>Copy code</button></div><pre><code id="core_api_4" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReaderIssue</span><span class="p">,</span> <span class="n">ReaderOptions</span>
+
+<span class="n">issues</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ReaderIssue</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">ReaderOptions</span><span class="p">(</span><span class="n">archive_mode</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">on_issue</span><span class="o">=</span><span class="n">issues</span><span class="o">.</span><span class="n">append</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">options</span><span class="o">.</span><span class="n">fallback_charset</span> <span class="o">==</span> <span class="s2">"CP850"</span>
+<span class="k">assert</span> <span class="n">options</span><span class="o">.</span><span class="n">on_issue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="n">options</span><span class="o">.</span><span class="n">on_issue</span><span class="p">(</span>
+    <span class="n">ReaderIssue</span><span class="p">(</span>
+        <span class="n">source_type</span><span class="o">=</span><span class="s2">"msg"</span><span class="p">,</span>
+        <span class="n">source_path</span><span class="o">=</span><span class="s2">"area/1.MSG"</span><span class="p">,</span>
+        <span class="n">source_id</span><span class="o">=</span><span class="s2">"1"</span><span class="p">,</span>
+        <span class="n">source_offset</span><span class="o">=</span><span class="mi">190</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">"skipped"</span><span class="p">,</span>
+        <span class="n">code</span><span class="o">=</span><span class="s2">"example"</span><span class="p">,</span>
+        <span class="n">detail</span><span class="o">=</span><span class="s2">"Record cannot be decoded."</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="k">assert</span> <span class="n">issues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">"skipped"</span>
+</code></pre></div>
+</section><section id="write-values-patches-and-revisions" class="guide-section"><div class="section-title"><span>06</span><h2>Write values, patches and revisions</h2></div>
+<h3 id="outgoingmessage"><code class="inline-code"><span class="n">OutgoingMessage</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_24" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_24"><span class="n">OutgoingMessage</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">from_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">to_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">body_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="n">external_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">from_address</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">to_address</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">posted_at</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">attributes_raw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">control_lines</span><span class="o">=</span><span class="p">(),</span>
+                <span class="n">provenance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reply_to_msgno</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reply1st_msgno</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">reply_next_msgno</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reply_list</span><span class="o">=</span><span class="p">(),</span> <span class="n">routing_seen_by</span><span class="o">=</span><span class="p">(),</span>
+                <span class="n">routing_path</span><span class="o">=</span><span class="p">())</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">from_name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Sender name.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">to_name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Recipient name.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">subject</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Subject.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">body_text</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Unicode message body.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">external_id</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Explicit external MSGID, if supplied.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">from_address</span></code></td>
+<td><code class="inline-code"><span class="n">FtnAddress</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Structured sender address.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">to_address</span></code></td>
+<td><code class="inline-code"><span class="n">FtnAddress</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Structured recipient address.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">posted_at</span></code></td>
+<td><code class="inline-code"><span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Posting date; concrete writers enforce precision/range/timezone rules.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">attributes_raw</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Raw format-specific attribute bits; concrete writers choose their default.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">control_lines</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="n">ControlLine</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code></td>
+<td><code class="inline-code"><span class="p">()</span></code></td>
+<td>Structured controls to serialize.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">provenance</span></code></td>
+<td><code class="inline-code"><span class="n">MessageProvenance</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Caller-supplied provenance; serialization support is format-specific.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply_to_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Format-specific parent link.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply1st_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Format-specific first reply link.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply_next_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Format-specific next reply link.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply_list</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code></td>
+<td><code class="inline-code"><span class="p">()</span></code></td>
+<td>Complete reply UID list for a format that represents one.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">routing_seen_by</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code></td>
+<td><code class="inline-code"><span class="p">()</span></code></td>
+<td>Explicit unexpanded SEEN-BY values.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">routing_path</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code></td>
+<td><code class="inline-code"><span class="p">()</span></code></td>
+<td>Explicit unexpanded PATH values.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Collection fields are converted to tuples. Core does not generate MSGID,
+route messages, detect duplicates or validate that replies exist. Concrete
+formats reject unrepresentable fields and contradictory metadata. Numeric
+reply links are independent of external <code class="inline-code"><span class="n">MSGID</span></code> and <code class="inline-code"><span class="n">REPLY</span></code> controls.</p>
+<h3 id="writeroptions"><code class="inline-code"><span class="n">WriterOptions</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_25" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_25"><span class="n">WriterOptions</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">target_charset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"CP850"</span><span class="p">,</span> <span class="n">lock_timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">,</span>
+              <span class="n">concurrent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">target_charset</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td><code class="inline-code"><span class="s2">"CP850"</span></code></td>
+<td>Encoding for values that require serialization.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">lock_timeout</span></code></td>
+<td><code class="inline-code"><span class="nb">float</span></code></td>
+<td><code class="inline-code"><span class="mf">5.0</span></code></td>
+<td>Maximum lock wait in seconds, measured with a monotonic clock.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">concurrent</span></code></td>
+<td><code class="inline-code"><span class="nb">bool</span></code></td>
+<td><code class="inline-code"><span class="kc">False</span></code></td>
+<td>Request supported concurrent GoldED access.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Negative, infinite or NaN <code class="inline-code"><span class="n">lock_timeout</span></code> raises <code class="inline-code"><span class="ne">ValueError</span></code> at construction.
+Zero requests an immediate lock attempt. The constructor does not validate the
+codec; concrete writers do so during serialization. Encoding is strict, with
+no silent truncation or replacement characters. Conflicting charset metadata
+is rejected. Pure attribute changes preserve existing text bytes.</p>
+<p><code class="inline-code"><span class="n">concurrent</span><span class="o">=</span><span class="kc">True</span></code> is a request, not permission or a safety guarantee. Current
+MSG, JAM, Squish and Hudson writers reject it. GoldED must remain closed during
+offline editing. Live support requires format, platform and build-specific
+competing writer, reader and refresh tests. Windows starts with offline use.</p>
+<h3 id="unset"><code class="inline-code"><span class="n">Unset</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_26" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_26"><span class="n">Unset</span><span class="p">()</span>
+</code></pre></div>
+<p>Marker type used in patch annotations. It has no fields and is not a dataclass.
+Use the exported singleton <code class="inline-code"><span class="n">UNSET</span></code> rather than creating another <code class="inline-code"><span class="n">Unset</span><span class="p">()</span></code>;
+concrete writers can use identity comparisons with that singleton.</p>
+<h3 id="unset_1"><code class="inline-code"><span class="n">UNSET</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_27" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_27"><span class="n">UNSET</span><span class="p">:</span> <span class="n">Unset</span>
+</code></pre></div>
+<p>The singleton default for every patch field. It means leave the stored field
+untouched. It is different from <code class="inline-code"><span class="kc">None</span></code>, which explicitly requests clearing.</p>
+<h3 id="messagepatch"><code class="inline-code"><span class="n">MessagePatch</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_28" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_28"><span class="n">MessagePatch</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">from_name</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">to_name</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">subject</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span>
+             <span class="n">body_text</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">external_id</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">from_address</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span>
+             <span class="n">to_address</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">posted_at</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">attributes_raw</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span>
+             <span class="n">control_lines</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">provenance</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">reply_to_msgno</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span>
+             <span class="n">reply1st_msgno</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">reply_next_msgno</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">reply_list</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span>
+             <span class="n">routing_seen_by</span><span class="o">=</span><span class="n">UNSET</span><span class="p">,</span> <span class="n">routing_path</span><span class="o">=</span><span class="n">UNSET</span><span class="p">)</span>
+</code></pre></div>
+<p>Every field defaults to <code class="inline-code"><span class="n">UNSET</span></code>. Each accepts <code class="inline-code"><span class="kc">None</span></code> as a clear request; the
+concrete writer rejects clearing fields it cannot represent. Required names
+and body generally need a string, including <code class="inline-code"><span class="s2">""</span></code> when allowed, rather than
+<code class="inline-code"><span class="kc">None</span></code>. Core does not validate or convert patch collections.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">from_name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">to_name</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">subject</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">body_text</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">external_id</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">from_address</span></code></td>
+<td><code class="inline-code"><span class="n">FtnAddress</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">to_address</span></code></td>
+<td><code class="inline-code"><span class="n">FtnAddress</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">posted_at</span></code></td>
+<td><code class="inline-code"><span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">attributes_raw</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">control_lines</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="n">ControlLine</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">provenance</span></code></td>
+<td><code class="inline-code"><span class="n">MessageProvenance</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply_to_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply1st_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply_next_msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">reply_list</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">routing_seen_by</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">routing_path</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">Unset</span></code></td>
+<td><code class="inline-code"><span class="n">UNSET</span></code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Names have the same meaning as in <code class="inline-code"><span class="n">OutgoingMessage</span></code>. An omitted field preserves
+existing raw metadata, including reply structures the decoded model cannot
+fully display. Explicit control/routing replacements follow the concrete
+format's representation rules. Deleting a message does not rewrite other
+messages' reply links, and message numbers are not renumbered.</p>
+<h3 id="messageidentity"><code class="inline-code"><span class="n">MessageIdentity</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_29" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_29"><span class="n">MessageIdentity</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">base</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msgno</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                <span class="n">board</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="nb">format</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Concrete format tag, such as <code class="inline-code"><span class="n">msg</span></code>, <code class="inline-code"><span class="n">jam</span></code>, <code class="inline-code"><span class="n">squish</span></code> or <code class="inline-code"><span class="n">hudson</span></code>.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">base</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>Base identity selected by the concrete writer.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">msgno</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span></code></td>
+<td>Required</td>
+<td>MSG file number, JAM message number, Squish UID or Hudson message number.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">board</span></code></td>
+<td><code class="inline-code"><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span></code></td>
+<td><code class="inline-code"><span class="kc">None</span></code></td>
+<td>Explicit Hudson board where applicable.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use identities returned by sessions. Core does not canonicalize base paths or
+validate board/number ranges. External MSGID is not part of this identity.</p>
+<h3 id="revisiontoken"><code class="inline-code"><span class="n">RevisionToken</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_30" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_30"><span class="n">RevisionToken</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">digest</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">identity</span></code></td>
+<td><code class="inline-code"><span class="n">MessageIdentity</span></code></td>
+<td>Required</td>
+<td>Target record identity.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">location</span></code></td>
+<td><code class="inline-code"><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span></code></td>
+<td>Required</td>
+<td>Physical record placement defined by the concrete format.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">digest</span></code></td>
+<td><code class="inline-code"><span class="nb">str</span></code></td>
+<td>Required</td>
+<td>SHA-256 hexadecimal digest of raw message header, metadata and text.</td>
+</tr>
+</tbody>
+</table></div>
+<p>A session issues this token from a consistent read and checks it again under
+the operation lock. Global base counters are not message revisions. Changes to
+other messages do not invalidate a token. Treat the entire token as opaque;
+core does not validate a manually constructed digest or location. It is an
+optimistic concurrency check, not authentication or a permanent message ID.</p>
+<h3 id="writeresult"><code class="inline-code"><span class="n">WriteResult</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_31" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_31"><span class="n">WriteResult</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span> <span class="n">revision</span><span class="p">:</span> <span class="n">RevisionToken</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">identity</span></code></td>
+<td><code class="inline-code"><span class="n">MessageIdentity</span></code></td>
+<td>Required</td>
+<td>Identity of the appended or updated message.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">revision</span></code></td>
+<td><code class="inline-code"><span class="n">RevisionToken</span></code></td>
+<td>Required</td>
+<td>Revision after that operation.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use the returned revision for the next update/delete. An earlier revision can
+be stale after content or attribute changes.</p>
+<h3 id="sessionmessage"><code class="inline-code"><span class="n">SessionMessage</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_32" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_32"><span class="n">SessionMessage</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">ParsedMessage</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span>
+               <span class="n">revision</span><span class="p">:</span> <span class="n">RevisionToken</span><span class="p">)</span>
+</code></pre></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code class="inline-code"><span class="n">message</span></code></td>
+<td><code class="inline-code"><span class="n">ParsedMessage</span></code></td>
+<td>Required</td>
+<td>Decoded view from the consistent session read.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">identity</span></code></td>
+<td><code class="inline-code"><span class="n">MessageIdentity</span></code></td>
+<td>Required</td>
+<td>Identity of that record.</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">revision</span></code></td>
+<td><code class="inline-code"><span class="n">RevisionToken</span></code></td>
+<td>Required</td>
+<td>Raw record revision read with the view.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Core does not enforce that manually constructed triples refer to the same
+record. Obtain them through the concrete session.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="core_api_5" hidden>Copy code</button></div><pre><code id="core_api_5" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">UNSET</span><span class="p">,</span> <span class="n">MessageIdentity</span><span class="p">,</span> <span class="n">MessagePatch</span><span class="p">,</span> <span class="n">OutgoingMessage</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="n">OutgoingMessage</span><span class="p">(</span>
+    <span class="n">from_name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">,</span>
+    <span class="n">to_name</span><span class="o">=</span><span class="s2">"Bob"</span><span class="p">,</span>
+    <span class="n">subject</span><span class="o">=</span><span class="s2">"Ping"</span><span class="p">,</span>
+    <span class="n">body_text</span><span class="o">=</span><span class="s2">"Hello"</span><span class="p">,</span>
+    <span class="n">reply_to_msgno</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">routing_seen_by</span><span class="o">=</span><span class="p">(</span><span class="s2">"1/2 3"</span><span class="p">,),</span>
+<span class="p">)</span>
+<span class="n">patch</span> <span class="o">=</span> <span class="n">MessagePatch</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="s2">"Edited"</span><span class="p">,</span> <span class="n">external_id</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">patch</span><span class="o">.</span><span class="n">subject</span> <span class="o">==</span> <span class="s2">"Edited"</span>
+<span class="k">assert</span> <span class="n">patch</span><span class="o">.</span><span class="n">external_id</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="k">assert</span> <span class="n">patch</span><span class="o">.</span><span class="n">body_text</span> <span class="ow">is</span> <span class="n">UNSET</span>
+<span class="n">record</span> <span class="o">=</span> <span class="n">MessageIdentity</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s2">"hudson"</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="s2">"area"</span><span class="p">,</span> <span class="n">board</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">msgno</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">record</span><span class="o">.</span><span class="n">board</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">message</span><span class="o">.</span><span class="n">external_id</span> <span class="ow">is</span> <span class="kc">None</span>
+</code></pre></div>
+</section><section id="protocols-and-session-lifecycle" class="guide-section"><div class="section-title"><span>07</span><h2>Protocols and session lifecycle</h2></div>
+<p>These are structural typing protocols. A matching concrete object can satisfy
+them without inheriting from the protocol. They contain method signatures,
+not concrete behavior. They are not marked <code class="inline-code"><span class="n">runtime_checkable</span></code>; do not use them
+with <code class="inline-code"><span class="nb">isinstance</span></code> or instantiate them. Paths accept <code class="inline-code"><span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>.
+Concrete APIs may expose extra format-specific arguments.</p>
+<h3 id="messagebasereader"><code class="inline-code"><span class="n">MessageBaseReader</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_34" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_34"><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+     <span class="n">options</span><span class="p">:</span> <span class="n">ReaderOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ParsedMessage</span><span class="p">]</span>
+</code></pre></div>
+<p>Read an area through a concrete reader. <code class="inline-code"><span class="kc">None</span></code> selects default reader options.
+The iterable may be lazy; errors can appear during iteration. A reader's plain
+<code class="inline-code"><span class="n">ParsedMessage</span></code> does not include a session revision for editing.</p>
+<h3 id="messagesourcecatalog"><code class="inline-code"><span class="n">MessageSourceCatalog</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_35" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_35"><span class="n">sources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">options</span><span class="p">:</span> <span class="n">ReaderOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">MessageSource</span><span class="p">]</span>
+</code></pre></div>
+<p>Discover configured message sources through a concrete catalog. Ordering and
+path interpretation belong to that catalog. Core has no discovery implementation.</p>
+<h3 id="messagesourcelocator"><code class="inline-code"><span class="n">MessageSourceLocator</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_36" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_36"><span class="n">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</code></pre></div>
+<p>Find a source path through a concrete locator. <code class="inline-code"><span class="kc">None</span></code> means no match. Search
+rules and the meaning of the input path belong to the concrete locator.</p>
+<h3 id="messagewriter"><code class="inline-code"><span class="n">MessageWriter</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_37" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_37"><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">messages</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">OutgoingMessage</span><span class="p">],</span>
+      <span class="n">options</span><span class="p">:</span> <span class="n">WriterOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
+</code></pre></div>
+<p>Batch-writing convenience contract returning the number written. Core does not
+provide a batch implementation or promise a transaction around the iterable.
+The MSG convenience writer commits each successful message separately; check
+other formats' APIs before assuming they implement this legacy method.</p>
+<h3 id="messagebasewriter"><code class="inline-code"><span class="n">MessageBaseWriter</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_38" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_38"><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">options</span><span class="p">:</span> <span class="n">WriterOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="n">AbstractContextManager</span><span class="p">[</span><span class="n">MessageWriterSession</span><span class="p">]</span>
+</code></pre></div>
+<p><code class="inline-code"><span class="n">create</span></code> initializes an empty base and rejects existing base files. It does not
+open a session. <code class="inline-code"><span class="nb">open</span></code> opens an existing base, with default options when omitted.
+Use the returned context manager to scope the session. Hudson's concrete <code class="inline-code"><span class="nb">open</span></code>
+requires an explicit board; whole-base creation remains independent of board.
+Required initialization/lastread files are format-specific.</p>
+<h3 id="messagewritersession"><code class="inline-code"><span class="n">MessageWriterSession</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_39" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_39"><span class="n">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msgno</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionMessage</span>
+<span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">OutgoingMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteResult</span>
+<span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span> <span class="n">patch</span><span class="p">:</span> <span class="n">MessagePatch</span><span class="p">,</span>
+       <span class="n">expected_revision</span><span class="p">:</span> <span class="n">RevisionToken</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteResult</span>
+<span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span>
+       <span class="n">expected_revision</span><span class="p">:</span> <span class="n">RevisionToken</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MessageIdentity</span>
+</code></pre></div>
+<p>Each operation takes the format lock, reloads control data and holds the lock
+through validation, writing and flush. <code class="inline-code"><span class="n">read</span></code> supplies a consistent decoded
+view and revision. <code class="inline-code"><span class="n">append</span></code> allocates a format-specific identity; <code class="inline-code"><span class="n">update</span></code>
+preserves identity and returns the new revision. <code class="inline-code"><span class="n">delete</span></code> returns the deleted
+identity. A missing or changed update/delete target raises <code class="inline-code"><span class="n">ConflictError</span></code>.</p>
+<p>One operation is the commit unit. Earlier successful operations survive a later
+failure. Ordinary write failures trigger rollback under the lock. Failed rollback
+makes the session unusable and reports <code class="inline-code"><span class="n">RollbackError</span></code>; reopening a session is
+not proof that the base is healthy. Concrete writers reject damaged bases and
+do not use archive recovery for editing.</p>
+<p>Callers must not access base files directly while writer operations run. A
+Python writer lock alone does not establish safe coexistence with GoldED.
+Rollback has no guarantee for process termination or power loss, and there is
+no automatic detection promise for every partial write.</p>
+<p>The following functions consume protocols. The caller supplies concrete objects;
+core has no file reader or writer to instantiate. MSG, JAM and Squish expose
+the shown writer shape. Hudson needs a board-bound adapter for this generic
+example, because its concrete <code class="inline-code"><span class="nb">open</span></code> requires a board argument that the core
+protocol does not express.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="core_api_6" hidden>Copy code</button></div><pre><code id="core_api_6" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">MessageBaseReader</span><span class="p">,</span>
+    <span class="n">MessageBaseWriter</span><span class="p">,</span>
+    <span class="n">MessagePatch</span><span class="p">,</span>
+    <span class="n">OutgoingMessage</span><span class="p">,</span>
+    <span class="n">ParsedMessage</span><span class="p">,</span>
+    <span class="n">WriteResult</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">collect_messages</span><span class="p">(</span><span class="n">reader</span><span class="p">:</span> <span class="n">MessageBaseReader</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">ParsedMessage</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">append_edit_delete</span><span class="p">(</span><span class="n">writer</span><span class="p">:</span> <span class="n">MessageBaseWriter</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteResult</span><span class="p">:</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">writer</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">created</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">OutgoingMessage</span><span class="p">(</span>
+                <span class="n">from_name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">,</span>
+                <span class="n">to_name</span><span class="o">=</span><span class="s2">"Bob"</span><span class="p">,</span>
+                <span class="n">subject</span><span class="o">=</span><span class="s2">"Ping"</span><span class="p">,</span>
+                <span class="n">body_text</span><span class="o">=</span><span class="s2">"Hello"</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">created</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">msgno</span><span class="p">)</span>
+        <span class="n">edited</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+            <span class="n">MessagePatch</span><span class="p">(</span><span class="n">subject</span><span class="o">=</span><span class="s2">"Edited"</span><span class="p">),</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">revision</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">edited</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span> <span class="n">edited</span><span class="o">.</span><span class="n">revision</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">edited</span>
+</code></pre></div>
+</section><section id="exceptions" class="guide-section"><div class="section-title"><span>08</span><h2>Exceptions</h2></div>
+<h3 id="parserexception"><code class="inline-code"><span class="n">ParserException</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_41" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_41"><span class="k">class</span><span class="w"> </span><span class="nc">ParserException</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">)</span>
+</code></pre></div>
+<p>Concrete readers and writer base-validation paths use this error for records
+they cannot parse. Concrete APIs may chain the underlying error. Filesystem
+failures and archive callback failures propagate separately; this is not a
+catch-all for every read error.</p>
+<h3 id="writererror"><code class="inline-code"><span class="n">WriterError</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_42" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_42"><span class="k">class</span><span class="w"> </span><span class="nc">WriterError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">)</span>
+</code></pre></div>
+<p>Common base class for the writer-specific errors below. Concrete sessions also
+use it when closed or poisoned. Input validation and encoding failures can raise
+<code class="inline-code"><span class="ne">ValueError</span></code>, <code class="inline-code"><span class="ne">LookupError</span></code> or <code class="inline-code"><span class="ne">UnicodeEncodeError</span></code>; filesystem/I/O failures can
+raise <code class="inline-code"><span class="ne">OSError</span></code>. Catching only <code class="inline-code"><span class="n">WriterError</span></code> does not catch every failed write.</p>
+<h3 id="conflicterror"><code class="inline-code"><span class="n">ConflictError</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_43" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_43"><span class="k">class</span><span class="w"> </span><span class="nc">ConflictError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">)</span>
+</code></pre></div>
+<p>The target is missing, belongs to another base/identity or no longer matches
+the expected revision. Read the current target and decide how to reconcile the
+change. Do not retry the same stale patch blindly. Concrete session reads also
+use this error for a missing message.</p>
+<h3 id="locktimeouterror"><code class="inline-code"><span class="n">LockTimeoutError</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_44" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_44"><span class="k">class</span><span class="w"> </span><span class="nc">LockTimeoutError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">)</span>
+</code></pre></div>
+<p>The operation could not obtain the base lock within <code class="inline-code"><span class="n">WriterOptions</span><span class="o">.</span><span class="n">lock_timeout</span></code>.
+The operation has not begun mutating the base.</p>
+<h3 id="rollbackerror"><code class="inline-code"><span class="n">RollbackError</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_45" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_45"><span class="k">class</span><span class="w"> </span><span class="nc">RollbackError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">)</span>
+</code></pre></div>
+<p>An operation failed and restoring original bytes also failed. The exception
+reports base, operation and rollback failure. The concrete session stops
+accepting operations. The base may need inspection; automatic repair is outside
+this API.</p>
+<h3 id="unsupportedoperationerror"><code class="inline-code"><span class="n">UnsupportedOperationError</span></code></h3>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="core_api_block_46" hidden>Copy code</button></div><pre><code class="language-text" id="core_api_block_46"><span class="k">class</span><span class="w"> </span><span class="nc">UnsupportedOperationError</span><span class="p">(</span><span class="n">WriterError</span><span class="p">)</span>
+</code></pre></div>
+<p>A requested operation or concurrency mode is unavailable. Examples include
+current <code class="inline-code"><span class="n">concurrent</span><span class="o">=</span><span class="kc">True</span></code> requests and explicit Opus editing through the MSG
+writer. Unrepresentable message fields may instead raise <code class="inline-code"><span class="ne">ValueError</span></code>, as
+documented by the concrete format.</p>
+</section><section id="boundaries" class="guide-section"><div class="section-title"><span>09</span><h2>Boundaries</h2></div>
+<p>Core does not read or write MSG, JAM, Squish or Hudson files itself. It does not
+implement BBS behavior, routing policy, duplicate checking, packet handling,
+packing, repair of damaged bases or GoldED configuration. Internal modules such
+as <code class="inline-code"><span class="n">golded_ftn</span><span class="o">.</span><span class="n">_writer_io</span></code> are implementation details and are not public exports.</p>
+<p>Current writer sessions are for offline editing. GoldED interoperability and
+concurrent reader/refresh tests are deferred; source review or passing Python
+tests do not establish those guarantees. Check the concrete package's format
+notes and the shared writer guide before choosing a format or platform.</p></section></main></div></div><footer><span>GoldED for Python / GoldED.dev</span><span>v1.2.0 · MIT LICENSE</span></footer></div><script>
+for (const button of document.querySelectorAll('[data-copy]')) {
+  button.hidden = false;
+  button.addEventListener('click', async () => {
+    const source = document.getElementById(button.dataset.copy);
+    try {
+      await navigator.clipboard.writeText(source.textContent);
+      button.textContent = 'Copied';
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(source);
+      selection.removeAllRanges(); selection.addRange(range);
+      button.textContent = 'Code selected';
+    }
+    document.getElementById('copy-status').textContent = button.textContent;
+    setTimeout(() => { button.textContent = 'Copy code'; }, 1800);
+  });
+}
+const links = [...document.querySelectorAll('.nav a')];
+const sections = links.map(link => document.querySelector(link.hash)).filter(Boolean);
+function updateLocation() {
+  let current = sections[0];
+  for (const section of sections) if (section.getBoundingClientRect().top <= 100) current = section;
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = sections.at(-1);
+  for (const link of links) {
+    const active = current && link.hash === '#' + current.id;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+}
+let pending = false;
+window.addEventListener('scroll', () => {
+  if (!pending) requestAnimationFrame(() => { updateLocation(); pending = false; });
+  pending = true;
+}, {passive: true});
+window.addEventListener('hashchange', updateLocation);
+updateLocation();
+const narrow = window.matchMedia('(max-width:800px)');
+function setContents() { for (const menu of document.querySelectorAll('.contents')) menu.open = !narrow.matches; }
+narrow.addEventListener('change', setContents);
+setContents();
+</script><span id="copy-status" role="status" class="sr-only"></span></body></html>

@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GoldED for Python · Terminology reference</title><style>
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/ibm-plex-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/ibm-plex-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/ibm-plex-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-5.ttf) format('truetype');
+}
+
+
+:root{color-scheme:dark;--canvas:#05070b;--surface:#0b0f18;--raised:#101624;--ink:#f5f7ff;--muted:#bcc5d9;--blue:#4f6dff;--yellow:#ffe45a;--info:#8fb2ff;--line:#273149}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:17px/1.65 'IBM Plex Sans',sans-serif}a{color:var(--info);text-underline-offset:4px}a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}.page{max-width:1260px;margin:40px auto;padding:0 24px}.masthead{border-top:1px solid #ff6868;border-bottom:1px solid #ff6868;padding:7px 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:24px}.logo-mark{position:relative;display:block;width:210px;margin-left:-7.3px}.logo{display:block;width:100%;height:auto}.logo-subtitle{position:absolute;right:3%;top:70%;color:var(--yellow);font:400 13px/1 'IBM Plex Sans',sans-serif;letter-spacing:0;white-space:nowrap}.masthead a{font:12px 'IBM Plex Mono',monospace;text-decoration:none}.masthead div>span{color:var(--muted);margin-right:24px}.shell{border:1px solid var(--blue);background:var(--surface)}.bar{display:flex;justify-content:space-between;gap:16px;padding:12px 20px;background:#2d47c7;color:var(--yellow);font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em}.bar span:last-child{color:#e0e6ff}.layout{display:grid;grid-template-columns:230px minmax(0,1fr)}aside{min-width:0;border-right:1px solid var(--line);padding:32px 20px}.label{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.nav{display:grid;gap:4px;margin:20px -20px 36px}.nav a{padding:9px 20px;color:var(--muted);text-decoration:none;font-size:14px}.nav a.active{background:var(--raised);border-left:2px solid var(--yellow);padding-left:18px;color:var(--ink)}.num{font:11px 'IBM Plex Mono',monospace;color:#7f8798;margin-right:14px}.aside-note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}.aside-note code{color:var(--yellow)}main{padding:42px 48px 36px;min-width:0}.eyebrow{color:var(--yellow);font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em}h1{font-size:44px;line-height:1.1;letter-spacing:-.035em;font-weight:600;margin:16px 0 20px;max-width:650px}.intro{color:var(--muted);max-width:620px;margin:0 0 26px}.formats{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 34px}.formats span{padding:10px 19px 10px 0;margin-right:19px;font:12px 'IBM Plex Mono',monospace;color:var(--info)}.formats span+span{border-left:1px solid var(--line);padding-left:19px}.section-title{display:flex;gap:12px;align-items:baseline}h2{font-size:24px;line-height:1.2;margin:0 0 10px;font-weight:500}.section-title span{font:500 20px/1.2 'IBM Plex Mono',monospace;color:var(--yellow);flex-shrink:0}.lead{margin:0 0 20px;color:var(--muted);font-size:15px}.code-pane{border:1px solid #34446e;background:#080c14}.code-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--raised);border-bottom:1px solid #34446e;font:11px 'IBM Plex Mono',monospace;color:var(--muted)}button{white-space:nowrap;flex-shrink:0;cursor:pointer;background:transparent;color:var(--info);border:1px solid #435170;padding:4px 10px;font:11px 'IBM Plex Mono',monospace}pre{margin:0;padding:20px;overflow:auto;font:13px/1.85 'IBM Plex Mono',monospace;tab-size:4}.kw{color:#8fb2ff}.str{color:#ffe45a}.comment{color:#8d9bb5}.output{border-top:1px solid var(--line);padding:12px 20px;font:12px 'IBM Plex Mono',monospace;color:#bcc5d9}.output b{color:#8d9bb5;font-weight:400;margin-right:20px}.note{border-left:2px solid var(--blue);padding:0 0 0 16px;margin-top:24px;font-size:14px;color:var(--muted)}.note strong{color:var(--ink);font-weight:500}.next{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:24px;margin-top:32px;font-size:14px}.next span{color:var(--muted)}footer{display:flex;justify-content:space-between;font:11px 'IBM Plex Mono',monospace;color:#8d9bb5;padding:18px 0}.preview{color:var(--yellow)}@media(max-width:800px){.page{margin:20px auto;padding:0 20px}.logo-mark{width:160px;margin-left:-5.56px}.logo-subtitle{font-size:10px}.masthead div>span{display:none}.layout{grid-template-columns:1fr}aside{padding:16px;border-right:0;border-bottom:1px solid var(--line)}aside>.label,.aside-note{display:none}.nav{display:flex;overflow:auto;margin:0;gap:8px}.nav a{white-space:nowrap;padding:8px 10px}.nav a.active{padding-left:8px}.nav a{flex-shrink:0}main{padding:28px 20px}h1{font-size:34px}.bar{font-size:10px;padding:10px 14px}.bar span:last-child{display:none}pre{font-size:12px;padding:16px}.formats span{padding-right:10px;margin-right:10px}.formats span+span{padding-left:10px}footer{gap:16px;font-size:10px}}@media print{body,.shell,.code-pane{background:white;color:black}.page{margin:0;max-width:none}.masthead,aside,footer,button,.next{display:none}.layout{display:block}main{padding:0}.bar{background:white;color:black}.kw,.str,.comment,.intro,.lead,.note{color:black}pre{white-space:pre-wrap}.shell{border:0}}
+.guide-section{margin-top:44px;scroll-margin-top:24px}.guide-section>p,.guide-section>ul,.guide-section>dl{font-size:15px;color:var(--muted)}.guide-section h3{font-size:19px;font-weight:500;margin:30px 0 12px}.code-pane{margin:20px 0}.output pre{padding:8px 0 0;white-space:pre-wrap;font-size:12px}.table-wrap{overflow:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:13px;text-align:left}th,td{border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}th{color:var(--ink);font-weight:500}td{color:var(--muted)}code{font-family:'IBM Plex Mono',monospace;font-size:.86em}pre code{font-size:inherit}dt{color:var(--ink);margin-top:18px}dd{margin:6px 0 0}.references{padding-left:20px}.references li{margin:10px 0}.credit{font-size:12px!important}.skip{position:absolute;top:-100px}.skip:focus{top:4px;left:20px;background:var(--surface);padding:8px;z-index:5}.logo-mark{flex-shrink:0}button[hidden]{display:none}@media(max-width:800px){.masthead div{font-size:11px}.next{gap:20px}.guide-section{margin-top:36px}footer{flex-wrap:wrap}}@media print{.table-wrap,pre{overflow:visible}th,td,dt,.guide-section>p,.guide-section>ul,.guide-section>dl,.output{color:black}a{color:#163a8c}.code-head{background:#eee;color:black}.skip{display:none}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.kw,.k,.kn,.nb{color:#8fb2ff}.o,.ow{color:#ff6868}.kc,.mi,.mf{color:#55ff55}.str,.s,.s1,.s2,.se,.nf,.nc{color:#ffe45a}.comment,.c,.c1{color:#8d9bb5}@media print{.k,.kn,.kc,.nb,.mi,.mf,.o,.ow,.s,.s1,.s2,.se,.nf,.nc,.c,.c1{color:black}}.sidebar{position:sticky;top:24px}@media(max-width:800px){.sidebar{position:static}}@media print{.eyebrow,.section-title span,.bar span:last-child,.formats span,.output b{color:#222}.formats{border-color:#aaa}.code-pane{break-inside:avoid}}
+body{-webkit-font-smoothing:antialiased}h1,h2{text-wrap:balance}p{text-wrap:pretty}
+.page-nav{display:grid;gap:4px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.page-nav a{display:flex;align-items:center;min-height:40px;padding:8px 12px;font-size:14px;text-decoration:none;color:var(--muted)}
+.page-nav a[aria-current="page"]{color:var(--yellow);background:var(--raised);box-shadow:inset 2px 0 var(--yellow)}
+.contents summary{font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:space-between}
+.contents summary::after{content:'−';font-size:18px}.contents:not([open]) summary::after{content:'+'}.contents summary::-webkit-details-marker{display:none}
+.contents summary:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+.nav{margin:8px 0 24px}.nav a{min-height:40px;display:flex;align-items:baseline;padding:8px 12px}.nav a.active{padding-left:10px}.num{font-variant-numeric:tabular-nums;flex-shrink:0}
+.sidebar{max-height:calc(100vh - 48px);overflow:auto;scrollbar-gutter:stable;overscroll-behavior-y:contain}
+main>nav[aria-label="Documentation"]{display:none}
+@media(hover:hover) and (pointer:fine){.page-nav a:hover,.nav a:hover{background:var(--raised);color:var(--ink)}}
+@media(max-width:800px){.page-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:8px;padding-bottom:12px}.page-nav a{font-size:13px;padding:8px}.sidebar{max-height:none;overflow:visible}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 0;gap:4px;overflow:visible}.nav a{white-space:normal;padding:8px;font-size:13px}.nav a.active{padding-left:6px}.num{margin-right:8px}.contents summary{min-height:40px}.guide-section{scroll-margin-top:24px}}
+@media print{:root{color-scheme:light}main>nav[aria-label="Documentation"]{display:none}pre{break-inside:avoid}}
+.inline-code{color:var(--yellow)}p .inline-code,li .inline-code,dd .inline-code{background:var(--raised);padding:2px 4px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}@media print{.inline-code{color:black}p .inline-code,li .inline-code,dd .inline-code{background:transparent}}
+</style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>TERMINOLOGY / DOCUMENTATION</span><span>1.2.0 WORKING SOURCES · OFFLINE WRITERS</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="guide.html">Library guide</a><a href="core-api.html">Core API reference</a><a href="writers.html">Editing message bases</a><a href="glossary.html" aria-current="page">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html">Hudson</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#networks-areas-and-addresses"><span class="num">01</span>Networks, areas and addresses</a><a href="#message-text-and-control-lines"><span class="num">02</span>Message text and control lines</a><a href="#records-identities-and-metadata"><span class="num">03</span>Records, identities and metadata</a><a href="#reading-editing-and-failure-boundaries"><span class="num">04</span>Reading, editing and failure boundaries</a><a href="#tools-outside-these-libraries"><span class="num">05</span>Tools outside these libraries</a><a href="#read-next"><span class="num">06</span>Read next</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a></nav><div class="eyebrow">Old jargon. Plain explanations.</div><h1 id="ftn-terminology-and-jargon">FTN terminology and jargon</h1>
+<p>A vocabulary for the library guide, core API and four format references. Terms here
+explain the data and the tools; they do not imply that these packages implement a
+BBS, tosser or complete message network.</p>
+<section id="networks-areas-and-addresses" class="guide-section"><div class="section-title"><span>01</span><h2>Networks, areas and addresses</h2></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FTN</td>
+<td>FidoNet Technology Network: the family of networks using FidoNet-style addressing and message exchange conventions. FidoNet is one FTN network.</td>
+</tr>
+<tr>
+<td>BBS</td>
+<td>Bulletin Board System: software that gives users access to messages and other services. These libraries supply message-base access, not a BBS.</td>
+</tr>
+<tr>
+<td>Message base / area</td>
+<td>Stored messages. An area is a logical collection; depending on the format it occupies a directory, a basename with several files, or one board inside a shared Hudson base.</td>
+</tr>
+<tr>
+<td>Netmail</td>
+<td>Addressed mail to a particular FTN destination. A format may store netmail and echomail in the same kind of base; routing policy belongs to the caller.</td>
+</tr>
+<tr>
+<td>Echomail</td>
+<td>Messages exchanged for a named discussion area across participating systems.</td>
+</tr>
+<tr>
+<td>Board</td>
+<td>Hudson’s numbered partition within a shared base. Boards are 1–200; <code class="inline-code"><span class="n">BOARD7</span></code> is this reader’s synthetic identifier, not the configured area name.</td>
+</tr>
+<tr>
+<td>FTN address</td>
+<td><code class="inline-code"><span class="n">zone</span><span class="p">:</span><span class="n">net</span><span class="o">/</span><span class="n">node</span><span class="o">.</span><span class="n">point</span><span class="nd">@domain</span></code>. The point and domain may be absent. <code class="inline-code"><span class="mi">2</span><span class="p">:</span><span class="mi">236</span><span class="o">/</span><span class="mf">77.1</span></code> identifies point 1 of node 77 in net 236, zone 2.</td>
+</tr>
+<tr>
+<td>Zone / net / node / point</td>
+<td>Address components. A point is a system associated with a node. Zero and absent metadata are distinct values; formats impose their own ranges.</td>
+</tr>
+<tr>
+<td>Domain</td>
+<td>An optional network qualifier, such as <code class="inline-code"><span class="n">fidonet</span></code>. Binary formats do not all represent it.</td>
+</tr>
+<tr>
+<td>FTSC</td>
+<td>FidoNet Technical Standards Committee. “FTSC MSG” here identifies the classic MSG header layout, distinguished from the Opus variant.</td>
+</tr>
+<tr>
+<td>Opus</td>
+<td>A BBS implementation with its own interpretation of some MSG header words, including packed written and arrival dates. Select the reader layout explicitly.</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="message-text-and-control-lines" class="guide-section"><div class="section-title"><span>02</span><h2>Message text and control lines</h2></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kludge / control line</td>
+<td>Machine-readable message metadata. A kludge typically begins with SOH (<code class="inline-code">\<span class="n">x01</span></code>); readers expose supported controls through <code class="inline-code"><span class="n">control_lines</span></code>. Unknown controls may still matter to other software.</td>
+</tr>
+<tr>
+<td>SOH</td>
+<td>Start of Heading, byte <code class="inline-code"><span class="mh">0x01</span></code>. Used to mark or separate control metadata.</td>
+</tr>
+<tr>
+<td>NUL</td>
+<td>The zero byte, <code class="inline-code"><span class="mh">0x00</span></code>. Some fields and bodies use it as a terminator or padding. It is not an empty string.</td>
+</tr>
+<tr>
+<td>MSGID</td>
+<td>External message identifier carried in control metadata. It is separate from a filename number, JAM number, Squish UID or Hudson number. Writers do not generate it automatically.</td>
+</tr>
+<tr>
+<td>REPLY / REPLYID</td>
+<td>External identifier of a replied-to message. Distinct from binary numeric reply links. JAM has a dedicated reply-ID subfield.</td>
+</tr>
+<tr>
+<td>INTL</td>
+<td>Control giving destination and origin zone:net/node addresses. Point numbers can be supplied separately.</td>
+</tr>
+<tr>
+<td>FMPT / TOPT</td>
+<td>From-point / to-point controls. They supplement the sender and destination addresses.</td>
+</tr>
+<tr>
+<td>CHRS / CHARSET</td>
+<td>Encoding declarations. The charset token names an encoding; CHRS can also carry a level. Conflicting declarations can make serialization fail.</td>
+</tr>
+<tr>
+<td>CP850 / IBMPC</td>
+<td>CP850 is the default legacy encoding in these libraries. <code class="inline-code"><span class="n">IBMPC</span></code> is one FTN declaration alias resolved to CP850 by the core. It does not mean arbitrary PC text is always CP850.</td>
+</tr>
+<tr>
+<td>TZUTC</td>
+<td>Timezone-offset metadata. Preserving this control does not mean every decoded datetime is timezone-aware. Check the format’s date mapping.</td>
+</tr>
+<tr>
+<td>PID / FLAGS</td>
+<td>Program identifier and textual flag metadata. Their representation depends on the format; they are not interchangeable with raw binary attribute bits.</td>
+</tr>
+<tr>
+<td>SEEN-BY</td>
+<td>Routing history listing participating nodes. These packages retain supplied strings without expanding, deduplicating or calculating routing.</td>
+</tr>
+<tr>
+<td>PATH</td>
+<td>Routing-path metadata. The core parser distinguishes plain <code class="inline-code"><span class="n">PATH</span><span class="p">:</span></code> lines from SOH controls; format readers may handle additional forms.</td>
+</tr>
+<tr>
+<td>Tearline</td>
+<td>A line beginning <code class="inline-code"><span class="o">---</span></code>, traditionally carrying software or version information.</td>
+</tr>
+<tr>
+<td>Origin line</td>
+<td>A recognized <code class="inline-code"><span class="o">*</span> <span class="n">Origin</span><span class="p">:</span></code> line, often with a description and an address in parentheses. It is not permission to invent missing header addresses.</td>
+</tr>
+<tr>
+<td>Mojibake</td>
+<td>Text produced by decoding bytes with the wrong encoding. Optional repair is a heuristic and never runs automatically. Retain the original decoded text and source bytes when they matter.</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="records-identities-and-metadata" class="guide-section"><div class="section-title"><span>03</span><h2>Records, identities and metadata</h2></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>Structured fields describing a message or base. It may contain names, attributes, dates, addresses, offsets and reply links.</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>Records selecting active messages and locating their headers. JAM, Squish and Hudson use indexes as authority; scanning every physical header would return obsolete records.</td>
+</tr>
+<tr>
+<td>Offset / slot</td>
+<td>A byte position / a fixed record position. Hudson scan indexes store physical header slots, not message numbers.</td>
+</tr>
+<tr>
+<td>Subfield</td>
+<td>JAM’s typed variable-length header metadata. A subfield has IDs, a length and bytes. Unknown subfields can survive editing without appearing in the core parsed model.</td>
+</tr>
+<tr>
+<td>Frame</td>
+<td>A Squish allocation containing a frame header, message header, controls and text. Content edits can move a message to a new frame while preserving its UID.</td>
+</tr>
+<tr>
+<td>UID</td>
+<td>Squish’s persistent unique message number within a base. It is not the current relative index position or an external MSGID.</td>
+</tr>
+<tr>
+<td>Free list</td>
+<td>Squish’s chain of unused frames. Deleted or superseded frames can join it; this Python writer does not recycle or pack them.</td>
+</tr>
+<tr>
+<td>Pascal string / text block</td>
+<td>A length-prefixed field. Hudson text blocks are 256 bytes: one length byte followed by up to 255 payload bytes. Join payloads before decoding.</td>
+</tr>
+<tr>
+<td>Attribute bits</td>
+<td>Format-specific binary flags. <code class="inline-code"><span class="n">attributes_raw</span></code> retains their integer value; bit meanings differ across formats.</td>
+</tr>
+<tr>
+<td>Reply links</td>
+<td>Format-specific numeric relationships. Squish has nine reply slots, while the shared parsed model exposes only part of that structure. Deletion does not rewrite other messages’ links.</td>
+</tr>
+<tr>
+<td>Lastread</td>
+<td>Per-user read-position information, stored in format-specific auxiliary files. Writers preserve existing lastread data.</td>
+</tr>
+<tr>
+<td>CRC</td>
+<td>A cyclic redundancy check used by formats such as JAM for indexed lookups and metadata. It is not the SHA-256 revision digest.</td>
+</tr>
+<tr>
+<td>Provenance</td>
+<td>Where a parsed value came from: format, path, record ID and physical offset when known. It is not a revision or authority to edit.</td>
+</tr>
+<tr>
+<td>Synthetic ID</td>
+<td>The core’s <code class="inline-code"><span class="nb">hash</span><span class="p">:</span><span class="n">sha256</span><span class="p">:</span><span class="o">...</span></code> ID derived from decoded message fields. It is separate from raw record identity and must not be serialized as an external MSGID.</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="reading-editing-and-failure-boundaries" class="guide-section"><div class="section-title"><span>04</span><h2>Reading, editing and failure boundaries</h2></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Strict reading</td>
+<td>Reject malformed records and undecodable bytes rather than silently repairing them. Some readers validate the entire active base before returning messages; MSG can yield earlier files before a later failure.</td>
+</tr>
+<tr>
+<td>Archive mode</td>
+<td>Explicit, reported recovery while reading imperfect data. It requires an issue callback. It does not enable editing a damaged base.</td>
+</tr>
+<tr>
+<td>Recovered / skipped / stopped</td>
+<td>Issue actions: a deviation was accepted / a record was excluded / traversal is incomplete. Several issues may describe one record.</td>
+</tr>
+<tr>
+<td>Stable copy</td>
+<td>Files that do not change during a read. Copying separate files while another process writes is not automatically a consistent snapshot.</td>
+</tr>
+<tr>
+<td>Offline editing</td>
+<td>GoldED and other uncoordinated access remain closed while editing. All current writers reject <code class="inline-code"><span class="n">concurrent</span><span class="o">=</span><span class="kc">True</span></code>.</td>
+</tr>
+<tr>
+<td>Record lock</td>
+<td>A lock over a file-byte range. It coordinates cooperating processes; a matching write lock alone does not prove that GoldED reading, caching and refresh are safe.</td>
+</tr>
+<tr>
+<td>Session</td>
+<td>Context-managed access to one base, plus an explicit board for Hudson. Each operation takes and releases the format lock.</td>
+</tr>
+<tr>
+<td>Revision token</td>
+<td>Identity, physical placement and SHA-256 over raw message bytes. Used to check that the target still matches a previous consistent read. Other messages’ changes do not automatically invalidate it.</td>
+</tr>
+<tr>
+<td>Patch / UNSET / None</td>
+<td>A patch changes selected fields. <code class="inline-code"><span class="n">UNSET</span></code> leaves a field untouched; <code class="inline-code"><span class="kc">None</span></code> requests clearing when the format can represent that. Empty strings and zero are separate values.</td>
+</tr>
+<tr>
+<td>Conflict</td>
+<td>The target is missing or changed, or the supplied identity/revision does not match. Read again and reconcile rather than blindly retrying a stale patch.</td>
+</tr>
+<tr>
+<td>Commit unit</td>
+<td>One successful writer operation. Earlier operations survive a later failure; a session is not one transaction around all its operations.</td>
+</tr>
+<tr>
+<td>Rollback</td>
+<td>Restoration of watched bytes and file sizes after a handled I/O failure, under the lock. Failed rollback poisons the session. There is no process-kill or power-loss transaction guarantee.</td>
+</tr>
+<tr>
+<td>Poisoned session</td>
+<td>A session made unusable by failed rollback. Reopening is not proof that the underlying base is healthy.</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="tools-outside-these-libraries" class="guide-section"><div class="section-title"><span>05</span><h2>Tools outside these libraries</h2></div>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GoldED</td>
+<td>Message editor used as the main format implementation reference. Current-build interoperability and live refresh tests are deferred.</td>
+</tr>
+<tr>
+<td>Tosser</td>
+<td>Software that imports, exports and distributes FTN messages between packets and message areas. These writers expose storage operations, not tossing policy.</td>
+</tr>
+<tr>
+<td>Packet</td>
+<td>A transport container for FTN messages. Packet handling is outside these packages.</td>
+</tr>
+<tr>
+<td>Packing</td>
+<td>Reclaiming obsolete records or allocations and potentially changing physical layout. These writers leave obsolete blocks in place rather than compacting bases.</td>
+</tr>
+<tr>
+<td>GoldBase</td>
+<td>A different message-base layout using <code class="inline-code"><span class="o">.</span><span class="n">DAT</span></code> files; the Hudson package supports classic <code class="inline-code"><span class="o">.</span><span class="n">BBS</span></code> files instead.</td>
+</tr>
+</tbody>
+</table></div>
+</section><section id="read-next" class="guide-section"><div class="section-title"><span>06</span><h2>Read next</h2></div>
+<ul>
+<li><a href="guide.html">Library guide</a>: installation and practical examples.</li>
+<li><a href="core-api.html">Core API</a>: exact value, helper and exception contracts.</li>
+<li><a href="writers.html">Writer contract</a>: shared operation and revision rules.</li>
+<li>Format references: <a href="msg.html">MSG / Opus</a>, <a href="jam.html">JAM</a>,
+  <a href="squish.html">Squish</a> and <a href="hudson.html">Hudson</a>.</li>
+</ul></section></main></div></div><footer><span>GoldED for Python / GoldED.dev</span><span>v1.2.0 · MIT LICENSE</span></footer></div><script>
+for (const button of document.querySelectorAll('[data-copy]')) {
+  button.hidden = false;
+  button.addEventListener('click', async () => {
+    const source = document.getElementById(button.dataset.copy);
+    try {
+      await navigator.clipboard.writeText(source.textContent);
+      button.textContent = 'Copied';
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(source);
+      selection.removeAllRanges(); selection.addRange(range);
+      button.textContent = 'Code selected';
+    }
+    document.getElementById('copy-status').textContent = button.textContent;
+    setTimeout(() => { button.textContent = 'Copy code'; }, 1800);
+  });
+}
+const links = [...document.querySelectorAll('.nav a')];
+const sections = links.map(link => document.querySelector(link.hash)).filter(Boolean);
+function updateLocation() {
+  let current = sections[0];
+  for (const section of sections) if (section.getBoundingClientRect().top <= 100) current = section;
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = sections.at(-1);
+  for (const link of links) {
+    const active = current && link.hash === '#' + current.id;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+}
+let pending = false;
+window.addEventListener('scroll', () => {
+  if (!pending) requestAnimationFrame(() => { updateLocation(); pending = false; });
+  pending = true;
+}, {passive: true});
+window.addEventListener('hashchange', updateLocation);
+updateLocation();
+const narrow = window.matchMedia('(max-width:800px)');
+function setContents() { for (const menu of document.querySelectorAll('.contents')) menu.open = !narrow.matches; }
+narrow.addEventListener('change', setContents);
+setContents();
+</script><span id="copy-status" role="status" class="sr-only"></span></body></html>
