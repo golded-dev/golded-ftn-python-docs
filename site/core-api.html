@@ -331,19 +331,27 @@ even when the message has a recognized declaration. Invalid fallbacks raise
 <td><code class="inline-code"><span class="n">ASCII</span></code></td>
 </tr>
 <tr>
-<td><code class="inline-code"><span class="n">CP866</span></code>, <code class="inline-code"><span class="n">IBM866</span></code></td>
+<td><code class="inline-code"><span class="n">CP866</span></code>, <code class="inline-code"><span class="n">IBM866</span></code>, <code class="inline-code"><span class="n">CP</span><span class="o">-</span><span class="mi">866</span></code>, <code class="inline-code"><span class="o">+</span><span class="mi">7</span><span class="n">FIDO</span></code>, <code class="inline-code"><span class="o">+</span><span class="mi">7</span><span class="n">_FIDO</span></code>, <code class="inline-code"><span class="n">FIDO7</span></code>, <code class="inline-code"><span class="n">FIDO_7</span></code>, <code class="inline-code"><span class="n">RUS</span></code></td>
 <td><code class="inline-code"><span class="n">CP866</span></code></td>
 </tr>
 <tr>
-<td><code class="inline-code"><span class="n">KOI8</span><span class="o">-</span><span class="n">R</span></code>, <code class="inline-code"><span class="n">KOI8R</span></code></td>
+<td><code class="inline-code"><span class="n">KOI8</span><span class="o">-</span><span class="n">R</span></code>, <code class="inline-code"><span class="n">KOI8R</span></code>, <code class="inline-code"><span class="n">KOI</span></code>, <code class="inline-code"><span class="n">KOI8</span></code>, <code class="inline-code"><span class="n">GOST</span></code>, <code class="inline-code"><span class="n">CP20866</span></code></td>
 <td><code class="inline-code"><span class="n">KOI8</span><span class="o">-</span><span class="n">R</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">KOI8</span><span class="o">-</span><span class="n">U</span></code>, <code class="inline-code"><span class="n">KOI8U</span></code>, <code class="inline-code"><span class="n">KOU</span></code>, <code class="inline-code"><span class="n">KOI</span><span class="o">-</span><span class="n">U</span></code>, <code class="inline-code"><span class="n">CP21866</span></code></td>
+<td><code class="inline-code"><span class="n">KOI8</span><span class="o">-</span><span class="n">U</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">CP1125</span></code>, <code class="inline-code"><span class="n">UKR</span></code></td>
+<td><code class="inline-code"><span class="n">CP1125</span></code></td>
 </tr>
 <tr>
 <td><code class="inline-code"><span class="n">CP437</span></code>, <code class="inline-code"><span class="n">IBM437</span></code></td>
 <td><code class="inline-code"><span class="n">CP437</span></code></td>
 </tr>
 <tr>
-<td><code class="inline-code"><span class="n">CP1251</span></code></td>
+<td><code class="inline-code"><span class="n">CP1251</span></code>, <code class="inline-code"><span class="n">WIN</span></code>, <code class="inline-code"><span class="n">WIN</span><span class="o">-</span><span class="mi">1251</span></code>, <code class="inline-code"><span class="n">WINDOWS</span><span class="o">-</span><span class="mi">1251</span></code>, <code class="inline-code"><span class="n">CP</span><span class="o">-</span><span class="mi">1251</span></code></td>
 <td><code class="inline-code"><span class="n">CP1251</span></code></td>
 </tr>
 <tr>
@@ -364,6 +372,9 @@ even when the message has a recognized declaration. Invalid fallbacks raise
 </tr>
 </tbody>
 </table></div>
+<p>The historical Cyrillic aliases and KOI8-U/CP1125 declaration support above were
+added in 1.2.2. CP850 remains the default, including <code class="inline-code"><span class="n">IBMPC</span></code>. RFC
+<code class="inline-code"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span></code> does not participate in body-charset detection.</p>
 <p>Fallbacks additionally accept names understood by Python's codec registry.
 The returned spelling is an alias target or the validated fallback spelling,
 not necessarily the codec registry's canonical name.</p>
@@ -472,12 +483,35 @@ fall back to the default candidates.</p>
 <p><code class="inline-code"><span class="n">prefer_quoted_lines</span><span class="o">=</span><span class="kc">True</span></code> lowers the score threshold for matching quote lines;
 it does not mean only quoted lines are examined. Candidates that cannot encode
 and decode strictly are discarded. Malformed RFC 2047 words remain unchanged
-when decoding fails. Repair always returns a new result and never modifies
-source data.</p>
+when decoding fails. Version 1.2.2 safeguards allow Latin-1 fallback only for MIME
+words declared ASCII/US-ASCII, while rejecting output that introduces C0 controls
+(except tab), DEL, C1 controls or replacement characters. Repair always returns
+a new result and never modifies source data.</p>
+<p>Version 1.2.2 repair safeguards preserve graphic frames, block art, already-correct
+Danish/German words and symbol-only noise. Isolated <code class="inline-code"><span class="err">┼</span></code>/<code class="inline-code"><span class="err">▀</span></code> inside words can still
+represent damaged letters, and strict UTF-8 recovery may repair graphic-looking
+bytes such as <code class="inline-code"><span class="n">m</span><span class="err">├©</span><span class="n">de</span></code>; these are contextual heuristics. Supported damaged words
+can be repaired beside correct words. Recognizable uuencode data lines and PGP
+armour regions are excluded. Pass complete text to retain PGP context; separate
+per-line calls cannot retain that state.</p>
+<p>Literal degree signs are protected after an ASCII digit or before uppercase
+C/F followed by a non-letter or end of line. Spaces and tabs are allowed
+between the digit/sign/unit; the context never crosses a line break. Thus
+<code class="inline-code"><span class="n">m</span><span class="err">°</span><span class="n">de</span> <span class="n">at</span> <span class="mi">20</span> <span class="err">°</span><span class="n">C</span></code> becomes <code class="inline-code"><span class="n">møde</span> <span class="n">at</span> <span class="mi">20</span> <span class="err">°</span><span class="n">C</span></code>, and <code class="inline-code"><span class="n">SÃ</span><span class="err">¥</span><span class="n">dan</span> <span class="n">at</span> <span class="mi">10</span><span class="err">°</span></code> becomes
+<code class="inline-code"><span class="n">Sådan</span> <span class="n">at</span> <span class="mi">10</span><span class="err">°</span></code>. Other degree-shaped damage, such as <code class="inline-code"><span class="err">°</span><span class="n">l</span></code>, remains repairable.</p>
 <p>CRLF and CR are normalized to LF even when <code class="inline-code"><span class="n">changed</span></code> is false. <code class="inline-code"><span class="n">confidence</span></code> is
 the mean of line scores, including zero scores for unchanged lines, capped at
 1. This is an opt-in heuristic tuned to European-language fixtures, not a
-general detector. Readers and writers do not invoke it automatically.</p>
+general detector. Protected regions also undergo LF normalization, so output is
+not a byte-preserving copy or a signature-verification input. Readers and writers
+do not invoke it automatically.</p>
+<p>Cyrillic charset support means that bytes labelled CP866, KOI8-R, CP1251, KOI8-U
+or CP1125 can be decoded with the selected codec. It does not establish that
+<code class="inline-code"><span class="n">repair_mojibake</span></code> can recover Russian or Ukrainian text already decoded with the
+wrong codec. The scorer is tuned to Western European text; Cyrillic repair has
+not been evaluated against a representative corpus. Such an evaluation must
+check damaged text with known correct originals, unchanged clean text, mixed
+scripts and graphic/payload preservation before claiming support.</p>
 <div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="core_api_3" hidden>Copy code</button></div><pre><code id="core_api_3" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">repair_mojibake</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">repair_mojibake</span><span class="p">(</span><span class="s2">"Bruger m°de"</span><span class="p">)</span>
