@@ -1,7 +1,7 @@
 # JAM format reference
 
 Read and edit JAM revision 1 areas with `golded_ftn_jam`. A basename identifies
-separate header, text and index files. Python 3.12+ is required. Version 1.2.0 is available on
+separate header, text and index files. Python 3.12+ is required. Candidate 1.3.0 is unpublished. The historical 1.2.0 release is on
 [PyPI](https://pypi.org/project/golded-ftn-jam/1.2.0/).
 
 Use the [core API reference](core-api.html) for shared models and errors, and
@@ -205,3 +205,27 @@ The matching record lock alone does not establish safe GoldED coexistence.
   `gmojamm.h` structures, `gmojamm2.cpp` initialization and scan,
   `gmojamm4.cpp` locking and save, and `gcrcs32.cpp::strCrc32` CRC behavior.
   These establish source layout and write semantics, not tested live compatibility.
+
+## Candidate API additions
+
+Public exports: `JamReader`, `JamSession`, `JamWriter`, `JamWriterOptions`.
+
+Format options select extension_case for new files and preserve existing case.
+`recovery_session` adds durable staged mutation and explicit journal settlement.
+See [Editing message bases](writers.html) for recovery and concurrency prerequisites.
+
+```text
+JamWriterOptions(*, target_charset: 'str' = 'CP850', lock_timeout: 'float' = 5.0, concurrent: 'bool' = False, extension_case: "Literal['upper', 'lower']" = 'upper') -> None
+```
+
+```text
+JamWriter.create(self, path: 'str | PathLike[str]', options: 'WriterOptions | None' = None) -> 'None'
+```
+
+```text
+JamWriter.open(self, path: 'str | PathLike[str]', options: 'WriterOptions | None' = None) -> 'JamSession'
+```
+
+```text
+JamWriter.recovery_session(self, path: 'str | PathLike[str]', *, recovery_root: 'str | PathLike[str]', options: 'WriterOptions | None' = None) -> 'Iterator[JamRecoverableSession]'
+```

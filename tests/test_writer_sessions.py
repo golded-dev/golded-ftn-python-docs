@@ -9,7 +9,6 @@ from golded_ftn import (
     MessagePatch,
     MessageWriterSession,
     OutgoingMessage,
-    UnsupportedOperationError,
     WriterOptions,
 )
 from golded_ftn_hudson import HudsonWriter
@@ -77,9 +76,9 @@ def test_sessions_preserve_independent_revisions_and_detect_conflicts(
 
 
 @pytest.mark.parametrize("format_name", ["msg", "jam", "squish", "hudson"])
-def test_golded_concurrent_mode_is_disabled(format_name, tmp_path):
+def test_golded_concurrent_mode_requires_explicit_opt_in(format_name, tmp_path):
     path = tmp_path / "base"
     create(format_name, path)
-    with pytest.raises(UnsupportedOperationError):
-        with open_session(format_name, path, WriterOptions(concurrent=True)):
-            pytest.fail("Untested GoldED concurrency was enabled")
+    assert WriterOptions().concurrent is False
+    with open_session(format_name, path, WriterOptions(concurrent=True)) as session:
+        assert session.append(message()).identity.msgno >= 1

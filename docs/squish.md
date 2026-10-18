@@ -1,7 +1,7 @@
 # Squish message bases
 
 Read classic Squish areas and edit them offline with `golded-ftn-squish`.
-Imports use `golded_ftn_squish`. Version 1.2.0 is available on
+Imports use `golded_ftn_squish`. Candidate 1.3.0 is unpublished. The historical 1.2.0 release is on
 [PyPI](https://pypi.org/project/golded-ftn-squish/1.2.0/). Python 3.12 or newer is required.
 
 The [core API reference](core-api.html) defines shared models and errors.
@@ -181,3 +181,27 @@ cache refresh or competing writes.
 See the [package source and tests](https://github.com/golded-dev/golded-ftn-squish-python),
 its [writer source notes](https://github.com/golded-dev/golded-ftn-squish-python/blob/main/docs/writer-sources.md)
 and the [independent Squish structures](https://github.com/fidosoft/maximus/blob/master/msgapi/api_sq.h).
+
+## Candidate API additions
+
+Public exports: `SquishAdapterError`, `SquishReader`, `SquishRecoverableSession`, `SquishSession`, `SquishWriter`, `SquishWriterOptions`.
+
+Format options select extension_case for new files and preserve existing case.
+`recovery_session` adds durable staged mutation and explicit journal settlement.
+See [Editing message bases](writers.html) for recovery and concurrency prerequisites.
+
+```text
+SquishWriterOptions(*, target_charset: 'str' = 'CP850', lock_timeout: 'float' = 5.0, concurrent: 'bool' = False, timezone: 'str | None' = None, extension_case: "Literal['upper', 'lower']" = 'upper') -> None
+```
+
+```text
+SquishWriter.create(self, path: 'str | PathLike[str]', options: 'WriterOptions | None' = None) -> 'None'
+```
+
+```text
+SquishWriter.open(self, path: 'str | PathLike[str]', options: 'WriterOptions | None' = None) -> 'SquishSession'
+```
+
+```text
+SquishWriter.recovery_session(self, path: 'str | PathLike[str]', *, recovery_root: 'str | PathLike[str]', options: 'WriterOptions | None' = None) -> 'Iterator[SquishRecoverableSession]'
+```

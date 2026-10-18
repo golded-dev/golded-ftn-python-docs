@@ -1,6 +1,7 @@
 """Copy the canonical core reference and render it with the guide's design."""
 
 import argparse
+import os
 import re
 from pathlib import Path
 
@@ -14,7 +15,10 @@ else:
     from page_layout import layout
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT.parent / "golded-ftn-python/docs/api.md"
+SOURCE = (
+    Path(os.environ.get("GOLDED_CORE_SOURCE", str(ROOT.parent / "golded-ftn-python")))
+    / "docs/api.md"
+)
 
 
 def render() -> str:
@@ -66,7 +70,7 @@ def render() -> str:
         '<div class="page">'
         + masthead[0].replace('href="#start"', 'href="index.html"')
         + '<div class="shell"><div class="bar"><span>CORE API REFERENCE</span>'
-        "<span>1.2.0 WORKING SOURCES</span></div>"
+        "<span>UNPUBLISHED SUITE CANDIDATE</span></div>"
         + body
         + "</div>"
         + footer[0]

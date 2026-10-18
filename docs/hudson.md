@@ -1,7 +1,7 @@
 # Hudson message bases
 
 Read and edit classic `.BBS` Hudson bases with `golded-ftn-hudson`. Imports use
-`golded_ftn_hudson`. Python 3.12 or newer is required. Version 1.2.0 is available on
+`golded_ftn_hudson`. Python 3.12 or newer is required. Candidate 1.3.0 is unpublished. The historical 1.2.0 release is on
 [PyPI](https://pypi.org/project/golded-ftn-hudson/1.2.0/). GoldBase `.DAT` is a different format and
 is not supported.
 
@@ -208,3 +208,27 @@ See the [package source and tests](https://github.com/golded-dev/golded-ftn-huds
 and its [writer notes](https://github.com/golded-dev/golded-ftn-hudson-python/blob/main/docs/writer.md).
 GoldED's `gmohuds.h`, `gmohuds3.cpp` and `gmohuds4.cpp` are the implementation
 references for packed records, metadata and Pascal text blocks.
+
+## Candidate API additions
+
+Public exports: `HudsonAdapterError`, `HudsonReader`, `HudsonWriter`, `HudsonWriterOptions`.
+
+Format options select extension_case for new files and preserve existing case.
+`recovery_session` adds durable staged mutation and explicit journal settlement.
+See [Editing message bases](writers.html) for recovery and concurrency prerequisites.
+
+```text
+HudsonWriterOptions(*, target_charset: 'str' = 'CP850', lock_timeout: 'float' = 5.0, concurrent: 'bool' = False, extension_case: "Literal['upper', 'lower']" = 'upper') -> None
+```
+
+```text
+HudsonWriter.create(self, path: 'str | PathLike[str]', options: 'WriterOptions | None' = None) -> 'None'
+```
+
+```text
+HudsonWriter.open(self, path: 'str | PathLike[str]', board: 'int', options: 'WriterOptions | None' = None, *, scan_path: 'str | PathLike[str] | None' = None) -> 'HudsonSession'
+```
+
+```text
+HudsonWriter.recovery_session(self, path: 'str | PathLike[str]', *, recovery_root: 'str | PathLike[str]', options: 'WriterOptions | None' = None, scan_path: 'str | PathLike[str] | None' = None, board: 'int' = 1) -> 'Iterator[HudsonRecoverableSession]'
+```

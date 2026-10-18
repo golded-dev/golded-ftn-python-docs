@@ -1,10 +1,13 @@
 # Editing FTN message bases
 
-The 1.2.0 working sources add writers for FTSC MSG, JAM revision 1, classic
-Squish and classic Hudson. Stop GoldED and other base users before editing.
-`WriterOptions(concurrent=True)` is rejected: compatibility with a current
-GoldED build, concurrent reading and refresh are deferred. A matching byte lock
-alone does not establish safe concurrent use.
+The candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson 1.3.0.
+Offline editing remains the default. Explicit `WriterOptions(concurrent=True)` is
+qualified only for the tested Linux/macOS GoldED 3.1.0 builds, Unix local filesystems
+and the tested read, append, refresh, lastread and stale-editor scenarios. A matching
+lock byte alone does not establish compatibility with another editor or build.
+Windows and network filesystems are outside this profile. MSG/Opus stale-save
+checks detect changes but do not supply an atomic shared writer transaction with
+GoldED; avoid simultaneous MSG/Opus edits to the same message.
 
 ## Session API
 
@@ -160,3 +163,28 @@ uv run python scripts/check_examples.py
 that flag, the installer uses `package-refs.json`, which pins the public 1.2.0
 release commits. All five packages are published on PyPI. GoldED interoperability
 checks remain deferred; concurrent mode is disabled.
+
+## Recovery sessions
+
+Each format exposes `recovery_session(path, recovery_root=..., options=...)`;
+MSG additionally requires explicit header_format and Hudson may require board and
+scan_path. Under the base lock, inspect pending mutations and reconcile their
+transaction UUID with the caller's durable journal. `prepare_append`,
+`prepare_update` and `prepare_delete` persist recoverable intent; `apply` mutates;
+`settle` finalizes or rolls back according to CommitState. COMMITTED, UNCOMMITTED
+and UNKNOWN are different outcomes. An unknown commit must keep recovery evidence
+and block automatic replay. Preserve the state directory and physical-base identity
+through restart. A journal filename alone does not identify an unchanged base.
+
+## Filename case and compatibility
+
+Format options expose extension_case for new bases. Existing uppercase/lowercase
+files are opened in their existing case; ambiguous mixed duplicates are rejected.
+For the Unix GoldED profile select lower for newly created JAM, MSG, Squish and
+Hudson files and keep Hudson scan files in the configured system directory.
+The qualified GoldED 3.1.0 code resolves existing casing; older binaries may split
+one apparent base into separate files on case-sensitive filesystems.
+
+The suite manifest pins the exact source archive and native verification builds.
+Earlier compatibility results refer to their recorded binaries and cannot be
+silently transferred to another build. See the manifest before production use.

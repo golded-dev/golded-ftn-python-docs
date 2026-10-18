@@ -49,6 +49,8 @@ def main() -> None:
         parser.feed(page)
         format_sources += page
         assert any(key.startswith(f"{name}_example_") for key in parser.items)
+    for name in ("packet", "nodelist", "binkp", "tosser", "cli"):
+        parser.feed((ROOT / "site" / f"{name}.html").read_text(encoding="utf-8"))
     with tempfile.TemporaryDirectory(prefix="ftn-doc-examples-") as temporary:
         paths = []
         for name, code in parser.items.items():

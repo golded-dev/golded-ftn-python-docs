@@ -21,7 +21,17 @@ FORMATS = {
     "hudson": ("Hudson", "Shared files. Explicit boards."),
 }
 
-REFERENCES = FORMATS | {"glossary": ("Terminology", "Old jargon. Plain explanations.")}
+NETWORK = {
+    "packet": ("Packets", "Packed messages. Explicit boundaries."),
+    "nodelist": ("Nodelists", "Old lists. Typed identities."),
+    "binkp": ("Binkp and BSO", "Queued packets. Durable receipts."),
+    "tosser": ("Tosser operations", "Local bases. Explicit routes."),
+    "cli": ("CLI guide", "Small commands. Visible outcomes."),
+}
+
+REFERENCES = (
+    FORMATS | NETWORK | {"glossary": ("Terminology", "Old jargon. Plain explanations.")}
+)
 
 
 def render(name: str) -> str:
@@ -77,7 +87,7 @@ def render(name: str) -> str:
         + pieces["masthead"]
         + '<div class="shell"><div class="bar">'
         f"<span>{html.escape(title.upper())} / {reference_label}</span>"
-        "<span>1.2.0 WORKING SOURCES · OFFLINE WRITERS</span></div>"
+        "<span>UNPUBLISHED SUITE CANDIDATE · LINUX / macOS</span></div>"
         + body
         + "</div>"
         + pieces["footer"]

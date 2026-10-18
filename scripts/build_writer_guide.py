@@ -56,7 +56,7 @@ def render() -> str:
         '<div class="page">'
         + masthead[0].replace('href="#start"', 'href="index.html"')
         + '<div class="shell"><div class="bar"><span>WRITER CONTRACT</span>'
-        "<span>1.2.0 WORKING SOURCES · OFFLINE</span></div>"
+        "<span>UNPUBLISHED SUITE CANDIDATE</span></div>"
         + body
         + "</div>"
         + footer[0]

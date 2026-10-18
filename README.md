@@ -83,3 +83,21 @@ and strict mypy. The bounded macOS results and remaining gaps are recorded in th
 
 `docs/glossary.md` explains FTN terminology and is rendered as `site/glossary.html`
 by the format-guide renderer. Inline code uses the shared syntax palette, too.
+
+## Suite candidate
+
+The guide now covers core, four base formats, packet, nodelist, binkp, tosser and
+tools. Current candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson
+1.3.0, packet/nodelist/binkp/tosser 0.1.0 and tools 1.1.0. None is published by
+this preparation. Linux/macOS with Python 3.12–3.14 are the test targets.
+
+Install documented wheels with `python scripts/install_readers.py --wheelhouse
+/path/to/reviewed/wheelhouse` in the documentation environment. Default installation
+uses the public index and therefore requires the prerequisite releases first.
+Render packet, nodelist, binkp, tosser and CLI with `scripts/build_format_guides.py`.
+For core sync use `GOLDED_CORE_SOURCE=/path/to/candidate/core` with
+`scripts/build_api_guide.py --sync`; do not copy unrelated experimental docs.
+
+`package-refs.json` records the local candidate commits for this guide. The new
+commits require separately authorized publication before their GitHub links or
+public-index installs can be verified.

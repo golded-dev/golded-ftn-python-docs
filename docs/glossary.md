@@ -95,3 +95,13 @@ BBS, tosser or complete message network.
 - [Writer contract](writers.html): shared operation and revision rules.
 - Format references: [MSG / Opus](msg.html), [JAM](jam.html),
   [Squish](squish.html) and [Hudson](hudson.html).
+
+## Network and recovery terms
+
+**Packet:** a framed transport container. Complete framing precedes record import.
+**BSO:** BinkleyTerm Style Outbound, a filesystem spool with address locks.
+**Inbound receipt:** durable evidence of authenticated transport reception; not proof of mailbox import.
+**HELD:** quarantined input with a reason code; it is not delivered mail.
+**Physical base identity:** canonical identity of the base used by staged recovery.
+**CommitState.UNKNOWN:** the journal outcome cannot be proven; keep evidence and stop automatic replay.
+**Product ID:** an assigned FTSC product identifier. Fixture 0x00FE is not a production assignment.

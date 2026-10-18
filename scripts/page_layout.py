@@ -18,6 +18,13 @@ def page_navigation(current: str) -> str:
         ("squish.html", "Squish"),
         ("hudson.html", "Hudson"),
     ]
+    network = [
+        ("packet.html", "Packets"),
+        ("nodelist.html", "Nodelists"),
+        ("binkp.html", "Binkp and BSO"),
+        ("tosser.html", "Tosser operations"),
+        ("cli.html", "CLI guide"),
+    ]
     return (
         '<nav class="page-nav" aria-label="Documentation">'
         + "".join(
@@ -33,6 +40,14 @@ def page_navigation(current: str) -> str:
             + (' aria-current="page"' if url == current else "")
             + f">{title}</a>"
             for url, title in formats
+        )
+        + '</nav><div class="label">Network and CLI</div>'
+        + '<nav class="page-nav network-nav" aria-label="Network and CLI">'
+        + "".join(
+            f'<a href="{url}"'
+            + (' aria-current="page"' if url == current else "")
+            + f">{title}</a>"
+            for url, title in network
         )
         + "</nav>"
     )

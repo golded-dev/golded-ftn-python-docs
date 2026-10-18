@@ -49,6 +49,11 @@ def test_shared_navigation_marks_each_current_page():
         "jam.html",
         "squish.html",
         "hudson.html",
+        "packet.html",
+        "nodelist.html",
+        "binkp.html",
+        "tosser.html",
+        "cli.html",
     )
     for name in pages:
         tree = html5lib.HTMLParser(strict=True).parse(

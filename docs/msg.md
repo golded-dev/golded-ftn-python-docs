@@ -2,7 +2,7 @@
 
 Read classic FTSC and Opus message directories. Edit FTSC messages through
 `golded_ftn_msg`. Each message has its own numbered file and a 190-byte header.
-Python 3.12+ is required. Version 1.2.0 is available on [PyPI](https://pypi.org/project/golded-ftn-msg/1.2.0/).
+Python 3.12+ is required. Candidate 1.4.0 is unpublished. The historical 1.2.0 release is on [PyPI](https://pypi.org/project/golded-ftn-msg/1.2.0/).
 
 Use the [core API reference](core-api.html) for shared models and errors, and
 [Editing message bases](writers.html) for revision and patch contracts.
@@ -177,3 +177,27 @@ layout checks are not live compatibility tests.
 - [Writer source notes](https://github.com/golded-dev/golded-ftn-msg-python/blob/main/docs/writer-sources.md):
   original GoldED commit `600266252b73174ff5116cee697ef9a97aeb1859`,
   `gmofido.h` layout and `gmofido2.cpp` / `gmofido4.cpp` scan and write paths.
+
+## Candidate API additions
+
+Public exports: `MsgReader`, `MsgWriter`, `MsgWriterOptions`, `MsgSession`, `MsgRecoverableSession`.
+
+Format options select extension_case for new files and preserve existing case.
+`recovery_session` adds durable staged mutation and explicit journal settlement.
+See [Editing message bases](writers.html) for recovery and concurrency prerequisites.
+
+```text
+MsgWriterOptions(*, target_charset: 'str' = 'CP850', lock_timeout: 'float' = 5.0, concurrent: 'bool' = False, opus_time_policy: 'OpusTimePolicy' = 'strict', extension_case: "Literal['upper', 'lower']" = 'upper') -> None
+```
+
+```text
+MsgWriter.create(self, path: 'str | PathLike[str]', *, header_format: 'HeaderFormat' = 'ftsc') -> 'None'
+```
+
+```text
+MsgWriter.open(self, path: 'str | PathLike[str]', options: 'WriterOptions | None' = None, *, header_format: 'HeaderFormat' = 'ftsc', opus_time_policy: 'OpusTimePolicy | None' = None) -> 'MsgSession'
+```
+
+```text
+MsgWriter.recovery_session(self, path: 'str | PathLike[str]', *, recovery_root: 'str | PathLike[str]', options: 'WriterOptions | None' = None, header_format: 'HeaderFormat' = 'ftsc', opus_time_policy: 'OpusTimePolicy | None' = None) -> 'Iterator[MsgRecoverableSession]'
+```

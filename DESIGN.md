@@ -182,3 +182,10 @@ Check desktop and mobile, section jumps, current-page markers, keyboard focus an
 long navigation labels. Run pytest, Ruff, the HTML example checker and
 `git diff --check`. Record what was actually checked; keep unverified presentation
 or publication separate from local results.
+
+## Network references (candidate suite)
+
+The sidebar adds a Network and CLI group after Formats: Packets, Nodelists,
+Binkp and BSO, Tosser operations, CLI guide. It uses the existing page-link,
+current-page, keyboard, mobile and print rules. These pages render from Markdown
+through build_format_guides.py; no extra visual system or remote assets are added.

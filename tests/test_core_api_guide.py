@@ -60,6 +60,11 @@ def test_reference_internal_links_resolve():
         "jam.html",
         "squish.html",
         "hudson.html",
+        "packet.html",
+        "nodelist.html",
+        "binkp.html",
+        "tosser.html",
+        "cli.html",
     ):
         parsed = Links()
         parsed.feed((ROOT / "site" / name).read_text(encoding="utf-8"))
