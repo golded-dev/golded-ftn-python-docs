@@ -1,6 +1,6 @@
 # GoldED for Python
 
-A practical guide to the five GoldED FTN Python libraries, published at
+A practical guide to the GoldED FTN Python suite. The existing site is published at
 https://golded-dev.github.io/golded-ftn-python-docs/.
 
 `site/index.html` is the documentation home. It links to the library guide,
@@ -23,21 +23,19 @@ uv run ruff format --check .
 uv run python scripts/check_examples.py
 ```
 
-`package-refs.json` pins the public reader commits. The installer clones them into
-a temporary directory, builds wheels and installs those wheels in this environment.
-Python examples are extracted from the generated HTML pages; expected outputs and file
-examples are tested with synthetic message bases. No private archives are used.
-
-All five packages are released on PyPI at 1.2.0. The default installer tests
-the public release commits pinned in `package-refs.json`. Use `--local` only
-when checking changes in sibling development checkouts.
+`package-refs.json` pins local candidate commits. The installer uses the public
+index by default, which requires the prerequisite releases to be published first.
+For this unpublished candidate, `--local` selects the retained release wheelhouse,
+or use `--wheelhouse /path/to/reviewed/wheelhouse` explicitly. Python examples are
+extracted from generated HTML and tested with synthetic message bases; private
+archives are not used.
 
 Writer contracts and verification limits live in [docs/writers.md](docs/writers.md).
 Run `uv run python scripts/build_writer_guide.py` after editing them; this renders
 `site/writers.html` with the existing design. Tests check the generated page and
 execute its four-format CRUD example. Bounded macOS offline interoperability probes are recorded in
 [docs/golded-macos-compatibility.md](docs/golded-macos-compatibility.md). All four formats
-passed the described scenarios against the corrected GoldED build. Concurrent mode remains disabled on all platforms.
+passed the described scenarios against the corrected GoldED build. Concurrent writes are qualified only under the documented bounded Linux/macOS GoldED profile; see the writer contract and release manifest.
 
 Preview with `python -m http.server 8874 --directory site`, then open
 http://localhost:8874. Check a narrow mobile viewport, keyboard navigation,
@@ -51,7 +49,7 @@ are pinned to complete commit SHAs. No custom domain is configured.
 
 When updating the guide, change package refs deliberately and rerun the checks.
 Keep documented package versions and installation wheel filenames consistent.
-The five library distributions are available on PyPI at 1.2.0.
+Candidate versions and their publication boundary are listed below.
 
 ## License
 
