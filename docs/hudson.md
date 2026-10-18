@@ -197,17 +197,31 @@ details and makes the session unusable. There is no crash journal, transactional
 guarantee for process termination or power loss, or promise to detect every
 partial write.
 
-Stop GoldED before reading or editing. `WriterOptions(concurrent=True)` raises
-`UnsupportedOperationError` on every platform. macOS lock and rollback runtime
-tests are recorded; Linux and Windows runtime execution remain unverified.
-Current GoldED build integration is deferred. Live support requires competing
-write tests and tests of reads, scan/cache behavior and refresh against a pinned
-build; the byte lock alone does not establish that support.
+## Locks, recovery and compatibility
 
-See the [package source and tests](https://github.com/golded-dev/golded-ftn-hudson-python)
-and its [writer notes](https://github.com/golded-dev/golded-ftn-hudson-python/blob/main/docs/writer.md).
-GoldED's `gmohuds.h`, `gmohuds3.cpp` and `gmohuds4.cpp` are the implementation
-references for packed records, metadata and Pascal text blocks.
+Candidate interoperability is bounded to GoldED source commit `d7449053bd674df54c4a442c92dce8c06ad7b586`,
+version 3.1.0, native macOS arm64/GCC 16 and Ubuntu 24.04 aarch64/GCC 13.
+The suite release manifest pins the resulting binaries and records actual checks.
+Other GoldED versions, Windows and network filesystems are not qualified.
+
+Writers default to offline operation. Explicit `concurrent=True` opts into the
+tested read/write/refresh/lastread/stale-save profile, not a general multiwriter
+guarantee. Standalone readers still need a stable base; a session read uses its
+format lock. MSG/Opus and Goldbase have no shared GoldED writer lock: stale-save
+detection cannot close a race between comparison and a foreign write. Keep
+same-message edits serialized. Goldbase is outside the Python C1 profile.
+
+Use format-specific WriterOptions extension_case="lower" for newly created
+Unix bases used by GoldED; preserve existing casing and reject ambiguous twins.
+Hudson scan queues belong in the configured system directory. Recovery sessions
+have a durable journal protocol; ordinary open() sessions only roll back handled
+I/O failures. UNKNOWN outcomes retain artifacts for operator reconciliation.
+
+Hudson locks MSGINFO.BBS byte 407, validates whole-base records and preserves other boards. scan_path identifies the configured GoldED system directory.
+
+Ordinary I/O rollback preserves earlier completed operations. A rollback failure
+poisons the session. Recovery sessions stage durable mutations and reconcile the
+caller journal; UNKNOWN commit state keeps evidence and prevents blind replay.
 
 ## Candidate API additions
 

@@ -106,7 +106,7 @@ with TemporaryDirectory() as root:
 `WriterOptions` defaults to CP850 and a five-second monotonic lock timeout.
 Encoding is strict: unencodable characters, conflicting charset declarations,
 field overflow and unrepresentable dates or addresses fail before data writes.
-MSG writes FTSC; Opus editing is rejected. Hudson supports classic .BBS, not
+MSG supports explicit FTSC or Opus writes; Opus timestamp policy remains explicit. Hudson supports classic .BBS, not
 GoldBase. Routing strings remain unexpanded. Writers do not generate MSGID,
 route messages or check duplicates.
 
@@ -131,8 +131,8 @@ session. Earlier completed operations survive later failures. Full-file
 snapshots cost memory proportional to base size. Locked files are never replaced
 by rename. Existing lastread data is preserved.
 
-There is no transaction guarantee for process termination or power failure and
-no automatic repair. Deterministic failure tests cover ordinary exceptions;
+Ordinary open() provides no transaction guarantee for process termination or power
+failure and no automatic repair. Use recovery_session() with a durable caller journal. Deterministic failure tests cover ordinary exceptions;
 they do not prove recovery from every possible partial write.
 
 ## Verification boundary
@@ -143,26 +143,25 @@ locks are implemented for macOS/Linux and Windows has an offline lock/I/O path;
 only platforms actually tested may be reported as tested. GoldED source is the
 format reference, not evidence that the current executable accepts the output.
 
-The integration build and GoldED read/write/cache/refresh checks remain deferred
-at the user's request. Concurrent mode stays disabled on every platform.
-No BBS, tosser, packet, packing, repair or GoldED changes are included.
+The suite includes packet, nodelist, BSO/binkp, tosser and CLI packages with separate
+policy boundaries. The GoldED 3.1.0 source candidate has native macOS/Linux
+read/edit/refresh/stale-save checks recorded against the pinned source and binaries.
+Offline remains the default; explicit concurrent mode is bounded to that profile.
 
-## Check the working sources
-
-Keep all five package repositories beside this documentation repository:
+## Check the candidate wheels
 
 ```sh
-uv run python scripts/install_readers.py --local
+uv run python scripts/install_readers.py --wheelhouse /path/to/reviewed/wheelhouse
 uv run pytest
 uv run ruff check .
 uv run ruff format --check .
 uv run python scripts/check_examples.py
 ```
 
-`--local` builds and installs wheels from sibling development checkouts. Without
-that flag, the installer uses `package-refs.json`, which pins the public 1.2.0
-release commits. All five packages are published on PyPI. GoldED interoperability
-checks remain deferred; concurrent mode is disabled.
+No sibling working copies are required. `--local` selects the suite's retained
+candidate wheelhouse; the default installer uses exact candidate versions from the
+public index after their separately authorized publication. package-refs.json
+records local candidate commits, not already-published releases.
 
 ## Recovery sessions
 

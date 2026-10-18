@@ -76,7 +76,8 @@ No MSGID, routing or duplicate detection is generated automatically.
 
 ## Writing and limits
 
-Writers produce FTSC only. `open(..., header_format="opus")` is rejected.
+Writers require explicit FTSC or Opus selection. Opus timestamp policy is strict by
+default; floor-seconds is an explicit opt-in for even-second DOS storage.
 Names permit 35 encoded bytes and subjects 71. Header text rejects nulls, line
 breaks and control separators. Encoding defaults to CP850 and is strict:
 conflicting charset declarations, replacement characters and silent truncation
@@ -147,27 +148,31 @@ before any messages are returned. Callback exceptions propagate. Issues identify
 the source without including message contents. Archive mode never enables editing
 or repairs original bytes.
 
-## Locks, rollback and compatibility
+## Locks, recovery and compatibility
 
-Keep GoldED closed. `concurrent=True` is rejected on every platform: original
-GoldED MSG locks are empty functions, and the Python sidecar cannot coordinate
-GoldED readers or writers. Standalone reading also requires stable files.
+Candidate interoperability is bounded to GoldED source commit `d7449053bd674df54c4a442c92dce8c06ad7b586`,
+version 3.1.0, native macOS arm64/GCC 16 and Ubuntu 24.04 aarch64/GCC 13.
+The suite release manifest pins the resulting binaries and records actual checks.
+Other GoldED versions, Windows and network filesystems are not qualified.
 
-Each session operation takes the sidecar lock, rereads the area and checks the
-raw-byte revision under the lock. The default monotonic timeout is five seconds.
-Python sessions share a lock manager within one process. Callers must avoid direct
-base-file access during operations.
+Writers default to offline operation. Explicit `concurrent=True` opts into the
+tested read/write/refresh/lastread/stale-save profile, not a general multiwriter
+guarantee. Standalone readers still need a stable base; a session read uses its
+format lock. MSG/Opus and Goldbase have no shared GoldED writer lock: stale-save
+detection cannot close a race between comparison and a foreign write. Keep
+same-message edits serialized. Goldbase is outside the Python C1 profile.
 
-Append serializes a complete temporary file, then publishes without replacing an
-existing destination: a hard link on POSIX, a non-replacing rename on Windows.
-Update replaces the complete file; delete unlinks it. Ordinary I/O failure restores
-the affected file and numbering sidecar where possible. Failed rollback raises
-`RollbackError` and poisons the session. Completed earlier operations survive.
-Process death and power loss have no transactional guarantee.
+Use format-specific WriterOptions extension_case="lower" for newly created
+Unix bases used by GoldED; preserve existing casing and reject ambiguous twins.
+Hudson scan queues belong in the configured system directory. Recovery sessions
+have a durable journal protocol; ordinary open() sessions only roll back handled
+I/O failures. UNKNOWN outcomes retain artifacts for operator reconciliation.
 
-Runtime checks in this checkout cover macOS. Linux and Windows execution and
-GoldED build interoperability, caching and refresh remain unverified. Source
-layout checks are not live compatibility tests.
+MSG has no shared GoldED writer lock. Complete files are published atomically without clobbering existing names; updates replace the file. No numbering sidecar is created.
+
+Ordinary I/O rollback preserves earlier completed operations. A rollback failure
+poisons the session. Recovery sessions stage durable mutations and reconcile the
+caller journal; UNKNOWN commit state keeps evidence and prevents blind replay.
 
 ## Implementation references
 

@@ -178,23 +178,31 @@ Archive mode never enables writer repair or damaged-base editing.
 
 ## Locks, rollback and compatibility
 
-All platforms require offline editing with GoldED closed. `concurrent=True` is
-rejected. Each operation locks byte 0 of `.JHR`, rereads and validates the base,
-checks the target revision and holds the lock through writes and flushes.
-The default lock timeout is five seconds measured with a monotonic clock.
-Python sessions share the core lock manager; direct file access during operations
-is outside its contract.
+## Locks, recovery and compatibility
 
-A revision includes identity, physical index/header/text locations and SHA-256
-over raw header, metadata and text. Changes to other messages do not invalidate
-it. Ordinary I/O failures use full-file snapshots for in-place rollback under the
-lock. Locked base files are not replaced through rename. Rollback failure raises
-`RollbackError` and poisons the session. Earlier operations remain committed.
-Process death and power loss have no transactional guarantee.
+Candidate interoperability is bounded to GoldED source commit `d7449053bd674df54c4a442c92dce8c06ad7b586`,
+version 3.1.0, native macOS arm64/GCC 16 and Ubuntu 24.04 aarch64/GCC 13.
+The suite release manifest pins the resulting binaries and records actual checks.
+Other GoldED versions, Windows and network filesystems are not qualified.
 
-Runtime checks cover macOS in this checkout. Linux and Windows execution and
-GoldED read/write interoperability, caching and refresh remain unverified.
-The matching record lock alone does not establish safe GoldED coexistence.
+Writers default to offline operation. Explicit `concurrent=True` opts into the
+tested read/write/refresh/lastread/stale-save profile, not a general multiwriter
+guarantee. Standalone readers still need a stable base; a session read uses its
+format lock. MSG/Opus and Goldbase have no shared GoldED writer lock: stale-save
+detection cannot close a race between comparison and a foreign write. Keep
+same-message edits serialized. Goldbase is outside the Python C1 profile.
+
+Use format-specific WriterOptions extension_case="lower" for newly created
+Unix bases used by GoldED; preserve existing casing and reject ambiguous twins.
+Hudson scan queues belong in the configured system directory. Recovery sessions
+have a durable journal protocol; ordinary open() sessions only roll back handled
+I/O failures. UNKNOWN outcomes retain artifacts for operator reconciliation.
+
+JAM locks JHR byte 0 and retains that descriptor through index/header/text mutations. Recovery covers JHR/JDT/JDX; JLR is untouched.
+
+Ordinary I/O rollback preserves earlier completed operations. A rollback failure
+poisons the session. Recovery sessions stage durable mutations and reconcile the
+caller journal; UNKNOWN commit state keeps evidence and prevents blind replay.
 
 ## Implementation references
 

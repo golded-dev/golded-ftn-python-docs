@@ -172,15 +172,31 @@ in place under the lock. Previous completed operations remain committed. Failed
 rollback raises `RollbackError` and makes the session unusable. This provides no
 transactional guarantee for process termination or power loss.
 
-Use the writer offline with GoldED closed. `concurrent=True` raises
-`UnsupportedOperationError` on every platform. macOS runtime tests are recorded;
-Linux and Windows execution and current GoldED build integration remain
-unverified. A compatible byte lock alone does not prove safe concurrent reading,
-cache refresh or competing writes.
+## Locks, recovery and compatibility
 
-See the [package source and tests](https://github.com/golded-dev/golded-ftn-squish-python),
-its [writer source notes](https://github.com/golded-dev/golded-ftn-squish-python/blob/main/docs/writer-sources.md)
-and the [independent Squish structures](https://github.com/fidosoft/maximus/blob/master/msgapi/api_sq.h).
+Candidate interoperability is bounded to GoldED source commit `d7449053bd674df54c4a442c92dce8c06ad7b586`,
+version 3.1.0, native macOS arm64/GCC 16 and Ubuntu 24.04 aarch64/GCC 13.
+The suite release manifest pins the resulting binaries and records actual checks.
+Other GoldED versions, Windows and network filesystems are not qualified.
+
+Writers default to offline operation. Explicit `concurrent=True` opts into the
+tested read/write/refresh/lastread/stale-save profile, not a general multiwriter
+guarantee. Standalone readers still need a stable base; a session read uses its
+format lock. MSG/Opus and Goldbase have no shared GoldED writer lock: stale-save
+detection cannot close a race between comparison and a foreign write. Keep
+same-message edits serialized. Goldbase is outside the Python C1 profile.
+
+Use format-specific WriterOptions extension_case="lower" for newly created
+Unix bases used by GoldED; preserve existing casing and reject ambiguous twins.
+Hudson scan queues belong in the configured system directory. Recovery sessions
+have a durable journal protocol; ordinary open() sessions only roll back handled
+I/O failures. UNKNOWN outcomes retain artifacts for operator reconciliation.
+
+Squish locks SQD byte 0, retains stable UIDs and maintains frame chains, SQI and the free list. The timezone option governs naive time conversion.
+
+Ordinary I/O rollback preserves earlier completed operations. A rollback failure
+poisons the session. Recovery sessions stage durable mutations and reconcile the
+caller journal; UNKNOWN commit state keeps evidence and prevents blind replay.
 
 ## Candidate API additions
 
