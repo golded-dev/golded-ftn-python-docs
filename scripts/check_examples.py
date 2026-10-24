@@ -44,7 +44,7 @@ def main() -> None:
     parser.feed(api_source)
     assert any(name.startswith("core_api_") for name in parser.items)
     format_sources = ""
-    for name in ("msg", "jam", "squish", "hudson"):
+    for name in ("msg", "jam", "squish", "hudson", "sqlite"):
         page = (ROOT / "site" / f"{name}.html").read_text(encoding="utf-8")
         parser.feed(page)
         format_sources += page

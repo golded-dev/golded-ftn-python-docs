@@ -51,3 +51,13 @@ def test_format_reference_names_all_public_exports(name):
     source = (ROOT / "docs" / f"{name}.md").read_text(encoding="utf-8")
     for exported in module.__all__:
         assert f"`{exported}`" in source
+
+
+def test_sqlite_reference_is_part_of_the_format_suite():
+    assert "sqlite" in FORMATS
+    source = (ROOT / "site/sqlite.html").read_text(encoding="utf-8")
+    assert source == render("sqlite")
+    tree = html5lib.HTMLParser(strict=True).parse(source)
+    text = "".join(tree.itertext())
+    assert "one database file per area" in text
+    assert "several areas" in text

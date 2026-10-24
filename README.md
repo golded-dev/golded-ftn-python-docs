@@ -4,7 +4,7 @@ A practical guide to the GoldED FTN Python suite. The existing site is published
 https://golded-dev.github.io/golded-ftn-python-docs/.
 
 `site/index.html` is the documentation home. It links to the library guide,
-complete core API, writer contract, four format references and terminology page.
+complete core API, writer contract, five format references and terminology page.
 Every page shares the guide shell and navigation. `scripts/page_layout.py` supplies
 navigation for generated references; `DESIGN.md` defines the common presentation.
 
@@ -25,8 +25,9 @@ uv run python scripts/check_examples.py
 
 `package-refs.json` pins local candidate commits. The installer uses the public
 index by default, which requires the prerequisite releases to be published first.
-For this unpublished candidate, `--local` selects the retained release wheelhouse,
-or use `--wheelhouse /path/to/reviewed/wheelhouse` explicitly. Python examples are
+For this unpublished candidate, `--local` selects the retained release wheelhouse
+and the built sibling SQLite wheel, or use `--wheelhouse /path/to/reviewed/wheelhouse`
+explicitly. Python examples are
 extracted from generated HTML and tested with synthetic message bases; private
 archives are not used.
 
@@ -74,7 +75,7 @@ It stays available without JavaScript.
 
 The format pages cover public readers, writers and sessions, base files, metadata,
 archive recovery and known limits. Editable sources are `docs/msg.md`, `docs/jam.md`,
-`docs/squish.md` and `docs/hudson.md`. Regenerate all four with
+`docs/squish.md`, `docs/hudson.md` and `docs/sqlite.md`. Regenerate all five with
 `uv run python scripts/build_format_guides.py`. They use the shared design,
 syntax highlighting and navigation; their synthetic Python examples run in pytest
 and strict mypy. The bounded macOS results and remaining gaps are recorded in the compatibility report.
@@ -84,9 +85,9 @@ by the format-guide renderer. Inline code uses the shared syntax palette, too.
 
 ## Suite candidate
 
-The guide now covers core, four base formats, packet, nodelist, binkp, tosser and
+The guide now covers core, five base formats, packet, nodelist, binkp, tosser and
 tools. Current candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson
-1.3.0, packet/nodelist/binkp/tosser 0.1.0 and tools 1.1.0. None is published by
+1.3.0, SQLite 0.1.0, packet/nodelist/binkp/tosser 0.1.0 and tools 1.1.0. None is published by
 this preparation. Linux/macOS with Python 3.12–3.14 are the test targets.
 
 Install documented wheels with `python scripts/install_readers.py --wheelhouse

@@ -1,4 +1,4 @@
-"""Render the four format references using the library guide's shared shell."""
+"""Render the format references using the library guide's shared shell."""
 
 import html
 import re
@@ -19,6 +19,7 @@ FORMATS = {
     "jam": ("JAM", "Indexed messages. Preserved metadata."),
     "squish": ("Squish", "Linked frames. Stable identities."),
     "hudson": ("Hudson", "Shared files. Explicit boards."),
+    "sqlite": ("SQLite", "Transactional storage. Public schema."),
 }
 
 NETWORK = {

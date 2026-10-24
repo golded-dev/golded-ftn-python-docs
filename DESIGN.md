@@ -38,7 +38,7 @@ text colors. Preserve the black historical palette across the whole site.
 ## Shared page shell
 
 All pages use the same masthead, blue status bar, two-column shell and footer.
-The home page is the entry to the three shared guides, four format references and terminology;
+The home page is the entry to the three shared guides, five format references and terminology;
 its main content remains a short index with descriptions and quick links.
 
 - Page: maximum width 1260px, centered, 40px vertical margin, 24px horizontal padding.
@@ -68,6 +68,7 @@ shared `.eyebrow` style. Keep the two-part phrasing tied to the page’s purpose
 - JAM: “Indexed messages. Preserved metadata.”
 - Squish: “Linked frames. Stable identities.”
 - Hudson: “Shared files. Explicit boards.”
+- SQLite: “Transactional storage. Public schema.”
 
 ## Typography and section numbering
 
@@ -114,7 +115,7 @@ The sidebar has three distinct groups:
 1. **Documentation:** Home, Library guide, Core API reference, Editing message bases, Terminology.
    Use those labels and order on every page. Mark exactly one link with
    `aria-current="page"`, yellow text and a yellow inset left rule.
-2. **Formats:** MSG / Opus, JAM, Squish, Hudson. Use those labels and order.
+2. **Formats:** MSG / Opus, JAM, Squish, Hudson, SQLite. Use those labels and order.
    Current-page styling is identical to Documentation; exactly one current page
    exists across both groups. Keep the Formats label visible on mobile.
 3. **On this page:** the current guide’s section links, starting at Overview (00).

@@ -49,6 +49,7 @@ def test_shared_navigation_marks_each_current_page():
         "jam.html",
         "squish.html",
         "hudson.html",
+        "sqlite.html",
         "packet.html",
         "nodelist.html",
         "binkp.html",
@@ -86,5 +87,6 @@ def test_home_links_to_formats_and_terminology():
         "jam.html",
         "squish.html",
         "hudson.html",
+        "sqlite.html",
     ]
     assert tree.find('.//h:main//h:a[@href="glossary.html"]', NS) is not None

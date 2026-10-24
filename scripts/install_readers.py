@@ -12,6 +12,7 @@ VERSIONS = {
     "golded-ftn-jam": "1.3.0",
     "golded-ftn-squish": "1.3.0",
     "golded-ftn-hudson": "1.3.0",
+    "golded-ftn-sqlite": "0.1.0",
     "golded-ftn-packet": "0.1.0",
     "golded-ftn-nodelist": "0.1.0",
     "golded-ftn-binkp": "0.1.0",
@@ -27,9 +28,12 @@ def main() -> None:
         "--local", action="store_true", help="Use the suite candidate wheelhouse"
     )
     args = parser.parse_args()
-    wheelhouse = args.wheelhouse
+    wheelhouses = [args.wheelhouse] if args.wheelhouse is not None else []
     if args.local:
-        wheelhouse = ROOT.parent / "ftn-node-work/release/wheelhouse"
+        wheelhouses = [
+            ROOT.parent / "ftn-node-work/release/wheelhouse",
+            ROOT.parent / "golded-ftn-sqlite-python/dist",
+        ]
     command = [
         "uv",
         "pip",
@@ -39,8 +43,10 @@ def main() -> None:
         "--no-cache",
         "--reinstall",
     ]
-    if wheelhouse is not None:
-        command += ["--no-index", "--find-links", str(wheelhouse.resolve())]
+    if wheelhouses:
+        command.append("--no-index")
+        for wheelhouse in wheelhouses:
+            command += ["--find-links", str(wheelhouse.resolve())]
     command += [f"{name}=={version}" for name, version in VERSIONS.items()]
     subprocess.run(command, check=True)
 

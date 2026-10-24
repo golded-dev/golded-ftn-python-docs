@@ -1,6 +1,7 @@
 # Editing FTN message bases
 
-The candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson 1.3.0.
+The candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson 1.3.0 and
+SQLite 0.1.0.
 Offline editing remains the default. Explicit `WriterOptions(concurrent=True)` is
 qualified only for the tested Linux/macOS GoldED 3.1.0 builds, Unix local filesystems
 and the tested read, append, refresh, lastread and stale-editor scenarios. A matching
@@ -14,12 +15,15 @@ GoldED; avoid simultaneous MSG/Opus edits to the same message.
 The [complete core API reference](core-api.md) covers all public exports.
 Core exports `OutgoingMessage`, `MessagePatch`, `MessageIdentity`,
 `RevisionToken`, `SessionMessage`, `WriteResult` and writer errors. Each format
-exports its writer: `MsgWriter`, `JamWriter`, `SquishWriter`, `HudsonWriter`.
+exports its writer: `MsgWriter`, `JamWriter`, `SquishWriter`, `HudsonWriter` or
+`SqliteWriter`.
 
 `create(path)` initializes a whole base and refuses existing base files. Hudson
 creation is not board-specific. `open(path, options)` is a context-managed
 session; Hudson also requires an explicit board in 1–200. Its optional
 `scan_path` identifies GoldED's system directory when that differs from the base.
+SQLite databases are created with `SqliteDatabase.create(path, area=...)`; the
+writer then opens one named area, or the only area when no code is supplied.
 
 | Operation | Result |
 | --- | --- |
@@ -45,7 +49,9 @@ keeps omitted structured MSGID and address fields; conflicting explicit controls
 are rejected. JAM handles controls in both header subfields and inline text. Deletion does not rewrite
 other messages' reply links, and message identities are never renumbered.
 
-This example edits one synthetic message in each format. It uses no archive:
+This example edits one synthetic message in each legacy file format. It uses no
+archive. The [SQLite reference](sqlite.html) has the corresponding database
+example, including area creation.
 
 ```python
 from pathlib import Path
@@ -110,6 +116,9 @@ MSG supports explicit FTSC or Opus writes; Opus timestamp policy remains explici
 GoldBase. Routing strings remain unexpanded. Writers do not generate MSGID,
 route messages or check duplicates.
 
+SQLite stores text as Unicode and uses the shared lock timeout; its schema, not a
+legacy byte encoding, defines representable values.
+
 ## Locks and rollback
 
 | Format | Lock | Content update |
@@ -118,6 +127,7 @@ route messages or check duplicates.
 | JAM | Byte 0 in .JHR | New header/subfields and text; redirect .JDX |
 | Squish | Byte 0 in .SQD | New frame; maintain chains, .SQI and free list |
 | Hudson | Byte 407 in MSGINFO.BBS | New Pascal text blocks; replace headerslot |
+| SQLite | `BEGIN IMMEDIATE` transaction | Row update plus ordered metadata rows |
 
 Each operation rereads control data under the lock and flushes before unlocking.
 Session reads use that same lock and descriptor. Caller access to base files

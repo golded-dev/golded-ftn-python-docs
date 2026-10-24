@@ -17,6 +17,7 @@ def page_navigation(current: str) -> str:
         ("jam.html", "JAM"),
         ("squish.html", "Squish"),
         ("hudson.html", "Hudson"),
+        ("sqlite.html", "SQLite"),
     ]
     network = [
         ("packet.html", "Packets"),

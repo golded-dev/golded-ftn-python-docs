@@ -60,6 +60,7 @@ def test_reference_internal_links_resolve():
         "jam.html",
         "squish.html",
         "hudson.html",
+        "sqlite.html",
         "packet.html",
         "nodelist.html",
         "binkp.html",

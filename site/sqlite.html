@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GoldED for Python · SQLite reference</title><style>
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/ibm-plex-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/ibm-plex-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/ibm-plex-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-5.ttf) format('truetype');
+}
+
+
+:root{color-scheme:dark;--canvas:#05070b;--surface:#0b0f18;--raised:#101624;--ink:#f5f7ff;--muted:#bcc5d9;--blue:#4f6dff;--yellow:#ffe45a;--info:#8fb2ff;--line:#273149}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:17px/1.65 'IBM Plex Sans',sans-serif}a{color:var(--info);text-underline-offset:4px}a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}.page{max-width:1260px;margin:40px auto;padding:0 24px}.masthead{border-top:1px solid #ff6868;border-bottom:1px solid #ff6868;padding:7px 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:24px}.logo-mark{position:relative;display:block;width:210px;margin-left:-7.3px}.logo{display:block;width:100%;height:auto}.logo-subtitle{position:absolute;right:3%;top:70%;color:var(--yellow);font:400 13px/1 'IBM Plex Sans',sans-serif;letter-spacing:0;white-space:nowrap}.masthead a{font:12px 'IBM Plex Mono',monospace;text-decoration:none}.masthead div>span{color:var(--muted);margin-right:24px}.shell{border:1px solid var(--blue);background:var(--surface)}.bar{display:flex;justify-content:space-between;gap:16px;padding:12px 20px;background:#2d47c7;color:var(--yellow);font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em}.bar span:last-child{color:#e0e6ff}.layout{display:grid;grid-template-columns:230px minmax(0,1fr)}aside{min-width:0;border-right:1px solid var(--line);padding:32px 20px}.label{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.nav{display:grid;gap:4px;margin:20px -20px 36px}.nav a{padding:9px 20px;color:var(--muted);text-decoration:none;font-size:14px}.nav a.active{background:var(--raised);border-left:2px solid var(--yellow);padding-left:18px;color:var(--ink)}.num{font:11px 'IBM Plex Mono',monospace;color:#7f8798;margin-right:14px}.aside-note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}.aside-note code{color:var(--yellow)}main{padding:42px 48px 36px;min-width:0}.eyebrow{color:var(--yellow);font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em}h1{font-size:44px;line-height:1.1;letter-spacing:-.035em;font-weight:600;margin:16px 0 20px;max-width:650px}.intro{color:var(--muted);max-width:620px;margin:0 0 26px}.formats{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 34px}.formats span{padding:10px 19px 10px 0;margin-right:19px;font:12px 'IBM Plex Mono',monospace;color:var(--info)}.formats span+span{border-left:1px solid var(--line);padding-left:19px}.section-title{display:flex;gap:12px;align-items:baseline}h2{font-size:24px;line-height:1.2;margin:0 0 10px;font-weight:500}.section-title span{font:500 20px/1.2 'IBM Plex Mono',monospace;color:var(--yellow);flex-shrink:0}.lead{margin:0 0 20px;color:var(--muted);font-size:15px}.code-pane{border:1px solid #34446e;background:#080c14}.code-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--raised);border-bottom:1px solid #34446e;font:11px 'IBM Plex Mono',monospace;color:var(--muted)}button{white-space:nowrap;flex-shrink:0;cursor:pointer;background:transparent;color:var(--info);border:1px solid #435170;padding:4px 10px;font:11px 'IBM Plex Mono',monospace}pre{margin:0;padding:20px;overflow:auto;font:13px/1.85 'IBM Plex Mono',monospace;tab-size:4}.kw{color:#8fb2ff}.str{color:#ffe45a}.comment{color:#8d9bb5}.output{border-top:1px solid var(--line);padding:12px 20px;font:12px 'IBM Plex Mono',monospace;color:#bcc5d9}.output b{color:#8d9bb5;font-weight:400;margin-right:20px}.note{border-left:2px solid var(--blue);padding:0 0 0 16px;margin-top:24px;font-size:14px;color:var(--muted)}.note strong{color:var(--ink);font-weight:500}.next{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:24px;margin-top:32px;font-size:14px}.next span{color:var(--muted)}footer{display:flex;justify-content:space-between;font:11px 'IBM Plex Mono',monospace;color:#8d9bb5;padding:18px 0}.preview{color:var(--yellow)}@media(max-width:800px){.page{margin:20px auto;padding:0 20px}.logo-mark{width:160px;margin-left:-5.56px}.logo-subtitle{font-size:10px}.masthead div>span{display:none}.layout{grid-template-columns:1fr}aside{padding:16px;border-right:0;border-bottom:1px solid var(--line)}aside>.label,.aside-note{display:none}.nav{display:flex;overflow:auto;margin:0;gap:8px}.nav a{white-space:nowrap;padding:8px 10px}.nav a.active{padding-left:8px}.nav a{flex-shrink:0}main{padding:28px 20px}h1{font-size:34px}.bar{font-size:10px;padding:10px 14px}.bar span:last-child{display:none}pre{font-size:12px;padding:16px}.formats span{padding-right:10px;margin-right:10px}.formats span+span{padding-left:10px}footer{gap:16px;font-size:10px}}@media print{body,.shell,.code-pane{background:white;color:black}.page{margin:0;max-width:none}.masthead,aside,footer,button,.next{display:none}.layout{display:block}main{padding:0}.bar{background:white;color:black}.kw,.str,.comment,.intro,.lead,.note{color:black}pre{white-space:pre-wrap}.shell{border:0}}
+.guide-section{margin-top:44px;scroll-margin-top:24px}.guide-section>p,.guide-section>ul,.guide-section>dl{font-size:15px;color:var(--muted)}.guide-section h3{font-size:19px;font-weight:500;margin:30px 0 12px}.code-pane{margin:20px 0}.output pre{padding:8px 0 0;white-space:pre-wrap;font-size:12px}.table-wrap{overflow:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:13px;text-align:left}th,td{border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}th{color:var(--ink);font-weight:500}td{color:var(--muted)}code{font-family:'IBM Plex Mono',monospace;font-size:.86em}pre code{font-size:inherit}dt{color:var(--ink);margin-top:18px}dd{margin:6px 0 0}.references{padding-left:20px}.references li{margin:10px 0}.credit{font-size:12px!important}.skip{position:absolute;top:-100px}.skip:focus{top:4px;left:20px;background:var(--surface);padding:8px;z-index:5}.logo-mark{flex-shrink:0}button[hidden]{display:none}@media(max-width:800px){.masthead div{font-size:11px}.next{gap:20px}.guide-section{margin-top:36px}footer{flex-wrap:wrap}}@media print{.table-wrap,pre{overflow:visible}th,td,dt,.guide-section>p,.guide-section>ul,.guide-section>dl,.output{color:black}a{color:#163a8c}.code-head{background:#eee;color:black}.skip{display:none}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.kw,.k,.kn,.nb{color:#8fb2ff}.o,.ow{color:#ff6868}.kc,.mi,.mf{color:#55ff55}.str,.s,.s1,.s2,.se,.nf,.nc{color:#ffe45a}.comment,.c,.c1{color:#8d9bb5}@media print{.k,.kn,.kc,.nb,.mi,.mf,.o,.ow,.s,.s1,.s2,.se,.nf,.nc,.c,.c1{color:black}}.sidebar{position:sticky;top:24px}@media(max-width:800px){.sidebar{position:static}}@media print{.eyebrow,.section-title span,.bar span:last-child,.formats span,.output b{color:#222}.formats{border-color:#aaa}.code-pane{break-inside:avoid}}
+body{-webkit-font-smoothing:antialiased}h1,h2{text-wrap:balance}p{text-wrap:pretty}
+.page-nav{display:grid;gap:4px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.page-nav a{display:flex;align-items:center;min-height:40px;padding:8px 12px;font-size:14px;text-decoration:none;color:var(--muted)}
+.page-nav a[aria-current="page"]{color:var(--yellow);background:var(--raised);box-shadow:inset 2px 0 var(--yellow)}
+.contents summary{font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:space-between}
+.contents summary::after{content:'−';font-size:18px}.contents:not([open]) summary::after{content:'+'}.contents summary::-webkit-details-marker{display:none}
+.contents summary:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+.nav{margin:8px 0 24px}.nav a{min-height:40px;display:flex;align-items:baseline;padding:8px 12px}.nav a.active{padding-left:10px}.num{font-variant-numeric:tabular-nums;flex-shrink:0}
+.sidebar{max-height:calc(100vh - 48px);overflow:auto;scrollbar-gutter:stable;overscroll-behavior-y:contain}
+main>nav[aria-label="Documentation"]{display:none}
+@media(hover:hover) and (pointer:fine){.page-nav a:hover,.nav a:hover{background:var(--raised);color:var(--ink)}}
+@media(max-width:800px){.page-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:8px;padding-bottom:12px}.page-nav a{font-size:13px;padding:8px}.sidebar{max-height:none;overflow:visible}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 0;gap:4px;overflow:visible}.nav a{white-space:normal;padding:8px;font-size:13px}.nav a.active{padding-left:6px}.num{margin-right:8px}.contents summary{min-height:40px}.guide-section{scroll-margin-top:24px}}
+@media print{:root{color-scheme:light}main>nav[aria-label="Documentation"]{display:none}pre{break-inside:avoid}}
+.inline-code{color:var(--yellow)}p .inline-code,li .inline-code,dd .inline-code{background:var(--raised);padding:2px 4px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}@media print{.inline-code{color:black}p .inline-code,li .inline-code,dd .inline-code{background:transparent}}
+</style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>SQLITE / FORMAT REFERENCE</span><span>UNPUBLISHED SUITE CANDIDATE · LINUX / macOS</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="guide.html">Library guide</a><a href="core-api.html">Core API reference</a><a href="writers.html">Editing message bases</a><a href="glossary.html">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html">Hudson</a><a href="sqlite.html" aria-current="page">SQLite</a></nav><div class="label">Network and CLI</div><nav class="page-nav network-nav" aria-label="Network and CLI"><a href="packet.html">Packets</a><a href="nodelist.html">Nodelists</a><a href="binkp.html">Binkp and BSO</a><a href="tosser.html">Tosser operations</a><a href="cli.html">CLI guide</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#public-api"><span class="num">01</span>Public API</a><a href="#databases-and-areas"><span class="num">02</span>Databases and areas</a><a href="#create-write-and-read-echomail"><span class="num">03</span>Create, write and read echomail</a><a href="#netmail-and-echomail-data"><span class="num">04</span>Netmail and echomail data</a><a href="#updates-and-concurrency"><span class="num">05</span>Updates and concurrency</a><a href="#schema-and-backup"><span class="num">06</span>Schema and backup</a><a href="#implementation-references"><span class="num">07</span>Implementation references</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a></nav><div class="eyebrow">Transactional storage. Public schema.</div><h1 id="sqlite-format-reference">SQLite format reference</h1>
+<p>Store FTN netmail and echomail in a SQLite database with
+<code class="inline-code"><span class="n">golded_ftn_sqlite</span></code>. The package uses the shared <code class="inline-code"><span class="n">golded_ftn</span></code> message model and
+requires Python 3.12 or newer. Candidate 0.1.0 is local and unpublished.</p>
+<p>Use the <a href="core-api.html">core API reference</a> for shared message types and
+<a href="writers.html">Editing message bases</a> for revision-token updates.</p>
+<section id="public-api" class="guide-section"><div class="section-title"><span>01</span><h2>Public API</h2></div>
+<p>The package exports <code class="inline-code"><span class="n">AreaDefinition</span></code>, <code class="inline-code"><span class="n">AreaKind</span></code>, <code class="inline-code"><span class="n">SqliteDatabase</span></code>,
+<code class="inline-code"><span class="n">SqliteReader</span></code>, <code class="inline-code"><span class="n">SqliteSession</span></code> and <code class="inline-code"><span class="n">SqliteWriter</span></code>.</p>
+<div class="code-pane"><div class="code-head"><span>API signature</span><button type="button" data-copy="sqlite_block_1" hidden>Copy code</button></div><pre><code class="language-text" id="sqlite_block_1"><span class="n">SqliteDatabase</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">SqliteDatabase</span>
+<span class="n">SqliteDatabase</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="o">*</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">AreaDefinition</span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="n">SqliteDatabase</span>
+<span class="n">SqliteDatabase</span><span class="o">.</span><span class="n">add_area</span><span class="p">(</span><span class="n">area</span><span class="p">:</span> <span class="n">AreaDefinition</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+<span class="n">SqliteDatabase</span><span class="o">.</span><span class="n">areas</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">AreaDefinition</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">SqliteReader</span><span class="p">(</span><span class="n">area_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">SqliteReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">options</span><span class="p">:</span> <span class="n">ReaderOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ParsedMessage</span><span class="p">]</span>
+<span class="n">SqliteWriter</span><span class="p">(</span><span class="n">area_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">SqliteWriter</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">options</span><span class="p">:</span> <span class="n">WriterOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="o">-&gt;</span> <span class="n">SqliteSession</span>
+<span class="n">SqliteSession</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">msgno</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionMessage</span>
+<span class="n">SqliteSession</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">OutgoingMessage</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteResult</span>
+<span class="n">SqliteSession</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span> <span class="n">patch</span><span class="p">:</span> <span class="n">MessagePatch</span><span class="p">,</span>
+    <span class="n">expected_revision</span><span class="p">:</span> <span class="n">RevisionToken</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteResult</span>
+<span class="n">SqliteSession</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">identity</span><span class="p">:</span> <span class="n">MessageIdentity</span><span class="p">,</span>
+    <span class="n">expected_revision</span><span class="p">:</span> <span class="n">RevisionToken</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MessageIdentity</span>
+</code></pre></div>
+</section><section id="databases-and-areas" class="guide-section"><div class="section-title"><span>02</span><h2>Databases and areas</h2></div>
+<p>The format supports several areas in one database. The ordinary deployment is
+one database file per area: it maps cleanly to GoldED configuration, keeps backup
+and recovery local, and limits the blast radius when a disk has opinions.</p>
+<p>Create the database with its first area. Add more areas explicitly when a single
+database is useful. Area codes are case-insensitive. Message numbers are positive,
+monotonic and local to an area; soft-deleted numbers are not reused.</p>
+<p>Omit <code class="inline-code"><span class="n">area_code</span></code> from <code class="inline-code"><span class="n">SqliteReader</span></code> or <code class="inline-code"><span class="n">SqliteWriter</span></code> only when the database has
+exactly one area. For several areas, select one by code.</p>
+</section><section id="create-write-and-read-echomail" class="guide-section"><div class="section-title"><span>03</span><h2>Create, write and read echomail</h2></div>
+<p>This example creates a temporary one-area database, stores one Unicode message
+and reads it through the shared message model. No existing files are touched.</p>
+<div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="sqlite_example_1" hidden>Copy code</button></div><pre><code id="sqlite_example_1" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">FtnAddress</span><span class="p">,</span> <span class="n">OutgoingMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn_sqlite</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AreaDefinition</span><span class="p">,</span>
+    <span class="n">AreaKind</span><span class="p">,</span>
+    <span class="n">SqliteDatabase</span><span class="p">,</span>
+    <span class="n">SqliteReader</span><span class="p">,</span>
+    <span class="n">SqliteWriter</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">directory</span><span class="p">:</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span> <span class="o">/</span> <span class="s2">"fido-general.sqlite3"</span>
+    <span class="n">SqliteDatabase</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">path</span><span class="p">,</span>
+        <span class="n">area</span><span class="o">=</span><span class="n">AreaDefinition</span><span class="p">(</span>
+            <span class="n">code</span><span class="o">=</span><span class="s2">"FIDO.GENERAL"</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"FidoNet General"</span><span class="p">,</span>
+            <span class="n">kind</span><span class="o">=</span><span class="n">AreaKind</span><span class="o">.</span><span class="n">ECHOMAIL</span><span class="p">,</span>
+            <span class="n">default_origin</span><span class="o">=</span><span class="n">FtnAddress</span><span class="p">(</span><span class="n">zone</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">net</span><span class="o">=</span><span class="mi">230</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="n">SqliteWriter</span><span class="p">()</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="n">written</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">OutgoingMessage</span><span class="p">(</span>
+                <span class="n">from_name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">,</span>
+                <span class="n">to_name</span><span class="o">=</span><span class="s2">"All"</span><span class="p">,</span>
+                <span class="n">subject</span><span class="o">=</span><span class="s2">"Hello"</span><span class="p">,</span>
+                <span class="n">body_text</span><span class="o">=</span><span class="s2">"Stored transactionally. ÆØÅ."</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">session</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">written</span><span class="o">.</span><span class="n">identity</span><span class="o">.</span><span class="n">msgno</span><span class="p">)</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">subject</span> <span class="o">==</span> <span class="s2">"Hello"</span>
+
+    <span class="n">messages</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">SqliteReader</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area_code</span> <span class="o">==</span> <span class="s2">"FIDO.GENERAL"</span>
+    <span class="k">assert</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">body_text</span> <span class="o">==</span> <span class="s2">"Stored transactionally. ÆØÅ."</span>
+</code></pre></div>
+</section><section id="netmail-and-echomail-data" class="guide-section"><div class="section-title"><span>04</span><h2>Netmail and echomail data</h2></div>
+<p>Netmail requires origin and destination addresses. The origin may come from the
+area's <code class="inline-code"><span class="n">default_origin</span></code>; the destination is always explicit. Both the Python API
+and the database schema enforce the rule.</p>
+<p>Messages store Unicode names, subject and body, timestamps, raw attributes,
+external IDs, split FTN addresses, reply links and optional import provenance.
+Ordered tables retain repeated and unknown control lines, <code class="inline-code"><span class="n">SEEN</span><span class="o">-</span><span class="n">BY</span></code>, <code class="inline-code"><span class="n">PATH</span></code> and
+reply-list entries without flattening them into a JSON object.</p>
+<p>Readers return a stable SQLite snapshot. Session reads fetch one requested
+message. Deletes are soft deletes, so readers skip the message without making its
+number available again.</p>
+</section><section id="updates-and-concurrency" class="guide-section"><div class="section-title"><span>05</span><h2>Updates and concurrency</h2></div>
+<p>Writer sessions provide <code class="inline-code"><span class="n">read</span></code>, <code class="inline-code"><span class="n">append</span></code>, <code class="inline-code"><span class="n">update</span></code> and <code class="inline-code"><span class="n">delete</span></code>. Updates and
+deletes require the revision token returned by a session read or write. The token
+covers the message and its ordered control, routing and reply-list rows, including
+changes made directly by another SQLite client.</p>
+<p>Writers use <code class="inline-code"><span class="n">BEGIN</span> <span class="n">IMMEDIATE</span></code>, so allocation and mutations are serialized.
+Readers keep SQLite snapshot semantics. A caller can tune lock waiting through
+the shared <code class="inline-code"><span class="n">WriterOptions</span><span class="o">.</span><span class="n">lock_timeout</span></code> value.</p>
+</section><section id="schema-and-backup" class="guide-section"><div class="section-title"><span>06</span><h2>Schema and backup</h2></div>
+<p>Schema version 1 uses SQLite application ID <code class="inline-code"><span class="mh">0x47465453</span></code> (<code class="inline-code"><span class="n">GFTS</span></code>), strict tables,
+foreign keys and WAL journaling. Readers reject a different application ID or
+schema version. The schema is a public format boundary; changing existing meaning
+requires a migration and a new version.</p>
+<p>Do not copy an open WAL database as a lone <code class="inline-code"><span class="o">.</span><span class="n">sqlite3</span></code> file. Use SQLite's backup
+API, or close and checkpoint the database first. Copying only the main file can
+omit committed pages still present in the WAL.</p>
+</section><section id="implementation-references" class="guide-section"><div class="section-title"><span>07</span><h2>Implementation references</h2></div>
+<ul>
+<li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/README.md">Package README</a></li>
+<li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/docs/schema.md">Schema guide</a></li>
+</ul>
+<p>Those GitHub targets become public only after the separate package repository is
+committed and published. The format page does not establish that release state.</p></section></main></div></div><footer><span>GoldED for Python / GoldED.dev</span><span>CANDIDATE · MIT LICENSE</span></footer></div><script>
+for (const button of document.querySelectorAll('[data-copy]')) {
+  button.hidden = false;
+  button.addEventListener('click', async () => {
+    const source = document.getElementById(button.dataset.copy);
+    try {
+      await navigator.clipboard.writeText(source.textContent);
+      button.textContent = 'Copied';
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(source);
+      selection.removeAllRanges(); selection.addRange(range);
+      button.textContent = 'Code selected';
+    }
+    document.getElementById('copy-status').textContent = button.textContent;
+    setTimeout(() => { button.textContent = 'Copy code'; }, 1800);
+  });
+}
+const links = [...document.querySelectorAll('.nav a')];
+const sections = links.map(link => document.querySelector(link.hash)).filter(Boolean);
+function updateLocation() {
+  let current = sections[0];
+  for (const section of sections) if (section.getBoundingClientRect().top <= 100) current = section;
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = sections.at(-1);
+  for (const link of links) {
+    const active = current && link.hash === '#' + current.id;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+}
+let pending = false;
+window.addEventListener('scroll', () => {
+  if (!pending) requestAnimationFrame(() => { updateLocation(); pending = false; });
+  pending = true;
+}, {passive: true});
+window.addEventListener('hashchange', updateLocation);
+updateLocation();
+const narrow = window.matchMedia('(max-width:800px)');
+function setContents() { for (const menu of document.querySelectorAll('.contents')) menu.open = !narrow.matches; }
+narrow.addEventListener('change', setContents);
+setContents();
+</script><span id="copy-status" role="status" class="sr-only"></span></body></html>

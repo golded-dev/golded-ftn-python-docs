@@ -63,8 +63,9 @@ main>nav[aria-label="Documentation"]{display:none}
 @media(max-width:800px){.page-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:8px;padding-bottom:12px}.page-nav a{font-size:13px;padding:8px}.sidebar{max-height:none;overflow:visible}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 0;gap:4px;overflow:visible}.nav a{white-space:normal;padding:8px;font-size:13px}.nav a.active{padding-left:6px}.num{margin-right:8px}.contents summary{min-height:40px}.guide-section{scroll-margin-top:24px}}
 @media print{:root{color-scheme:light}main>nav[aria-label="Documentation"]{display:none}pre{break-inside:avoid}}
 .inline-code{color:var(--yellow)}p .inline-code,li .inline-code,dd .inline-code{background:var(--raised);padding:2px 4px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}@media print{.inline-code{color:black}p .inline-code,li .inline-code,dd .inline-code{background:transparent}}
-</style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>WRITER CONTRACT</span><span>UNPUBLISHED SUITE CANDIDATE</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="guide.html">Library guide</a><a href="core-api.html">Core API reference</a><a href="writers.html" aria-current="page">Editing message bases</a><a href="glossary.html">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html">Hudson</a></nav><div class="label">Network and CLI</div><nav class="page-nav network-nav" aria-label="Network and CLI"><a href="packet.html">Packets</a><a href="nodelist.html">Nodelists</a><a href="binkp.html">Binkp and BSO</a><a href="tosser.html">Tosser operations</a><a href="cli.html">CLI guide</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#session-api"><span class="num">01</span>Session API</a><a href="#encoding-and-message-policy"><span class="num">02</span>Encoding and message policy</a><a href="#locks-and-rollback"><span class="num">03</span>Locks and rollback</a><a href="#verification-boundary"><span class="num">04</span>Verification boundary</a><a href="#check-the-candidate-wheels"><span class="num">05</span>Check the candidate wheels</a><a href="#recovery-sessions"><span class="num">06</span>Recovery sessions</a><a href="#filename-case-and-compatibility"><span class="num">07</span>Filename case and compatibility</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a> · <a href="guide.html">Library guide</a> · <a href="core-api.html">Core API</a></nav><div class="eyebrow">Old bases. Careful edits.</div><h1 id="editing-ftn-message-bases">Editing FTN message bases</h1>
-<p>The candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson 1.3.0.
+</style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>WRITER CONTRACT</span><span>UNPUBLISHED SUITE CANDIDATE</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="guide.html">Library guide</a><a href="core-api.html">Core API reference</a><a href="writers.html" aria-current="page">Editing message bases</a><a href="glossary.html">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html">Hudson</a><a href="sqlite.html">SQLite</a></nav><div class="label">Network and CLI</div><nav class="page-nav network-nav" aria-label="Network and CLI"><a href="packet.html">Packets</a><a href="nodelist.html">Nodelists</a><a href="binkp.html">Binkp and BSO</a><a href="tosser.html">Tosser operations</a><a href="cli.html">CLI guide</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#session-api"><span class="num">01</span>Session API</a><a href="#encoding-and-message-policy"><span class="num">02</span>Encoding and message policy</a><a href="#locks-and-rollback"><span class="num">03</span>Locks and rollback</a><a href="#verification-boundary"><span class="num">04</span>Verification boundary</a><a href="#check-the-candidate-wheels"><span class="num">05</span>Check the candidate wheels</a><a href="#recovery-sessions"><span class="num">06</span>Recovery sessions</a><a href="#filename-case-and-compatibility"><span class="num">07</span>Filename case and compatibility</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a> · <a href="guide.html">Library guide</a> · <a href="core-api.html">Core API</a></nav><div class="eyebrow">Old bases. Careful edits.</div><h1 id="editing-ftn-message-bases">Editing FTN message bases</h1>
+<p>The candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson 1.3.0 and
+SQLite 0.1.0.
 Offline editing remains the default. Explicit <code class="inline-code"><span class="n">WriterOptions</span><span class="p">(</span><span class="n">concurrent</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code> is
 qualified only for the tested Linux/macOS GoldED 3.1.0 builds, Unix local filesystems
 and the tested read, append, refresh, lastread and stale-editor scenarios. A matching
@@ -76,11 +77,14 @@ GoldED; avoid simultaneous MSG/Opus edits to the same message.</p>
 <p>The <a href="core-api.html">complete core API reference</a> covers all public exports.
 Core exports <code class="inline-code"><span class="n">OutgoingMessage</span></code>, <code class="inline-code"><span class="n">MessagePatch</span></code>, <code class="inline-code"><span class="n">MessageIdentity</span></code>,
 <code class="inline-code"><span class="n">RevisionToken</span></code>, <code class="inline-code"><span class="n">SessionMessage</span></code>, <code class="inline-code"><span class="n">WriteResult</span></code> and writer errors. Each format
-exports its writer: <code class="inline-code"><span class="n">MsgWriter</span></code>, <code class="inline-code"><span class="n">JamWriter</span></code>, <code class="inline-code"><span class="n">SquishWriter</span></code>, <code class="inline-code"><span class="n">HudsonWriter</span></code>.</p>
+exports its writer: <code class="inline-code"><span class="n">MsgWriter</span></code>, <code class="inline-code"><span class="n">JamWriter</span></code>, <code class="inline-code"><span class="n">SquishWriter</span></code>, <code class="inline-code"><span class="n">HudsonWriter</span></code> or
+<code class="inline-code"><span class="n">SqliteWriter</span></code>.</p>
 <p><code class="inline-code"><span class="n">create</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code> initializes a whole base and refuses existing base files. Hudson
 creation is not board-specific. <code class="inline-code"><span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span></code> is a context-managed
 session; Hudson also requires an explicit board in 1–200. Its optional
-<code class="inline-code"><span class="n">scan_path</span></code> identifies GoldED's system directory when that differs from the base.</p>
+<code class="inline-code"><span class="n">scan_path</span></code> identifies GoldED's system directory when that differs from the base.
+SQLite databases are created with <code class="inline-code"><span class="n">SqliteDatabase</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">area</span><span class="o">=...</span><span class="p">)</span></code>; the
+writer then opens one named area, or the only area when no code is supplied.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -122,7 +126,9 @@ Squish retains its complete nine-entry reply array. If a patch supplies both
 keeps omitted structured MSGID and address fields; conflicting explicit controls
 are rejected. JAM handles controls in both header subfields and inline text. Deletion does not rewrite
 other messages' reply links, and message identities are never renumbered.</p>
-<p>This example edits one synthetic message in each format. It uses no archive:</p>
+<p>This example edits one synthetic message in each legacy file format. It uses no
+archive. The <a href="sqlite.html">SQLite reference</a> has the corresponding database
+example, including area creation.</p>
 <div class="code-pane"><div class="code-head"><span>Python · RUNNABLE</span><button type="button" data-copy="writer_formats" hidden>Copy code</button></div><pre><code id="writer_formats" data-language="python" data-mode="run"><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">golded_ftn</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagePatch</span><span class="p">,</span> <span class="n">OutgoingMessage</span>
@@ -182,6 +188,8 @@ field overflow and unrepresentable dates or addresses fail before data writes.
 MSG supports explicit FTSC or Opus writes; Opus timestamp policy remains explicit. Hudson supports classic .BBS, not
 GoldBase. Routing strings remain unexpanded. Writers do not generate MSGID,
 route messages or check duplicates.</p>
+<p>SQLite stores text as Unicode and uses the shared lock timeout; its schema, not a
+legacy byte encoding, defines representable values.</p>
 </section><section id="locks-and-rollback" class="guide-section"><div class="section-title"><span>03</span><h2>Locks and rollback</h2></div>
 <div class="table-wrap"><table>
 <thead>
@@ -211,6 +219,11 @@ route messages or check duplicates.</p>
 <td>Hudson</td>
 <td>Byte 407 in MSGINFO.BBS</td>
 <td>New Pascal text blocks; replace headerslot</td>
+</tr>
+<tr>
+<td>SQLite</td>
+<td><code class="inline-code"><span class="n">BEGIN</span> <span class="n">IMMEDIATE</span></code> transaction</td>
+<td>Row update plus ordered metadata rows</td>
 </tr>
 </tbody>
 </table></div>
