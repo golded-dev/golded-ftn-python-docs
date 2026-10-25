@@ -70,7 +70,7 @@ def render() -> str:
         '<div class="page">'
         + masthead[0].replace('href="#start"', 'href="index.html"')
         + '<div class="shell"><div class="bar"><span>CORE API REFERENCE</span>'
-        "<span>UNPUBLISHED SUITE CANDIDATE</span></div>"
+        "<span>PUBLISHED RELEASES</span></div>"
         + body
         + "</div>"
         + footer[0]

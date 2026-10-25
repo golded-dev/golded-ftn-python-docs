@@ -1,4 +1,4 @@
-"""Install the documented candidates from a wheelhouse or the public index."""
+"""Install the documented releases from a wheelhouse or the public index."""
 
 import argparse
 import subprocess
@@ -7,16 +7,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSIONS = {
-    "golded-ftn": "1.3.0",
+    "golded-ftn": "1.4.0",
     "golded-ftn-msg": "1.4.0",
     "golded-ftn-jam": "1.3.0",
     "golded-ftn-squish": "1.3.0",
     "golded-ftn-hudson": "1.3.0",
-    "golded-ftn-sqlite": "0.1.0",
-    "golded-ftn-packet": "0.1.0",
-    "golded-ftn-nodelist": "0.1.0",
-    "golded-ftn-binkp": "0.1.0",
-    "golded-ftn-tosser": "0.1.0",
+    "golded-ftn-sqlite": "1.0.0",
+    "golded-ftn-packet": "1.0.0",
+    "golded-ftn-nodelist": "1.0.0",
+    "golded-ftn-binkp": "1.0.0",
+    "golded-ftn-tosser": "1.0.0",
     "golded-ftn-tools": "1.1.0",
 }
 
@@ -25,7 +25,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--wheelhouse", type=Path)
     parser.add_argument(
-        "--local", action="store_true", help="Use the suite candidate wheelhouse"
+        "--local", action="store_true", help="Use the retained suite wheelhouse"
     )
     args = parser.parse_args()
     wheelhouses = [args.wheelhouse] if args.wheelhouse is not None else []

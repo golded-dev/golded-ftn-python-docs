@@ -2,7 +2,7 @@
 
 Read classic FTSC and Opus message directories. Edit FTSC messages through
 `golded_ftn_msg`. Each message has its own numbered file and a 190-byte header.
-Python 3.12+ is required. Candidate 1.4.0 is unpublished. The historical 1.2.0 release is on [PyPI](https://pypi.org/project/golded-ftn-msg/1.2.0/).
+Python 3.12+ is required. Version 1.4.0 is published on [PyPI](https://pypi.org/project/golded-ftn-msg/1.4.0/).
 
 Use the [core API reference](core-api.html) for shared models and errors, and
 [Editing message bases](writers.html) for revision and patch contracts.

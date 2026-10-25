@@ -2,7 +2,7 @@
 
 The command-line interface lets you work with message files from a terminal instead of writing a Python program. Its command is `ftnt`. Start with local message bases; add the network commands when you need to inspect packet files, look up systems or operate a configured node.
 
-Tools 1.1.0 candidate supports Linux/macOS and Python 3.12–3.14.
+Tools 1.1.0 supports Linux/macOS and Python 3.12–3.14.
 
 ## Install and first check
 
@@ -12,8 +12,8 @@ ftnt --version
 ftnt catalog
 ```
 
-Before publication, install the reviewed candidate wheels together. The network
-extra supplies packet, nodelist, binkp and tosser dependencies. Without it, base
+The network extra installs the published packet, nodelist, binkp and tosser
+dependencies. Without it, base
 commands continue to work and network commands report network_missing.
 
 ## Message bases

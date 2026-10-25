@@ -1,8 +1,8 @@
 # Squish message bases
 
 Read classic Squish areas and edit them offline with `golded-ftn-squish`.
-Imports use `golded_ftn_squish`. Candidate 1.3.0 is unpublished. The historical 1.2.0 release is on
-[PyPI](https://pypi.org/project/golded-ftn-squish/1.2.0/). Python 3.12 or newer is required.
+Imports use `golded_ftn_squish`. Version 1.3.0 is published on
+[PyPI](https://pypi.org/project/golded-ftn-squish/1.3.0/). Python 3.12 or newer is required.
 
 The [core API reference](core-api.html) defines shared models and errors.
 [Editing message bases](writers.html) defines patches, revision tokens and the

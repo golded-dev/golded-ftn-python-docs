@@ -2,16 +2,16 @@
 
 A packet is a file used to carry one or more FTN messages from one system to another. This package reads and writes that file format. It does not open a network connection or put incoming messages into a message base; those jobs belong to binkp and the tosser.
 
-Version 0.1.0 candidate. Python 3.12–3.14 on Linux and macOS.
+Version 1.0.0. Python 3.12–3.14 on Linux and macOS.
 
 ## Installation
 
 ```sh
-python -m pip install golded-ftn-packet==0.1.0
+python -m pip install golded-ftn-packet==1.0.0
 ```
 
-The command becomes available after publication. For the unpublished suite, install
-all reviewed wheels from the candidate wheelhouse; no sibling checkouts are needed.
+The package is published on PyPI. The command above installs the reviewed release;
+no sibling checkout or private wheelhouse is needed.
 
 ## First working example
 
@@ -84,7 +84,7 @@ private. The library does not authenticate incoming links or write message bases
 
 ## Public API reference
 
-Signatures below are extracted from the installed candidate wheel. Constructors
+Signatures below are extracted from the installed release wheel. Constructors
 are keyword-only where shown. Default enum repr values describe defaults, not
 Python source to paste.
 

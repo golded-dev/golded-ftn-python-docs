@@ -23,11 +23,9 @@ uv run ruff format --check .
 uv run python scripts/check_examples.py
 ```
 
-`package-refs.json` pins local candidate commits. The installer uses the public
-index by default, which requires the prerequisite releases to be published first.
-For this unpublished candidate, `--local` selects the retained release wheelhouse
-and the built sibling SQLite wheel, or use `--wheelhouse /path/to/reviewed/wheelhouse`
-explicitly. Python examples are
+`package-refs.json` pins the published release commits. The installer uses the
+public index by default. `--local` selects the retained release wheelhouse, or use
+`--wheelhouse /path/to/reviewed/wheelhouse` explicitly. Python examples are
 extracted from generated HTML and tested with synthetic message bases; private
 archives are not used.
 
@@ -50,7 +48,7 @@ are pinned to complete commit SHAs. No custom domain is configured.
 
 When updating the guide, change package refs deliberately and rerun the checks.
 Keep documented package versions and installation wheel filenames consistent.
-Candidate versions and their publication boundary are listed below.
+The documented release set is listed below.
 
 ## License
 
@@ -83,23 +81,21 @@ and strict mypy. The bounded macOS results and remaining gaps are recorded in th
 `docs/glossary.md` explains FTN terminology and is rendered as `site/glossary.html`
 by the format-guide renderer. Inline code uses the shared syntax palette, too.
 
-## Suite candidate
+## Published suite
 
-The guide now covers core, five base formats, packet, nodelist, binkp, tosser and
-tools. Current candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson
-1.3.0, SQLite 0.1.0, packet/nodelist/binkp/tosser 0.1.0 and tools 1.1.0. None is published by
-this preparation. Linux/macOS with Python 3.12–3.14 are the test targets.
+The guide covers core, five base formats, packet, nodelist, binkp, tosser and
+tools. Published versions are core 1.4.0, MSG 1.4.0, JAM/Squish/Hudson 1.3.0,
+SQLite 1.0.0, packet/nodelist/binkp/tosser 1.0.0 and tools 1.1.0.
+Linux/macOS with Python 3.12–3.14 are the test targets.
 
 Install documented wheels with `python scripts/install_readers.py --wheelhouse
 /path/to/reviewed/wheelhouse` in the documentation environment. Default installation
-uses the public index and therefore requires the prerequisite releases first.
+uses the public index.
 Render packet, nodelist, binkp, tosser and CLI with `scripts/build_format_guides.py`.
-For core sync use `GOLDED_CORE_SOURCE=/path/to/candidate/core` with
+For core sync use `GOLDED_CORE_SOURCE=/path/to/core` with
 `scripts/build_api_guide.py --sync`; do not copy unrelated experimental docs.
 
-`package-refs.json` records the local candidate commits for this guide. The new
-commits require separately authorized publication before their GitHub links or
-public-index installs can be verified.
+`package-refs.json` records the published release commits used by this guide.
 
 ## Archive reading entry
 

@@ -60,10 +60,9 @@ python -m pip install golded-ftn-tools==1.1.0
 ftnt --version
 ```
 
-**Release status:** version 1.1.0 is an unpublished candidate. The installation
-command above will work after publication. If you have the reviewed candidate
-wheel files, replace the install command with the following, using your wheel
-folder's actual path:
+**Release status:** version 1.1.0 is published. The installation command above
+uses PyPI. To use reviewed wheel files instead, replace it with the following,
+using your wheel folder's actual path:
 
 ```sh
 python -m pip install --no-index --find-links "/path/to/wheelhouse" golded-ftn-tools==1.1.0

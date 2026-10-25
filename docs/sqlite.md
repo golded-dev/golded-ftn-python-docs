@@ -2,7 +2,8 @@
 
 Store FTN netmail and echomail in a SQLite database with
 `golded_ftn_sqlite`. The package uses the shared `golded_ftn` message model and
-requires Python 3.12 or newer. Candidate 0.1.0 is local and unpublished.
+requires Python 3.12 or newer. Version 1.0.0 is published on
+[PyPI](https://pypi.org/project/golded-ftn-sqlite/1.0.0/).
 
 Use the [core API reference](core-api.html) for shared message types and
 [Editing message bases](writers.html) for revision-token updates.
@@ -139,8 +140,8 @@ omit committed pages still present in the WAL.
 
 ## Implementation references
 
-- [Package README](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/README.md)
-- [Schema format contract](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/docs/schema.md)
+- [Package README](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.0.0/README.md)
+- [Schema format contract](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.0.0/docs/schema.md)
 
-Those GitHub targets become public only after the separate package repository is
-committed and published. The format page does not establish that release state.
+These links pin the published 1.0.0 source and schema rather than the moving main
+branch.

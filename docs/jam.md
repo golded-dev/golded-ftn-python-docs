@@ -1,8 +1,8 @@
 # JAM format reference
 
 Read and edit JAM revision 1 areas with `golded_ftn_jam`. A basename identifies
-separate header, text and index files. Python 3.12+ is required. Candidate 1.3.0 is unpublished. The historical 1.2.0 release is on
-[PyPI](https://pypi.org/project/golded-ftn-jam/1.2.0/).
+separate header, text and index files. Python 3.12+ is required. Version 1.3.0 is published on
+[PyPI](https://pypi.org/project/golded-ftn-jam/1.3.0/).
 
 Use the [core API reference](core-api.html) for shared models and errors, and
 [Editing message bases](writers.html) for revision and patch contracts.

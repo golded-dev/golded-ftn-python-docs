@@ -2,16 +2,16 @@
 
 Binkp is a protocol for transferring files between FTN systems over a network connection. This package provides the transfer machinery and an outgoing file queue. BSO means Binkley-style outbound: the directory and filename conventions used to organise that queue. It does not decide which message belongs in which message base; the tosser handles that.
 
-Version 0.1.0 candidate. Python 3.12–3.14 on Linux and macOS.
+Version 1.0.0. Python 3.12–3.14 on Linux and macOS.
 
 ## Installation
 
 ```sh
-python -m pip install golded-ftn-binkp==0.1.0
+python -m pip install golded-ftn-binkp==1.0.0
 ```
 
-The command becomes available after publication. For the unpublished suite, install
-all reviewed wheels from the candidate wheelhouse; no sibling checkouts are needed.
+The package is published on PyPI. The command above installs the reviewed release;
+no sibling checkout or private wheelhouse is needed.
 
 ## First working example
 
@@ -69,7 +69,7 @@ retrying with a new job identity can duplicate delivery.
 
 ## Public API reference
 
-Signatures below are extracted from the installed candidate wheel. Constructors
+Signatures below are extracted from the installed release wheel. Constructors
 are keyword-only where shown. Default enum repr values describe defaults, not
 Python source to paste.
 
@@ -110,7 +110,7 @@ Enum where members are also (and must be) ints
 ### `BinkpConfig`
 
 ```text
-BinkpConfig(*, local_akas: 'tuple[FtnAddress, ...]', links: 'tuple[BinkpLink, ...]', inbound_tmp: 'str', secure_inbound: 'str', unauthenticated_quarantine: 'str', inbound_receipts: 'str', allow_unauthenticated: 'bool' = False, system_name: 'str' = 'GoldED FTN', sysop: 'str' = 'Sysop', location: 'str' = 'Unknown', mailer_id: 'str' = 'golded-ftn-binkp/0.1.0') -> None
+BinkpConfig(*, local_akas: 'tuple[FtnAddress, ...]', links: 'tuple[BinkpLink, ...]', inbound_tmp: 'str', secure_inbound: 'str', unauthenticated_quarantine: 'str', inbound_receipts: 'str', allow_unauthenticated: 'bool' = False, system_name: 'str' = 'GoldED FTN', sysop: 'str' = 'Sysop', location: 'str' = 'Unknown', mailer_id: 'str' = 'golded-ftn-binkp/1.0.0') -> None
 ```
 
 

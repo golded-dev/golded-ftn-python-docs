@@ -96,7 +96,7 @@ def render(name: str) -> str:
         + pieces["masthead"]
         + '<div class="shell"><div class="bar">'
         f"<span>{html.escape(title.upper())} / {reference_label}</span>"
-        "<span>UNPUBLISHED SUITE CANDIDATE · LINUX / macOS</span></div>"
+        "<span>PUBLISHED RELEASES · LINUX / macOS</span></div>"
         + body
         + "</div>"
         + pieces["footer"]

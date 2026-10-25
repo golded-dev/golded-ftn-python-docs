@@ -1,7 +1,7 @@
 # API reference for golded-ftn
 
-This reference covers all public names exported by `golded_ftn` in the 1.3.0 candidate
-working tree. Import public values and functions from `golded_ftn`. Core owns
+This reference covers all public names exported by `golded_ftn` 1.4.0.
+Import public values and functions from `golded_ftn`. Core owns
 values, protocols and pure text helpers. Concrete format packages own files,
 serialization, record validation and writer sessions.
 
@@ -567,7 +567,7 @@ codec; concrete writers do so during serialization. Encoding is strict, with
 no silent truncation or replacement characters. Conflicting charset metadata
 is rejected. Pure attribute changes preserve existing text bytes.
 
-`concurrent=True` is a request, not permission or a safety guarantee. The candidate
+`concurrent=True` is a request, not permission or a safety guarantee. The release
 writers accept it for the qualified Linux/macOS GoldED 3.1.0 profile. Offline
 editing remains the default. Other builds, Windows and network filesystems are
 outside that qualification. See the writer guide for MSG/Opus race limitations.
@@ -924,7 +924,7 @@ implement BBS behavior, routing policy, duplicate checking, packet handling,
 packing, repair of damaged bases or GoldED configuration. Internal modules such
 as `golded_ftn._writer_io` are implementation details and are not public exports.
 
-Writer sessions default to offline editing. The candidate suite records
+Writer sessions default to offline editing. The published suite records
 GoldED interoperability against pinned Linux/macOS builds; passing Python
 tests alone does not establish those guarantees. Check the concrete package's format
 notes and the shared writer guide before choosing a format or platform.

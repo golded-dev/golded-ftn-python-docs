@@ -2,16 +2,16 @@
 
 A nodelist is a directory of systems in an FTN network. It describes their addresses, operators and connection information. Use this package to read that directory and find entries; it does not connect to those systems.
 
-Version 0.1.0 candidate. Python 3.12–3.14 on Linux and macOS.
+Version 1.0.0. Python 3.12–3.14 on Linux and macOS.
 
 ## Installation
 
 ```sh
-python -m pip install golded-ftn-nodelist==0.1.0
+python -m pip install golded-ftn-nodelist==1.0.0
 ```
 
-The command becomes available after publication. For the unpublished suite, install
-all reviewed wheels from the candidate wheelhouse; no sibling checkouts are needed.
+The package is published on PyPI. The command above installs the reviewed release;
+no sibling checkout or private wheelhouse is needed.
 
 ## First working example
 
@@ -56,7 +56,7 @@ write occurs in the parser/exporter itself.
 
 ## Public API reference
 
-Signatures below are extracted from the installed candidate wheel. Constructors
+Signatures below are extracted from the installed release wheel. Constructors
 are keyword-only where shown. Default enum repr values describe defaults, not
 Python source to paste.
 

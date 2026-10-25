@@ -1,8 +1,8 @@
 # Hudson message bases
 
 Read and edit classic `.BBS` Hudson bases with `golded-ftn-hudson`. Imports use
-`golded_ftn_hudson`. Python 3.12 or newer is required. Candidate 1.3.0 is unpublished. The historical 1.2.0 release is on
-[PyPI](https://pypi.org/project/golded-ftn-hudson/1.2.0/). GoldBase `.DAT` is a different format and
+`golded_ftn_hudson`. Python 3.12 or newer is required. Version 1.3.0 is published on
+[PyPI](https://pypi.org/project/golded-ftn-hudson/1.3.0/). GoldBase `.DAT` is a different format and
 is not supported.
 
 The [core API reference](core-api.html) defines shared models and errors.

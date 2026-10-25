@@ -1,7 +1,7 @@
 # Editing FTN message bases
 
-The candidate versions are core 1.3.0, MSG 1.4.0, JAM/Squish/Hudson 1.3.0 and
-SQLite 0.1.0.
+The published versions are core 1.4.0, MSG 1.4.0, JAM/Squish/Hudson 1.3.0 and
+SQLite 1.0.0.
 Offline editing remains the default. Explicit `WriterOptions(concurrent=True)` is
 qualified only for the tested Linux/macOS GoldED 3.1.0 builds, Unix local filesystems
 and the tested read, append, refresh, lastread and stale-editor scenarios. A matching
@@ -154,11 +154,11 @@ only platforms actually tested may be reported as tested. GoldED source is the
 format reference, not evidence that the current executable accepts the output.
 
 The suite includes packet, nodelist, BSO/binkp, tosser and CLI packages with separate
-policy boundaries. The GoldED 3.1.0 source candidate has native macOS/Linux
+policy boundaries. The GoldED 3.1.0 source release has native macOS/Linux
 read/edit/refresh/stale-save checks recorded against the pinned source and binaries.
 Offline remains the default; explicit concurrent mode is bounded to that profile.
 
-## Check the candidate wheels
+## Check the release wheels
 
 ```sh
 uv run python scripts/install_readers.py --wheelhouse /path/to/reviewed/wheelhouse
@@ -169,9 +169,8 @@ uv run python scripts/check_examples.py
 ```
 
 No sibling working copies are required. `--local` selects the suite's retained
-candidate wheelhouse; the default installer uses exact candidate versions from the
-public index after their separately authorized publication. package-refs.json
-records local candidate commits, not already-published releases.
+wheelhouse; the default installer uses exact published versions from the public
+index. package-refs.json records their release commits.
 
 ## Recovery sessions
 

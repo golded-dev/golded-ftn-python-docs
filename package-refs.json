@@ -1,12 +1,13 @@
 {
-  "golded-ftn": "e5502dfd3bbc26d9925234e2ac96aab448b40759",
-  "golded-ftn-msg": "195035a6e24e722f5aef716c100bf9b6a8d68ebc",
-  "golded-ftn-jam": "0fc26de8b4e973fabc957906c4e9b1281b6724ab",
-  "golded-ftn-squish": "6fe9987076e7434d0a279ff2079ac4f634dcdc89",
-  "golded-ftn-hudson": "fee6f9b35e694ad7aede861a5af084d501c1a408",
-  "golded-ftn-packet": "119ab194ff83047838ffe56226e1bf5039cfb2be",
-  "golded-ftn-nodelist": "5d4af83683d12f4b1a332cc281c12f7af80bef69",
-  "golded-ftn-binkp": "e6093508a4dbb436c77f2fffe45c69786919c7a2",
-  "golded-ftn-tosser": "6bc2925dd24b0e136afca3c0abacb310096332e3",
-  "golded-ftn-tools": "a2670de322b9782b270eaec0e232598553a76943"
+  "golded-ftn": "e61ab16e635037dc3c4cde8cd2ace6f194ac720e",
+  "golded-ftn-msg": "85b405836f0e9483c00dee7a8dc97ef510c6c6fb",
+  "golded-ftn-jam": "a5e57a185def899aedae1f0f5b68da658dd4a531",
+  "golded-ftn-squish": "0730aaa9d6177953e12f9a2cc2e78143e32b5ee9",
+  "golded-ftn-hudson": "ba092167a7da8645f942b0305a607bb12f0be8f7",
+  "golded-ftn-sqlite": "2071cd97bc62d8ca4062ae64675d77abfe64e90b",
+  "golded-ftn-packet": "20a710a3fc96b3d98dbb50a997b34e2fb45df62f",
+  "golded-ftn-nodelist": "53e7c6b1f432ece14409cbffb389a57e7ee751ef",
+  "golded-ftn-binkp": "b45a5106d59fbe0690390351d85d4964004792cd",
+  "golded-ftn-tosser": "36e689a055e0aa299a6eea470f3021fe04d3b885",
+  "golded-ftn-tools": "4561abffa18984cf7c8834aa612ef0ebb4776ae2"
 }
