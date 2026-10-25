@@ -1,5 +1,7 @@
 # golded-ftn-tosser
 
+A tosser sorts incoming FTN messages into local message bases and prepares outgoing messages for delivery. It brings together message storage, packet files, routing rules and file transfer. Use it when you want to operate a node, meaning a configured system that exchanges mail with other systems. To read an archive or try one local message, begin with the [library guide](guide.html) instead.
+
 Version 0.1.0 candidate. Python 3.12–3.14 on Linux and macOS.
 
 ## Installation
@@ -12,6 +14,8 @@ The command becomes available after publication. For the unpublished suite, inst
 all reviewed wheels from the candidate wheelhouse; no sibling checkouts are needed.
 
 ## First working example
+
+This first example only creates a local node with no peers, routes or message areas and checks its state. It does not send or receive mail. The later sections explain the configuration needed for delivery.
 
 ```python
 from pathlib import Path

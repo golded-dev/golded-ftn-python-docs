@@ -26,7 +26,7 @@ def render() -> str:
     body = renderer.convert(
         (ROOT / "docs/writers.md").read_text(encoding="utf-8"),
     )
-    body = '<div class="eyebrow">Old bases. Careful edits.</div>' + body
+    body = '<div class="eyebrow">Message bases. Careful edits.</div>' + body
     body = body.replace('href="core-api.md"', 'href="core-api.html"')
     body = body.replace(
         '<code class="language-python">',

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GoldED for Python · Read an archive</title><style>
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/ibm-plex-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/ibm-plex-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/ibm-plex-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: normal;
+  font-display: swap;
+  src: url(assets/ibm-plex-5.ttf) format('truetype');
+}
+
+
+:root{color-scheme:dark;--canvas:#05070b;--surface:#0b0f18;--raised:#101624;--ink:#f5f7ff;--muted:#bcc5d9;--blue:#4f6dff;--yellow:#ffe45a;--info:#8fb2ff;--line:#273149}*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:17px/1.65 'IBM Plex Sans',sans-serif}a{color:var(--info);text-underline-offset:4px}a:focus-visible,button:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}.page{max-width:1260px;margin:40px auto;padding:0 24px}.masthead{border-top:1px solid #ff6868;border-bottom:1px solid #ff6868;padding:7px 0;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:24px}.logo-mark{position:relative;display:block;width:210px;margin-left:-7.3px}.logo{display:block;width:100%;height:auto}.logo-subtitle{position:absolute;right:3%;top:70%;color:var(--yellow);font:400 13px/1 'IBM Plex Sans',sans-serif;letter-spacing:0;white-space:nowrap}.masthead a{font:12px 'IBM Plex Mono',monospace;text-decoration:none}.masthead div>span{color:var(--muted);margin-right:24px}.shell{border:1px solid var(--blue);background:var(--surface)}.bar{display:flex;justify-content:space-between;gap:16px;padding:12px 20px;background:#2d47c7;color:var(--yellow);font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em}.bar span:last-child{color:#e0e6ff}.layout{display:grid;grid-template-columns:230px minmax(0,1fr)}aside{min-width:0;border-right:1px solid var(--line);padding:32px 20px}.label{font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em;color:var(--muted);text-transform:uppercase}.nav{display:grid;gap:4px;margin:20px -20px 36px}.nav a{padding:9px 20px;color:var(--muted);text-decoration:none;font-size:14px}.nav a.active{background:var(--raised);border-left:2px solid var(--yellow);padding-left:18px;color:var(--ink)}.num{font:11px 'IBM Plex Mono',monospace;color:#7f8798;margin-right:14px}.aside-note{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}.aside-note code{color:var(--yellow)}main{padding:42px 48px 36px;min-width:0}.eyebrow{color:var(--yellow);font:500 11px 'IBM Plex Mono',monospace;letter-spacing:.13em}h1{font-size:44px;line-height:1.1;letter-spacing:-.035em;font-weight:600;margin:16px 0 20px;max-width:650px}.intro{color:var(--muted);max-width:620px;margin:0 0 26px}.formats{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 34px}.formats span{padding:10px 19px 10px 0;margin-right:19px;font:12px 'IBM Plex Mono',monospace;color:var(--info)}.formats span+span{border-left:1px solid var(--line);padding-left:19px}.section-title{display:flex;gap:12px;align-items:baseline}h2{font-size:24px;line-height:1.2;margin:0 0 10px;font-weight:500}.section-title span{font:500 20px/1.2 'IBM Plex Mono',monospace;color:var(--yellow);flex-shrink:0}.lead{margin:0 0 20px;color:var(--muted);font-size:15px}.code-pane{border:1px solid #34446e;background:#080c14}.code-head{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:var(--raised);border-bottom:1px solid #34446e;font:11px 'IBM Plex Mono',monospace;color:var(--muted)}button{white-space:nowrap;flex-shrink:0;cursor:pointer;background:transparent;color:var(--info);border:1px solid #435170;padding:4px 10px;font:11px 'IBM Plex Mono',monospace}pre{margin:0;padding:20px;overflow:auto;font:13px/1.85 'IBM Plex Mono',monospace;tab-size:4}.kw{color:#8fb2ff}.str{color:#ffe45a}.comment{color:#8d9bb5}.output{border-top:1px solid var(--line);padding:12px 20px;font:12px 'IBM Plex Mono',monospace;color:#bcc5d9}.output b{color:#8d9bb5;font-weight:400;margin-right:20px}.note{border-left:2px solid var(--blue);padding:0 0 0 16px;margin-top:24px;font-size:14px;color:var(--muted)}.note strong{color:var(--ink);font-weight:500}.next{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:24px;margin-top:32px;font-size:14px}.next span{color:var(--muted)}footer{display:flex;justify-content:space-between;font:11px 'IBM Plex Mono',monospace;color:#8d9bb5;padding:18px 0}.preview{color:var(--yellow)}@media(max-width:800px){.page{margin:20px auto;padding:0 20px}.logo-mark{width:160px;margin-left:-5.56px}.logo-subtitle{font-size:10px}.masthead div>span{display:none}.layout{grid-template-columns:1fr}aside{padding:16px;border-right:0;border-bottom:1px solid var(--line)}aside>.label,.aside-note{display:none}.nav{display:flex;overflow:auto;margin:0;gap:8px}.nav a{white-space:nowrap;padding:8px 10px}.nav a.active{padding-left:8px}.nav a{flex-shrink:0}main{padding:28px 20px}h1{font-size:34px}.bar{font-size:10px;padding:10px 14px}.bar span:last-child{display:none}pre{font-size:12px;padding:16px}.formats span{padding-right:10px;margin-right:10px}.formats span+span{padding-left:10px}footer{gap:16px;font-size:10px}}@media print{body,.shell,.code-pane{background:white;color:black}.page{margin:0;max-width:none}.masthead,aside,footer,button,.next{display:none}.layout{display:block}main{padding:0}.bar{background:white;color:black}.kw,.str,.comment,.intro,.lead,.note{color:black}pre{white-space:pre-wrap}.shell{border:0}}
+.guide-section{margin-top:44px;scroll-margin-top:24px}.guide-section>p,.guide-section>ul,.guide-section>dl{font-size:15px;color:var(--muted)}.guide-section h3{font-size:19px;font-weight:500;margin:30px 0 12px}.code-pane{margin:20px 0}.output pre{padding:8px 0 0;white-space:pre-wrap;font-size:12px}.table-wrap{overflow:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:13px;text-align:left}th,td{border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}th{color:var(--ink);font-weight:500}td{color:var(--muted)}code{font-family:'IBM Plex Mono',monospace;font-size:.86em}pre code{font-size:inherit}dt{color:var(--ink);margin-top:18px}dd{margin:6px 0 0}.references{padding-left:20px}.references li{margin:10px 0}.credit{font-size:12px!important}.skip{position:absolute;top:-100px}.skip:focus{top:4px;left:20px;background:var(--surface);padding:8px;z-index:5}.logo-mark{flex-shrink:0}button[hidden]{display:none}@media(max-width:800px){.masthead div{font-size:11px}.next{gap:20px}.guide-section{margin-top:36px}footer{flex-wrap:wrap}}@media print{.table-wrap,pre{overflow:visible}th,td,dt,.guide-section>p,.guide-section>ul,.guide-section>dl,.output{color:black}a{color:#163a8c}.code-head{background:#eee;color:black}.skip{display:none}}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.kw,.k,.kn,.nb{color:#8fb2ff}.o,.ow{color:#ff6868}.kc,.mi,.mf{color:#55ff55}.str,.s,.s1,.s2,.se,.nf,.nc{color:#ffe45a}.comment,.c,.c1{color:#8d9bb5}@media print{.k,.kn,.kc,.nb,.mi,.mf,.o,.ow,.s,.s1,.s2,.se,.nf,.nc,.c,.c1{color:black}}.sidebar{position:sticky;top:24px}@media(max-width:800px){.sidebar{position:static}}@media print{.eyebrow,.section-title span,.bar span:last-child,.formats span,.output b{color:#222}.formats{border-color:#aaa}.code-pane{break-inside:avoid}}
+body{-webkit-font-smoothing:antialiased}h1,h2{text-wrap:balance}p{text-wrap:pretty}
+.page-nav{display:grid;gap:4px;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+.page-nav a{display:flex;align-items:center;min-height:40px;padding:8px 12px;font-size:14px;text-decoration:none;color:var(--muted)}
+.page-nav a[aria-current="page"]{color:var(--yellow);background:var(--raised);box-shadow:inset 2px 0 var(--yellow)}
+.contents summary{font:500 11px/1.5 'IBM Plex Mono',monospace;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;cursor:pointer;min-height:40px;display:flex;align-items:center;justify-content:space-between}
+.contents summary::after{content:'−';font-size:18px}.contents:not([open]) summary::after{content:'+'}.contents summary::-webkit-details-marker{display:none}
+.contents summary:focus-visible{outline:2px solid var(--yellow);outline-offset:4px}
+.nav{margin:8px 0 24px}.nav a{min-height:40px;display:flex;align-items:baseline;padding:8px 12px}.nav a.active{padding-left:10px}.num{font-variant-numeric:tabular-nums;flex-shrink:0}
+.sidebar{max-height:calc(100vh - 48px);overflow:auto;scrollbar-gutter:stable;overscroll-behavior-y:contain}
+main>nav[aria-label="Documentation"]{display:none}
+@media(hover:hover) and (pointer:fine){.page-nav a:hover,.nav a:hover{background:var(--raised);color:var(--ink)}}
+@media(max-width:800px){.page-nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-bottom:8px;padding-bottom:12px}.page-nav a{font-size:13px;padding:8px}.sidebar{max-height:none;overflow:visible}.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:8px 0 0;gap:4px;overflow:visible}.nav a{white-space:normal;padding:8px;font-size:13px}.nav a.active{padding-left:6px}.num{margin-right:8px}.contents summary{min-height:40px}.guide-section{scroll-margin-top:24px}}
+@media print{:root{color-scheme:light}main>nav[aria-label="Documentation"]{display:none}pre{break-inside:avoid}}
+.inline-code{color:var(--yellow)}p .inline-code,li .inline-code,dd .inline-code{background:var(--raised);padding:2px 4px;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}@media print{.inline-code{color:black}p .inline-code,li .inline-code,dd .inline-code{background:transparent}}
+</style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>READ AN ARCHIVE / DOCUMENTATION</span><span>UNPUBLISHED SUITE CANDIDATE · LINUX / macOS</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="archive.html" aria-current="page">Read an archive</a><a href="guide.html">Library guide</a><a href="core-api.html">Core API reference</a><a href="writers.html">Editing message bases</a><a href="glossary.html">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html">Hudson</a><a href="sqlite.html">SQLite</a></nav><div class="label">Network and CLI</div><nav class="page-nav network-nav" aria-label="Network and CLI"><a href="packet.html">Packets</a><a href="nodelist.html">Nodelists</a><a href="binkp.html">Binkp and BSO</a><a href="tosser.html">Tosser operations</a><a href="cli.html">CLI guide</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#start-with-a-copy"><span class="num">01</span>Start with a copy</a><a href="#recognise-the-files"><span class="num">02</span>Recognise the files</a><a href="#install-the-reader"><span class="num">03</span>Install the reader</a><a href="#list-the-messages"><span class="num">04</span>List the messages</a><a href="#read-one-message"><span class="num">05</span>Read one message</a><a href="#if-reading-fails"><span class="num">06</span>If reading fails</a><a href="#where-to-go-next"><span class="num">07</span>Where to go next</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a></nav><div class="eyebrow">Your files. Readable messages.</div><h1 id="read-a-message-archive">Read a message archive</h1>
+<p>Have a folder of messages from a BBS and want to see what is in it? Start here.
+You can list the messages, read their text and save a message as a text file.
+You do not need to write Python code, join a network or configure a BBS.</p>
+<p>This guide uses <code class="inline-code"><span class="n">ftnt</span></code>, a terminal command for reading message bases on Linux and
+macOS. It is not a graphical mail reader. The examples below only read the message
+base; they do not edit, delete or send messages.</p>
+<section id="start-with-a-copy" class="guide-section"><div class="section-title"><span>01</span><h2>Start with a copy</h2></div>
+<p>Keep the original files together and make a working copy with your file manager.
+If the files are inside a ZIP or another compressed file, extract a copy first.
+Do not rename individual files: some formats need several files with the same name.
+If the BBS is still running, stop it before making the copy so the files agree.</p>
+<p>In the examples, the working copy is called <code class="inline-code"><span class="n">archive</span><span class="o">-</span><span class="n">copy</span></code>. Replace each example
+path with the location of your copy. Keep the quotes if the path contains spaces.</p>
+</section><section id="recognise-the-files" class="guide-section"><div class="section-title"><span>02</span><h2>Recognise the files</h2></div>
+<p>A message base stores the sender, recipient, subject and text of messages.
+Different BBS programs used different storage formats. Look at the filenames in
+your copy before choosing a command.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Files you see</th>
+<th>Format</th>
+<th>Path to give the command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Numbered files such as <code class="inline-code"><span class="mf">1.</span><span class="n">MSG</span></code>, <code class="inline-code"><span class="mf">2.</span><span class="n">MSG</span></code>, <code class="inline-code"><span class="mf">42.</span><span class="n">MSG</span></code></td>
+<td>MSG; sometimes the Opus variant</td>
+<td>The folder containing them, such as <code class="inline-code"><span class="n">archive</span><span class="o">-</span><span class="n">copy</span><span class="o">/</span><span class="n">msg</span></code></td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">general</span><span class="o">.</span><span class="n">JHR</span></code>, <code class="inline-code"><span class="n">general</span><span class="o">.</span><span class="n">JDT</span></code>, <code class="inline-code"><span class="n">general</span><span class="o">.</span><span class="n">JDX</span></code> (often also <code class="inline-code"><span class="o">.</span><span class="n">JLR</span></code>)</td>
+<td>JAM</td>
+<td><code class="inline-code"><span class="n">archive</span><span class="o">-</span><span class="n">copy</span><span class="o">/</span><span class="n">jam</span><span class="o">/</span><span class="n">general</span></code>, without an extension</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">general</span><span class="o">.</span><span class="n">SQD</span></code>, <code class="inline-code"><span class="n">general</span><span class="o">.</span><span class="n">SQI</span></code> (often also <code class="inline-code"><span class="o">.</span><span class="n">SQL</span></code>)</td>
+<td>Squish</td>
+<td><code class="inline-code"><span class="n">archive</span><span class="o">-</span><span class="n">copy</span><span class="o">/</span><span class="n">squish</span><span class="o">/</span><span class="n">general</span></code>, without an extension</td>
+</tr>
+<tr>
+<td><code class="inline-code"><span class="n">MSGHDR</span><span class="o">.</span><span class="n">BBS</span></code>, <code class="inline-code"><span class="n">MSGIDX</span><span class="o">.</span><span class="n">BBS</span></code>, <code class="inline-code"><span class="n">MSGTXT</span><span class="o">.</span><span class="n">BBS</span></code>, and possibly other <code class="inline-code"><span class="o">.</span><span class="n">BBS</span></code> files</td>
+<td>Hudson</td>
+<td>The folder containing them, such as <code class="inline-code"><span class="n">archive</span><span class="o">-</span><span class="n">copy</span><span class="o">/</span><span class="n">hudson</span></code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Uppercase and lowercase extensions are accepted. Keep every file from the original
+base, even if it is not listed here. A missing companion file may prevent reading.
+A <code class="inline-code"><span class="o">.</span><span class="n">PKT</span></code> file is a transfer packet, not one of these message bases;
+see <a href="packet.html">Packets</a> if that is what you have.</p>
+<p>Numbered <code class="inline-code"><span class="o">.</span><span class="n">MSG</span></code> files do not tell you whether they use FTSC or Opus headers.
+Use <code class="inline-code"><span class="o">--</span><span class="nb">format</span> <span class="n">opus</span></code> if the BBS configuration or original software identifies them
+as Opus. Otherwise check that information before relying on decoded dates and
+addresses; format detection is not automatic. GoldBase <code class="inline-code"><span class="o">.</span><span class="n">DAT</span></code> files are not
+supported by these Python readers.</p>
+</section><section id="install-the-reader" class="guide-section"><div class="section-title"><span>03</span><h2>Install the reader</h2></div>
+<p>You need Python 3.12 or newer, up to 3.14, on Linux or macOS. Open Terminal and
+check the version:</p>
+<div class="code-pane"><div class="code-head"><span>Shell commands</span><button type="button" data-copy="archive_block_1" hidden>Copy code</button></div><pre><code class="language-sh" id="archive_block_1"><span class="nf">python3</span><span class="w"> </span><span class="o">--version</span>
+</code></pre></div>
+<p>Create a separate environment for the tool, activate it and install:</p>
+<div class="code-pane"><div class="code-head"><span>Shell commands</span><button type="button" data-copy="archive_block_2" hidden>Copy code</button></div><pre><code class="language-sh" id="archive_block_2"><span class="nf">python3</span><span class="w"> </span><span class="o">-m</span><span class="w"> </span>venv<span class="w"> </span>.ftnt-reader
+.<span class="w"> </span>.ftnt-reader/bin/activate
+<span class="nf">python</span><span class="w"> </span><span class="o">-m</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>golded-ftn-tools<span class="o">==</span><span class="m">1</span>.1.0
+<span class="nf">ftnt</span><span class="w"> </span><span class="o">--version</span>
+</code></pre></div>
+<p><strong>Release status:</strong> version 1.1.0 is an unpublished candidate. The installation
+command above will work after publication. If you have the reviewed candidate
+wheel files, replace the install command with the following, using your wheel
+folder's actual path:</p>
+<div class="code-pane"><div class="code-head"><span>Shell commands</span><button type="button" data-copy="archive_block_3" hidden>Copy code</button></div><pre><code class="language-sh" id="archive_block_3"><span class="nf">python</span><span class="w"> </span><span class="o">-m</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="o">--no-index</span><span class="w"> </span><span class="o">--find-links</span><span class="w"> </span><span class="s2">"/path/to/wheelhouse"</span><span class="w"> </span>golded-ftn-tools<span class="o">==</span><span class="m">1</span>.1.0
+</code></pre></div>
+<p>The normal installation includes all four message-base readers. No network extra
+is needed. When opening a new terminal, activate the environment again before
+using <code class="inline-code"><span class="n">ftnt</span></code>.</p>
+</section><section id="list-the-messages" class="guide-section"><div class="section-title"><span>04</span><h2>List the messages</h2></div>
+<p>Choose <strong>one</strong> command matching the files you found:</p>
+<div class="code-pane"><div class="code-head"><span>Shell commands</span><button type="button" data-copy="archive_block_4" hidden>Copy code</button></div><pre><code class="language-sh" id="archive_block_4"><span class="nf">ftnt</span><span class="w"> </span>heads<span class="w"> </span><span class="s2">"archive-copy/msg"</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>msg<span class="w"> </span><span class="o">--limit</span><span class="w"> </span><span class="m">10</span>
+<span class="nf">ftnt</span><span class="w"> </span>heads<span class="w"> </span><span class="s2">"archive-copy/jam/general"</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>jam<span class="w"> </span><span class="o">--limit</span><span class="w"> </span><span class="m">10</span>
+<span class="nf">ftnt</span><span class="w"> </span>heads<span class="w"> </span><span class="s2">"archive-copy/squish/general"</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>squish<span class="w"> </span><span class="o">--limit</span><span class="w"> </span><span class="m">10</span>
+<span class="nf">ftnt</span><span class="w"> </span>heads<span class="w"> </span><span class="s2">"archive-copy/hudson"</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>hudson<span class="w"> </span><span class="o">--limit</span><span class="w"> </span><span class="m">10</span>
+</code></pre></div>
+<p>For Opus, use the MSG folder command with <code class="inline-code"><span class="o">--</span><span class="nb">format</span> <span class="n">opus</span></code> instead.</p>
+<p>Each output line describes one message. It is JSON: labelled fields in braces.
+Look for <code class="inline-code"><span class="n">msgno</span></code> (message number), <code class="inline-code"><span class="n">from_name</span></code> (sender), <code class="inline-code"><span class="n">to_name</span></code> (recipient) and
+<code class="inline-code"><span class="n">subject</span></code>. The limit keeps this first look to ten messages. For Hudson, each line
+also has <code class="inline-code"><span class="n">board</span></code>, the numbered discussion area to which the message belongs.</p>
+</section><section id="read-one-message" class="guide-section"><div class="section-title"><span>05</span><h2>Read one message</h2></div>
+<p>Take a <code class="inline-code"><span class="n">msgno</span></code> from the list. These examples use <strong>42</strong>; replace it with a number
+that actually appeared in your output:</p>
+<div class="code-pane"><div class="code-head"><span>Shell commands</span><button type="button" data-copy="archive_block_5" hidden>Copy code</button></div><pre><code class="language-sh" id="archive_block_5"><span class="nf">ftnt</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="s2">"archive-copy/msg"</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>msg<span class="w"> </span><span class="o">--body</span>
+<span class="nf">ftnt</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="s2">"archive-copy/jam/general"</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>jam<span class="w"> </span><span class="o">--body</span>
+<span class="nf">ftnt</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="s2">"archive-copy/squish/general"</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>squish<span class="w"> </span><span class="o">--body</span>
+<span class="nf">ftnt</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="s2">"archive-copy/hudson"</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>hudson<span class="w"> </span><span class="o">--board</span><span class="w"> </span><span class="m">7</span><span class="w"> </span><span class="o">--body</span>
+</code></pre></div>
+<p>Again, choose only the command for your format. For Hudson, also replace <strong>7</strong> with
+the message's <code class="inline-code"><span class="n">board</span></code> from the list. For Opus, use <code class="inline-code"><span class="o">--</span><span class="nb">format</span> <span class="n">opus</span></code>.</p>
+<p><code class="inline-code"><span class="o">--</span><span class="n">body</span></code> shows the message text rather than JSON. Some messages include routing or
+format-control lines alongside the text; the reader does not silently remove them.
+To save the text for reading in your normal editor, redirect it into a new file:</p>
+<div class="code-pane"><div class="code-head"><span>Shell commands</span><button type="button" data-copy="archive_block_6" hidden>Copy code</button></div><pre><code class="language-sh" id="archive_block_6"><span class="nf">ftnt</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="s2">"archive-copy/jam/general"</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>jam<span class="w"> </span><span class="o">--body</span><span class="w"> </span>&gt;<span class="w"> </span>message-42.txt
+</code></pre></div>
+<p>Choose a new output filename: <code class="inline-code"><span class="o">&gt;</span></code> replaces an existing file with that name.
+Save outside the message-base folder. This saves the decoded text of one message,
+not a backup of its original binary files.</p>
+</section><section id="if-reading-fails" class="guide-section"><div class="section-title"><span>06</span><h2>If reading fails</h2></div>
+<p>First check the path, selected format and companion files. JAM and Squish need a
+basename without an extension. Hudson needs the containing folder. Message numbers
+can have gaps, so use a number from the list rather than assuming the first is 1.</p>
+<p>If letters are garbled, the text may use a different character encoding. Readers
+use declarations in the messages and otherwise fall back to CP850. If you know
+that undeclared text uses another encoding, try <code class="inline-code"><span class="o">--</span><span class="n">fallback</span><span class="o">-</span><span class="n">charset</span></code>, for example:</p>
+<div class="code-pane"><div class="code-head"><span>Shell commands</span><button type="button" data-copy="archive_block_7" hidden>Copy code</button></div><pre><code class="language-sh" id="archive_block_7"><span class="nf">ftnt</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span><span class="s2">"archive-copy/jam/general"</span><span class="w"> </span><span class="m">42</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>jam<span class="w"> </span><span class="o">--body</span><span class="w"> </span><span class="o">--fallback-charset</span><span class="w"> </span>CP437
+</code></pre></div>
+<p>This changes the fallback for this read; it does not rewrite the files. Do not
+assume every base uses CP437 or that it overrides a message's own declaration.</p>
+<p>A damaged base may fail normal reading. Recovery mode can list recoverable messages
+and report problems separately:</p>
+<div class="code-pane"><div class="code-head"><span>Shell commands</span><button type="button" data-copy="archive_block_8" hidden>Copy code</button></div><pre><code class="language-sh" id="archive_block_8"><span class="nf">ftnt</span><span class="w"> </span>heads<span class="w"> </span><span class="s2">"archive-copy/jam/general"</span><span class="w"> </span><span class="o">--format</span><span class="w"> </span>jam<span class="w"> </span><span class="o">--archive</span><span class="w"> </span><span class="o">--limit</span><span class="w"> </span><span class="m">10</span>
+</code></pre></div>
+<p>Replace the path and format for your base. Recovery mode does not repair files or
+guarantee that every message is recovered. Exit status 7 means issues occurred;
+keep the diagnostics. Normal <code class="inline-code"><span class="n">read</span></code> still validates strictly and may fail even
+when recovery mode listed a message. See the <a href="cli.html">CLI guide</a> for recovery
+exports if that happens. Keep the original files regardless of the result.</p>
+</section><section id="where-to-go-next" class="guide-section"><div class="section-title"><span>07</span><h2>Where to go next</h2></div>
+<p>For more terminal commands, use the <a href="cli.html">CLI guide</a>. For a Python program
+that reads messages, use the <a href="guide.html">library guide</a>. Details of each storage
+format are in <a href="msg.html">MSG / Opus</a>, <a href="jam.html">JAM</a>, <a href="squish.html">Squish</a> and
+<a href="hudson.html">Hudson</a>. You can stay with reading; none of these steps requires
+configuring the network packages.</p></section></main></div></div><footer><span>GoldED for Python / GoldED.dev</span><span>CANDIDATE · MIT LICENSE</span></footer></div><script>
+for (const button of document.querySelectorAll('[data-copy]')) {
+  button.hidden = false;
+  button.addEventListener('click', async () => {
+    const source = document.getElementById(button.dataset.copy);
+    try {
+      await navigator.clipboard.writeText(source.textContent);
+      button.textContent = 'Copied';
+    } catch {
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(source);
+      selection.removeAllRanges(); selection.addRange(range);
+      button.textContent = 'Code selected';
+    }
+    document.getElementById('copy-status').textContent = button.textContent;
+    setTimeout(() => { button.textContent = 'Copy code'; }, 1800);
+  });
+}
+const links = [...document.querySelectorAll('.nav a')];
+const sections = links.map(link => document.querySelector(link.hash)).filter(Boolean);
+function updateLocation() {
+  let current = sections[0];
+  for (const section of sections) if (section.getBoundingClientRect().top <= 100) current = section;
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = sections.at(-1);
+  for (const link of links) {
+    const active = current && link.hash === '#' + current.id;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+}
+let pending = false;
+window.addEventListener('scroll', () => {
+  if (!pending) requestAnimationFrame(() => { updateLocation(); pending = false; });
+  pending = true;
+}, {passive: true});
+window.addEventListener('hashchange', updateLocation);
+updateLocation();
+const narrow = window.matchMedia('(max-width:800px)');
+function setContents() { for (const menu of document.querySelectorAll('.contents')) menu.open = !narrow.matches; }
+narrow.addEventListener('change', setContents);
+setContents();
+</script><span id="copy-status" role="status" class="sr-only"></span></body></html>

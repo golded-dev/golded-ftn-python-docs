@@ -24,20 +24,28 @@ FORMATS = {
 
 NETWORK = {
     "packet": ("Packets", "Packed messages. Explicit boundaries."),
-    "nodelist": ("Nodelists", "Old lists. Typed identities."),
+    "nodelist": ("Nodelists", "Network directory. Typed entries."),
     "binkp": ("Binkp and BSO", "Queued packets. Durable receipts."),
     "tosser": ("Tosser operations", "Local bases. Explicit routes."),
     "cli": ("CLI guide", "Small commands. Visible outcomes."),
 }
 
 REFERENCES = (
-    FORMATS | NETWORK | {"glossary": ("Terminology", "Old jargon. Plain explanations.")}
+    FORMATS
+    | NETWORK
+    | {
+        "glossary": ("Terminology", "FTN terms. Plain explanations."),
+        "archive": ("Read an archive", "Your files. Readable messages."),
+    }
 )
 
 
 def render(name: str) -> str:
     title, eyebrow = REFERENCES[name]
-    reference_label = "DOCUMENTATION" if name == "glossary" else "FORMAT REFERENCE"
+    page_title = title if name == "archive" else f"{title} reference"
+    reference_label = (
+        "DOCUMENTATION" if name in {"glossary", "archive"} else "FORMAT REFERENCE"
+    )
     guide = (ROOT / "site/guide.html").read_text(encoding="utf-8")
     pieces = {}
     for key, pattern in {
@@ -81,7 +89,7 @@ def render(name: str) -> str:
     return (
         '<!doctype html>\n<html lang="en"><head><meta charset="utf-8">'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
-        f"<title>GoldED for Python · {html.escape(title)} reference</title>"
+        f"<title>GoldED for Python · {html.escape(page_title)}</title>"
         + pieces["style"]
         + '</head><body><a class="skip" href="#start">Skip to content</a>'
         '<div class="page">'

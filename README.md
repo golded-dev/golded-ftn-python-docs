@@ -100,3 +100,11 @@ For core sync use `GOLDED_CORE_SOURCE=/path/to/candidate/core` with
 `package-refs.json` records the local candidate commits for this guide. The new
 commits require separately authorized publication before their GitHub links or
 public-index installs can be verified.
+
+## Archive reading entry
+
+`docs/archive.md` is the task guide for people with existing message bases who
+want to read them without writing code or operating a network. It renders to
+`site/archive.html` through `scripts/build_format_guides.py`. It is linked from
+the home page and every sidebar. Tests execute its reading commands on synthetic
+bases and compare file hashes before and after.

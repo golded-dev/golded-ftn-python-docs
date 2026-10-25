@@ -37,7 +37,7 @@ def render() -> str:
         'href="../../golded-ftn-python-docs/docs/writers.md"', 'href="writers.html"'
     )
     body = body.replace("\\|", "|")
-    body = '<div class="eyebrow">Old formats. Shared values.</div>' + body
+    body = '<div class="eyebrow">Shared types. Consistent interfaces.</div>' + body
     counter = 0
 
     def example(match: re.Match[str]) -> str:

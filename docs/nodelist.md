@@ -1,5 +1,7 @@
 # golded-ftn-nodelist
 
+A nodelist is a directory of systems in an FTN network. It describes their addresses, operators and connection information. Use this package to read that directory and find entries; it does not connect to those systems.
+
 Version 0.1.0 candidate. Python 3.12–3.14 on Linux and macOS.
 
 ## Installation
@@ -12,6 +14,8 @@ The command becomes available after publication. For the unpublished suite, inst
 all reviewed wheels from the candidate wheelhouse; no sibling checkouts are needed.
 
 ## First working example
+
+The example parses three invented directory entries and finds the operator named Bob. The data is included in the example; no downloaded nodelist is needed.
 
 ```python
 from golded_ftn_nodelist import ListDialect, ParseOptions, parse_list, find_by_name

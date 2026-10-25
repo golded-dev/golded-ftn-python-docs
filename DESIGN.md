@@ -57,13 +57,16 @@ specific shell and masthead values above rather than rounding them incidentally.
 ## Page eyebrows
 
 Place a short yellow Mono eyebrow immediately above each page heading, using the
-shared `.eyebrow` style. Keep the two-part phrasing tied to the page’s purpose:
+shared `.eyebrow` style. Describe what each page helps readers do. The suite serves active FTN networks,
+new applications and existing message bases. Avoid age or nostalgia as the
+organising theme; archive recovery is a specific capability. Keep the two-part
+phrasing tied to the page’s purpose:
 
-- Home: “Old messages. New possibilities.”
-- Library guide: “Old messages. Ordinary Python.”
-- Core API reference: “Old formats. Shared values.”
-- Editing message bases: “Old bases. Careful edits.”
-- Terminology: “Old jargon. Plain explanations.”
+- Home: “FTN messages. Python tools.”
+- Library guide: “Message bases. Ordinary Python.”
+- Core API reference: “Shared types. Consistent interfaces.”
+- Editing message bases: “Message bases. Careful edits.”
+- Terminology: “FTN terms. Plain explanations.”
 - MSG / Opus: “Individual files. Complete messages.”
 - JAM: “Indexed messages. Preserved metadata.”
 - Squish: “Linked frames. Stable identities.”
@@ -112,7 +115,7 @@ copy button for inline snippets.
 
 The sidebar has three distinct groups:
 
-1. **Documentation:** Home, Library guide, Core API reference, Editing message bases, Terminology.
+1. **Documentation:** Home, Read an archive, Library guide, Core API reference, Editing message bases, Terminology.
    Use those labels and order on every page. Mark exactly one link with
    `aria-current="page"`, yellow text and a yellow inset left rule.
 2. **Formats:** MSG / Opus, JAM, Squish, Hudson, SQLite. Use those labels and order.
@@ -190,3 +193,11 @@ The sidebar adds a Network and CLI group after Formats: Packets, Nodelists,
 Binkp and BSO, Tosser operations, CLI guide. It uses the existing page-link,
 current-page, keyboard, mobile and print rules. These pages render from Markdown
 through build_format_guides.py; no extra visual system or remote assets are added.
+
+## Archive reading entry
+
+Read an archive is a task guide for readers with existing files. It renders from
+`docs/archive.md` through the shared format-guide renderer and uses the existing
+shell, code-copy controls, section navigation and print styles. Its eyebrow is
+“Your files. Readable messages.” Link it directly from the home page and include
+it immediately after Home in shared navigation.

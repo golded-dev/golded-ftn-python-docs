@@ -1,5 +1,7 @@
 # golded-ftn-packet
 
+A packet is a file used to carry one or more FTN messages from one system to another. This package reads and writes that file format. It does not open a network connection or put incoming messages into a message base; those jobs belong to binkp and the tosser.
+
 Version 0.1.0 candidate. Python 3.12–3.14 on Linux and macOS.
 
 ## Installation
@@ -12,6 +14,8 @@ The command becomes available after publication. For the unpublished suite, inst
 all reviewed wheels from the candidate wheelhouse; no sibling checkouts are needed.
 
 ## First working example
+
+The example creates a packet in memory and reads it back. No files are sent and no network configuration is needed.
 
 ```python
 import io

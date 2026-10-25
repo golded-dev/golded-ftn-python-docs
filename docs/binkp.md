@@ -1,5 +1,7 @@
 # golded-ftn-binkp
 
+Binkp is a protocol for transferring files between FTN systems over a network connection. This package provides the transfer machinery and an outgoing file queue. BSO means Binkley-style outbound: the directory and filename conventions used to organise that queue. It does not decide which message belongs in which message base; the tosser handles that.
+
 Version 0.1.0 candidate. Python 3.12–3.14 on Linux and macOS.
 
 ## Installation
@@ -12,6 +14,8 @@ The command becomes available after publication. For the unpublished suite, inst
 all reviewed wheels from the candidate wheelhouse; no sibling checkouts are needed.
 
 ## First working example
+
+Start with the queue example below. It creates a temporary, empty outgoing queue and checks it for one invented peer. It does not start a server, send a file or test a network connection.
 
 ```python
 from pathlib import Path

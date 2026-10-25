@@ -7,6 +7,7 @@ import re
 def page_navigation(current: str) -> str:
     pages = [
         ("index.html", "Home"),
+        ("archive.html", "Read an archive"),
         ("guide.html", "Library guide"),
         ("core-api.html", "Core API reference"),
         ("writers.html", "Editing message bases"),

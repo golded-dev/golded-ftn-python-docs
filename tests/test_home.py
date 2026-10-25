@@ -41,6 +41,7 @@ def test_subpages_link_home():
 def test_shared_navigation_marks_each_current_page():
     pages = (
         "index.html",
+        "archive.html",
         "guide.html",
         "core-api.html",
         "writers.html",
