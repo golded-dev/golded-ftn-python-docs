@@ -108,6 +108,8 @@ created for a new empty area.</p>
 number. It is separate from an external MSGID. Reader provenance records the
 actual filename and message number; byte offsets are unknown.</p>
 </section><section id="reading-and-metadata" class="guide-section"><div class="section-title"><span>03</span><h2>Reading and metadata</h2></div>
+<p>By default <code class="inline-code"><span class="n">MsgReader</span></code> streams one <code class="inline-code"><span class="o">.</span><span class="n">msg</span></code> file at a time. Pass
+<code class="inline-code"><span class="n">ReaderOptions</span><span class="p">(</span><span class="n">eager</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code> to parse every message before yielding.</p>
 <p>FTSC is the default. Choose <code class="inline-code"><span class="n">MsgReader</span><span class="p">(</span><span class="s2">"opus"</span><span class="p">)</span></code> explicitly for Opus: header
 format detection is not automatic. FTSC words 176–183 represent zone and point;
 Opus uses those bytes for DOS written/arrived timestamps. Opus addresses combine

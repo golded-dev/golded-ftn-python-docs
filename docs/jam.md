@@ -53,12 +53,16 @@ from external MSGID. Provenance identifies the `.JHR` header location.
 
 ## Reading and metadata
 
-Strict reading loads the three files into memory, validates every indexed record
-and returns a tuple in message-number order. A malformed later record cannot
-produce a partial strict result. Validation covers signatures, revision, record
-boundaries, offsets, subfield lengths, message numbers and reused header offsets.
-Damage and decoding failures raise `ParserException` with source path, physical
-offset and chained cause. Filesystem errors remain filesystem errors.
+Default reading streams indexed messages: the index is loaded, then each header
+and body is sought and yielded in message-number order. Pass
+`ReaderOptions(eager=True)` to restore the older behaviour that loads the three
+files, validates every indexed record, and returns a tuple before any message
+escapes. With eager mode, a malformed later record cannot produce a partial
+result. Streaming may yield earlier messages before a later failure. Validation
+covers signatures, revision, record boundaries, offsets, subfield lengths,
+message numbers and reused header offsets. Damage and decoding failures raise
+`ParserException` with source path, physical offset and chained cause.
+Filesystem errors remain filesystem errors.
 
 The standalone reader takes no lock and provides no cross-file snapshot. Stop
 writers or read a consistent copy. Use session `read` for a locked read and a

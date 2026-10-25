@@ -43,7 +43,9 @@ database is useful. Area codes are case-insensitive. Message numbers are positiv
 monotonic and local to an area; soft-deleted numbers are not reused.
 
 Omit `area_code` from `SqliteReader` or `SqliteWriter` only when the database has
-exactly one area. For several areas, select one by code.
+exactly one area. For several areas, select one by code. By default
+`SqliteReader` streams rows; pass `ReaderOptions(eager=True)` to load every
+message before returning.
 
 ## Create, write and read echomail
 
@@ -98,7 +100,8 @@ area's `default_origin`; the destination is always explicit. Both the Python API
 and the database schema enforce the rule.
 
 Messages store Unicode names, subject and body, timestamps, raw attributes,
-external IDs, split FTN addresses, reply links and optional import provenance.
+external IDs, canonical FTN address text, reply links and optional import
+provenance.
 Ordered tables retain repeated and unknown control lines, `SEEN-BY`, `PATH` and
 reply-list entries without flattening them into a JSON object.
 
@@ -124,6 +127,12 @@ foreign keys and WAL journaling. Readers reject a different application ID or
 schema version. The schema is a public format boundary; changing existing meaning
 requires a migration and a new version.
 
+The standalone format contract — identification, full DDL, column meanings,
+message-number allocation, soft delete, optimistic concurrency and backup — lives
+in the package repository's [schema guide](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/docs/schema.md).
+Use that document to implement another language or package against the same
+database files.
+
 Do not copy an open WAL database as a lone `.sqlite3` file. Use SQLite's backup
 API, or close and checkpoint the database first. Copying only the main file can
 omit committed pages still present in the WAL.
@@ -131,7 +140,7 @@ omit committed pages still present in the WAL.
 ## Implementation references
 
 - [Package README](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/README.md)
-- [Schema guide](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/docs/schema.md)
+- [Schema format contract](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/docs/schema.md)
 
 Those GitHub targets become public only after the separate package repository is
 committed and published. The format page does not establish that release state.

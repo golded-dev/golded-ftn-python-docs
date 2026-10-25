@@ -125,12 +125,16 @@ Index holes and deleted messages are skipped; old unindexed headers are ignored.
 Identity uses format <code class="inline-code"><span class="n">jam</span></code>, resolved basename and JAM message number, separately
 from external MSGID. Provenance identifies the <code class="inline-code"><span class="o">.</span><span class="n">JHR</span></code> header location.</p>
 </section><section id="reading-and-metadata" class="guide-section"><div class="section-title"><span>03</span><h2>Reading and metadata</h2></div>
-<p>Strict reading loads the three files into memory, validates every indexed record
-and returns a tuple in message-number order. A malformed later record cannot
-produce a partial strict result. Validation covers signatures, revision, record
-boundaries, offsets, subfield lengths, message numbers and reused header offsets.
-Damage and decoding failures raise <code class="inline-code"><span class="n">ParserException</span></code> with source path, physical
-offset and chained cause. Filesystem errors remain filesystem errors.</p>
+<p>Default reading streams indexed messages: the index is loaded, then each header
+and body is sought and yielded in message-number order. Pass
+<code class="inline-code"><span class="n">ReaderOptions</span><span class="p">(</span><span class="n">eager</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code> to restore the older behaviour that loads the three
+files, validates every indexed record, and returns a tuple before any message
+escapes. With eager mode, a malformed later record cannot produce a partial
+result. Streaming may yield earlier messages before a later failure. Validation
+covers signatures, revision, record boundaries, offsets, subfield lengths,
+message numbers and reused header offsets. Damage and decoding failures raise
+<code class="inline-code"><span class="n">ParserException</span></code> with source path, physical offset and chained cause.
+Filesystem errors remain filesystem errors.</p>
 <p>The standalone reader takes no lock and provides no cross-file snapshot. Stop
 writers or read a consistent copy. Use session <code class="inline-code"><span class="n">read</span></code> for a locked read and a
 revision suitable for editing.</p>

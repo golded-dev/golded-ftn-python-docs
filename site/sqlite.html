@@ -98,7 +98,9 @@ and recovery local, and limits the blast radius when a disk has opinions.</p>
 database is useful. Area codes are case-insensitive. Message numbers are positive,
 monotonic and local to an area; soft-deleted numbers are not reused.</p>
 <p>Omit <code class="inline-code"><span class="n">area_code</span></code> from <code class="inline-code"><span class="n">SqliteReader</span></code> or <code class="inline-code"><span class="n">SqliteWriter</span></code> only when the database has
-exactly one area. For several areas, select one by code.</p>
+exactly one area. For several areas, select one by code. By default
+<code class="inline-code"><span class="n">SqliteReader</span></code> streams rows; pass <code class="inline-code"><span class="n">ReaderOptions</span><span class="p">(</span><span class="n">eager</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code> to load every
+message before returning.</p>
 </section><section id="create-write-and-read-echomail" class="guide-section"><div class="section-title"><span>03</span><h2>Create, write and read echomail</h2></div>
 <p>This example creates a temporary one-area database, stores one Unicode message
 and reads it through the shared message model. No existing files are touched.</p>
@@ -146,7 +148,8 @@ and reads it through the shared message model. No existing files are touched.</p
 area's <code class="inline-code"><span class="n">default_origin</span></code>; the destination is always explicit. Both the Python API
 and the database schema enforce the rule.</p>
 <p>Messages store Unicode names, subject and body, timestamps, raw attributes,
-external IDs, split FTN addresses, reply links and optional import provenance.
+external IDs, canonical FTN address text, reply links and optional import
+provenance.
 Ordered tables retain repeated and unknown control lines, <code class="inline-code"><span class="n">SEEN</span><span class="o">-</span><span class="n">BY</span></code>, <code class="inline-code"><span class="n">PATH</span></code> and
 reply-list entries without flattening them into a JSON object.</p>
 <p>Readers return a stable SQLite snapshot. Session reads fetch one requested
@@ -165,13 +168,18 @@ the shared <code class="inline-code"><span class="n">WriterOptions</span><span c
 foreign keys and WAL journaling. Readers reject a different application ID or
 schema version. The schema is a public format boundary; changing existing meaning
 requires a migration and a new version.</p>
+<p>The standalone format contract — identification, full DDL, column meanings,
+message-number allocation, soft delete, optimistic concurrency and backup — lives
+in the package repository's <a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/docs/schema.md">schema guide</a>.
+Use that document to implement another language or package against the same
+database files.</p>
 <p>Do not copy an open WAL database as a lone <code class="inline-code"><span class="o">.</span><span class="n">sqlite3</span></code> file. Use SQLite's backup
 API, or close and checkpoint the database first. Copying only the main file can
 omit committed pages still present in the WAL.</p>
 </section><section id="implementation-references" class="guide-section"><div class="section-title"><span>07</span><h2>Implementation references</h2></div>
 <ul>
 <li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/README.md">Package README</a></li>
-<li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/docs/schema.md">Schema guide</a></li>
+<li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/main/docs/schema.md">Schema format contract</a></li>
 </ul>
 <p>Those GitHub targets become public only after the separate package repository is
 committed and published. The format page does not establish that release state.</p></section></main></div></div><footer><span>GoldED for Python / GoldED.dev</span><span>CANDIDATE · MIT LICENSE</span></footer></div><script>

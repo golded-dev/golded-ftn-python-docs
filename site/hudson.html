@@ -166,11 +166,13 @@ checked. Zero-block bodies, short or empty text blocks and bodies without a
 final NUL are accepted by the reader.</p>
 </section><section id="reading-and-metadata" class="guide-section"><div class="section-title"><span>03</span><h2>Reading and metadata</h2></div>
 <p>Read a stable directory with no concurrent writer. The standalone reader reads
-files separately without locking or an atomic snapshot. Strict mode validates
-all active records before yielding the first message; a later malformed record
-cannot leave a partial result. Filesystem errors remain filesystem errors.
-Malformed records and strict decoding failures raise <code class="inline-code"><span class="n">ParserException</span></code> with the
-actual filename, byte offset and chained cause. Session reads are locked.</p>
+files separately without locking or an atomic snapshot. By default it streams:
+the index is loaded, then headers and text spans are sought per message. Pass
+<code class="inline-code"><span class="n">ReaderOptions</span><span class="p">(</span><span class="n">eager</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code> to parse every active message before yielding; in
+eager mode a later malformed record cannot leave a partial result. Filesystem
+errors remain filesystem errors. Malformed records and strict decoding failures
+raise <code class="inline-code"><span class="n">ParserException</span></code> with the actual filename, byte offset and chained cause.
+Session reads are locked.</p>
 <p>Decoding uses core charset handling with CP850 fallback. Repeated charset, MSGID
 and REPLY declarations must agree. <code class="inline-code"><span class="n">body_text</span></code> retains control lines; core
 normalizes line endings and removes trailing NULs. Controls and routing keep

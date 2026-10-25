@@ -66,11 +66,13 @@ final NUL are accepted by the reader.
 ## Reading and metadata
 
 Read a stable directory with no concurrent writer. The standalone reader reads
-files separately without locking or an atomic snapshot. Strict mode validates
-all active records before yielding the first message; a later malformed record
-cannot leave a partial result. Filesystem errors remain filesystem errors.
-Malformed records and strict decoding failures raise `ParserException` with the
-actual filename, byte offset and chained cause. Session reads are locked.
+files separately without locking or an atomic snapshot. By default it streams:
+the index is loaded, then headers and text spans are sought per message. Pass
+`ReaderOptions(eager=True)` to parse every active message before yielding; in
+eager mode a later malformed record cannot leave a partial result. Filesystem
+errors remain filesystem errors. Malformed records and strict decoding failures
+raise `ParserException` with the actual filename, byte offset and chained cause.
+Session reads are locked.
 
 Decoding uses core charset handling with CP850 fallback. Repeated charset, MSGID
 and REPLY declarations must agree. `body_text` retains control lines; core

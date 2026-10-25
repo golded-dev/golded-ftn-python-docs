@@ -56,11 +56,13 @@ UIDs are preserved across updates and never renumbered by deletion.
 ## Reading and metadata
 
 Standalone reading requires stable files: `.SQD` and `.SQI` are read separately,
-without a lock or atomic snapshot. Strict mode validates every active record
-before returning messages. Filesystem failures remain filesystem errors;
-malformed records and decoding failures raise `ParserException` with the actual
-path, byte offset and chained cause. Session `read()` instead takes the writer's
-lock and provides a consistent read.
+without a lock or atomic snapshot. By default the reader streams: it loads the
+index, validates active frame extents, then seeks each frame. Pass
+`ReaderOptions(eager=True)` to load `.SQD` and parse every active message before
+returning a tuple. Filesystem failures remain filesystem errors; malformed
+records and decoding failures raise `ParserException` with the actual path, byte
+offset and chained cause. Session `read()` instead takes the writer's lock and
+provides a consistent read.
 
 Names, subject and body decode strictly, with CP850 fallback. Charset declarations
 in the separate control block precede body declarations; conflicting declarations

@@ -56,6 +56,9 @@ actual filename and message number; byte offsets are unknown.
 
 ## Reading and metadata
 
+By default `MsgReader` streams one `.msg` file at a time. Pass
+`ReaderOptions(eager=True)` to parse every message before yielding.
+
 FTSC is the default. Choose `MsgReader("opus")` explicitly for Opus: header
 format detection is not automatic. FTSC words 176–183 represent zone and point;
 Opus uses those bytes for DOS written/arrived timestamps. Opus addresses combine
