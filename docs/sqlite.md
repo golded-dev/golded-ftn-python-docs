@@ -2,8 +2,8 @@
 
 Store FTN netmail and echomail in a SQLite database with
 `golded_ftn_sqlite`. The package uses the shared `golded_ftn` message model and
-requires Python 3.12 or newer. Version 1.0.0 is published on
-[PyPI](https://pypi.org/project/golded-ftn-sqlite/1.0.0/).
+requires Python 3.12 or newer. Version 1.1.0 is published on
+[PyPI](https://pypi.org/project/golded-ftn-sqlite/1.1.0/).
 
 Use the [core API reference](core-api.html) for shared message types and
 [Editing message bases](writers.html) for revision-token updates.
@@ -19,10 +19,10 @@ SqliteDatabase.create(path: str | PathLike[str], *, area: AreaDefinition)
     -> SqliteDatabase
 SqliteDatabase.add_area(area: AreaDefinition) -> None
 SqliteDatabase.areas() -> tuple[AreaDefinition, ...]
-SqliteReader(area_code: str | None = None)
+SqliteReader(area: str | None = None)
 SqliteReader.read(path: str | PathLike[str], options: ReaderOptions | None = None)
     -> Iterable[ParsedMessage]
-SqliteWriter(area_code: str | None = None)
+SqliteWriter(area: str | None = None)
 SqliteWriter.open(path: str | PathLike[str], options: WriterOptions | None = None)
     -> SqliteSession
 SqliteSession.read(msgno: int) -> SessionMessage
@@ -43,7 +43,7 @@ Create the database with its first area. Add more areas explicitly when a single
 database is useful. Area codes are case-insensitive. Message numbers are positive,
 monotonic and local to an area; soft-deleted numbers are not reused.
 
-Omit `area_code` from `SqliteReader` or `SqliteWriter` only when the database has
+Omit `area` from `SqliteReader` or `SqliteWriter` only when the database has
 exactly one area. For several areas, select one by code. By default
 `SqliteReader` streams rows; pass `ReaderOptions(eager=True)` to load every
 message before returning.
@@ -90,7 +90,7 @@ with TemporaryDirectory() as directory:
 
     messages = tuple(SqliteReader().read(path))
     assert len(messages) == 1
-    assert messages[0].area_code == "FIDO.GENERAL"
+    assert messages[0].area == "FIDO.GENERAL"
     assert messages[0].body_text == "Stored transactionally. ÆØÅ."
 ```
 
@@ -140,8 +140,8 @@ omit committed pages still present in the WAL.
 
 ## Implementation references
 
-- [Package README](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.0.0/README.md)
-- [Schema format contract](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.0.0/docs/schema.md)
+- [Package README](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.1.0/README.md)
+- [Schema format contract](https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.1.0/docs/schema.md)
 
-These links pin the published 1.0.0 source and schema rather than the moving main
+These links pin the published 1.1.0 source and schema rather than the moving main
 branch.

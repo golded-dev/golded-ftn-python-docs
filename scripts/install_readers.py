@@ -7,17 +7,17 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSIONS = {
-    "golded-ftn": "1.4.0",
+    "golded-ftn": "1.5.0",
     "golded-ftn-msg": "1.4.0",
     "golded-ftn-jam": "1.3.0",
     "golded-ftn-squish": "1.3.0",
-    "golded-ftn-hudson": "1.3.0",
-    "golded-ftn-sqlite": "1.0.0",
+    "golded-ftn-hudson": "1.4.0",
+    "golded-ftn-sqlite": "1.1.0",
     "golded-ftn-packet": "1.0.0",
     "golded-ftn-nodelist": "1.0.0",
     "golded-ftn-binkp": "1.0.0",
     "golded-ftn-tosser": "1.0.0",
-    "golded-ftn-tools": "1.1.0",
+    "golded-ftn-tools": "1.2.0",
 }
 
 

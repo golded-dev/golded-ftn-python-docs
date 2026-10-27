@@ -66,8 +66,8 @@ main>nav[aria-label="Documentation"]{display:none}
 </style></head><body><a class="skip" href="#start">Skip to content</a><div class="page"><header class="masthead"><a href="index.html" class="logo-mark" aria-label="GoldED for Python documentation"><img class="logo" src="assets/golded-logo.png" width="600" height="205" alt="GoldED"><span class="logo-subtitle" aria-hidden="true">for python</span></a><div><span>GOLDED FOR PYTHON</span><a href="https://github.com/golded-dev/golded-ftn-python">Source on GitHub ↗</a></div></header><div class="shell"><div class="bar"><span>SQLITE / FORMAT REFERENCE</span><span>PUBLISHED RELEASES · LINUX / macOS</span></div><div class="layout"><aside><div class="sidebar"><nav class="page-nav" aria-label="Documentation"><a href="index.html">Home</a><a href="archive.html">Read an archive</a><a href="guide.html">Library guide</a><a href="core-api.html">Core API reference</a><a href="writers.html">Editing message bases</a><a href="glossary.html">Terminology</a></nav><div class="label">Formats</div><nav class="page-nav format-nav" aria-label="Formats"><a href="msg.html">MSG / Opus</a><a href="jam.html">JAM</a><a href="squish.html">Squish</a><a href="hudson.html">Hudson</a><a href="sqlite.html" aria-current="page">SQLite</a></nav><div class="label">Network and CLI</div><nav class="page-nav network-nav" aria-label="Network and CLI"><a href="packet.html">Packets</a><a href="nodelist.html">Nodelists</a><a href="binkp.html">Binkp and BSO</a><a href="tosser.html">Tosser operations</a><a href="cli.html">CLI guide</a></nav><details class="contents" open><summary>On this page</summary><nav class="nav" aria-label="Guide sections"><a class="active" aria-current="location" href="#start"><span class="num">00</span>Overview</a><a href="#public-api"><span class="num">01</span>Public API</a><a href="#databases-and-areas"><span class="num">02</span>Databases and areas</a><a href="#create-write-and-read-echomail"><span class="num">03</span>Create, write and read echomail</a><a href="#netmail-and-echomail-data"><span class="num">04</span>Netmail and echomail data</a><a href="#updates-and-concurrency"><span class="num">05</span>Updates and concurrency</a><a href="#schema-and-backup"><span class="num">06</span>Schema and backup</a><a href="#implementation-references"><span class="num">07</span>Implementation references</a></nav></details><div class="aside-note"><a href="index.html">Documentation home</a></div></div></aside><main id="start"><nav aria-label="Documentation"><a href="index.html">Documentation home</a></nav><div class="eyebrow">Transactional storage. Public schema.</div><h1 id="sqlite-format-reference">SQLite format reference</h1>
 <p>Store FTN netmail and echomail in a SQLite database with
 <code class="inline-code"><span class="n">golded_ftn_sqlite</span></code>. The package uses the shared <code class="inline-code"><span class="n">golded_ftn</span></code> message model and
-requires Python 3.12 or newer. Version 1.0.0 is published on
-<a href="https://pypi.org/project/golded-ftn-sqlite/1.0.0/">PyPI</a>.</p>
+requires Python 3.12 or newer. Version 1.1.0 is published on
+<a href="https://pypi.org/project/golded-ftn-sqlite/1.1.0/">PyPI</a>.</p>
 <p>Use the <a href="core-api.html">core API reference</a> for shared message types and
 <a href="writers.html">Editing message bases</a> for revision-token updates.</p>
 <section id="public-api" class="guide-section"><div class="section-title"><span>01</span><h2>Public API</h2></div>
@@ -78,10 +78,10 @@ requires Python 3.12 or newer. Version 1.0.0 is published on
     <span class="o">-&gt;</span> <span class="n">SqliteDatabase</span>
 <span class="n">SqliteDatabase</span><span class="o">.</span><span class="n">add_area</span><span class="p">(</span><span class="n">area</span><span class="p">:</span> <span class="n">AreaDefinition</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
 <span class="n">SqliteDatabase</span><span class="o">.</span><span class="n">areas</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">AreaDefinition</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
-<span class="n">SqliteReader</span><span class="p">(</span><span class="n">area_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">SqliteReader</span><span class="p">(</span><span class="n">area</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">SqliteReader</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">options</span><span class="p">:</span> <span class="n">ReaderOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
     <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">ParsedMessage</span><span class="p">]</span>
-<span class="n">SqliteWriter</span><span class="p">(</span><span class="n">area_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">SqliteWriter</span><span class="p">(</span><span class="n">area</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">SqliteWriter</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">options</span><span class="p">:</span> <span class="n">WriterOptions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
     <span class="o">-&gt;</span> <span class="n">SqliteSession</span>
 <span class="n">SqliteSession</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">msgno</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionMessage</span>
@@ -98,7 +98,7 @@ and recovery local, and limits the blast radius when a disk has opinions.</p>
 <p>Create the database with its first area. Add more areas explicitly when a single
 database is useful. Area codes are case-insensitive. Message numbers are positive,
 monotonic and local to an area; soft-deleted numbers are not reused.</p>
-<p>Omit <code class="inline-code"><span class="n">area_code</span></code> from <code class="inline-code"><span class="n">SqliteReader</span></code> or <code class="inline-code"><span class="n">SqliteWriter</span></code> only when the database has
+<p>Omit <code class="inline-code"><span class="n">area</span></code> from <code class="inline-code"><span class="n">SqliteReader</span></code> or <code class="inline-code"><span class="n">SqliteWriter</span></code> only when the database has
 exactly one area. For several areas, select one by code. By default
 <code class="inline-code"><span class="n">SqliteReader</span></code> streams rows; pass <code class="inline-code"><span class="n">ReaderOptions</span><span class="p">(</span><span class="n">eager</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code> to load every
 message before returning.</p>
@@ -141,7 +141,7 @@ and reads it through the shared message model. No existing files are touched.</p
 
     <span class="n">messages</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">SqliteReader</span><span class="p">()</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-    <span class="k">assert</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area_code</span> <span class="o">==</span> <span class="s2">"FIDO.GENERAL"</span>
+    <span class="k">assert</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">==</span> <span class="s2">"FIDO.GENERAL"</span>
     <span class="k">assert</span> <span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">body_text</span> <span class="o">==</span> <span class="s2">"Stored transactionally. ÆØÅ."</span>
 </code></pre></div>
 </section><section id="netmail-and-echomail-data" class="guide-section"><div class="section-title"><span>04</span><h2>Netmail and echomail data</h2></div>
@@ -179,10 +179,10 @@ API, or close and checkpoint the database first. Copying only the main file can
 omit committed pages still present in the WAL.</p>
 </section><section id="implementation-references" class="guide-section"><div class="section-title"><span>07</span><h2>Implementation references</h2></div>
 <ul>
-<li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.0.0/README.md">Package README</a></li>
-<li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.0.0/docs/schema.md">Schema format contract</a></li>
+<li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.1.0/README.md">Package README</a></li>
+<li><a href="https://github.com/golded-dev/golded-ftn-sqlite-python/blob/v1.1.0/docs/schema.md">Schema format contract</a></li>
 </ul>
-<p>These links pin the published 1.0.0 source and schema rather than the moving main
+<p>These links pin the published 1.1.0 source and schema rather than the moving main
 branch.</p></section></main></div></div><footer><span>GoldED for Python / GoldED.dev</span><span>PUBLISHED · MIT LICENSE</span></footer></div><script>
 for (const button of document.querySelectorAll('[data-copy]')) {
   button.hidden = false;

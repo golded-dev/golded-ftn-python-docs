@@ -1,8 +1,8 @@
 # Hudson message bases
 
 Read and edit classic `.BBS` Hudson bases with `golded-ftn-hudson`. Imports use
-`golded_ftn_hudson`. Python 3.12 or newer is required. Version 1.3.0 is published on
-[PyPI](https://pypi.org/project/golded-ftn-hudson/1.3.0/). GoldBase `.DAT` is a different format and
+`golded_ftn_hudson`. Python 3.12 or newer is required. Version 1.4.0 is published on
+[PyPI](https://pypi.org/project/golded-ftn-hudson/1.4.0/). GoldBase `.DAT` is a different format and
 is not supported.
 
 The [core API reference](core-api.html) defines shared models and errors.
@@ -93,7 +93,7 @@ with zero mapped to `None`. The read-count word is not a next-reply link;
 `reply_next_msgno` is `None`. MSGID supplies `external_id`; otherwise core
 creates a synthetic ID over decoded normalized fields.
 
-Each board maps to synthetic `area_code="BOARD<n>"` and
+Each board maps to synthetic `area="BOARD<n>"` and
 `area_meta_key="hudson:<n>"`. Area name and display order remain `None`: configured
 board names are not stored in this base. Provenance identifies `hudson`, the
 actual `MSGHDR.BBS` filename, message number and header offset.
